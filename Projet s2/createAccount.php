@@ -12,7 +12,7 @@ if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["la
   $_SESSION['password'] = $_POST['password'];
 
   createAccount($bdd);
-
+  echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 }
 
 ?>
