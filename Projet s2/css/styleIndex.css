@@ -24,7 +24,7 @@ width: 33%;
 .menu a{
   margin: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-  color: #808080;
+  color: #B5B6B6;
   font-weight:bold;
   text-decoration: none;
   font-size: 1.4em;
@@ -41,7 +41,7 @@ width: 33%;
   margin: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
 
-  color: #808080;
+  color: #B5B6B6;
   font-weight:bold;
   font-size: 1.5em;
   text-align: left;
@@ -85,13 +85,13 @@ img.logo{
 h1
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #808080;
+    color: #B5B6B6;
 }
 
 a
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #808080;
+    color: #B5B6B6;
 }
 
 footer {
@@ -103,6 +103,6 @@ footer {
 footer p
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #808080;
+    color: #B5B6B6;
     font-size: 0.9em;
 }
