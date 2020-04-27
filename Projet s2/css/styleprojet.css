@@ -7,21 +7,22 @@ body{
 
 header{
   position: fixed;
+  top: 0;
   display: flex;
-  height: 10%;
+  height: 15%;
+  background: linear-gradient(#808080,90%, transparent);
 }
 .menu{
-padding-left: 1%;
-padding-top: 2%;
-width: 33.33%;
-background-color: blue;
+  font-weight:bold;
+  padding-top: 3vh;
+  width: 33.33%;
+  font-size: 1.5vw;
 }
 .menu a{
-  margin: 1em;
+  margin: 1vw;
   color: #FFFFFF;
-  font-weight:bold;
   text-decoration: none;
-  font-size: 1.4em;
+  font-size: 1.6vw;
 }
 
 .imglogoheader{
@@ -31,24 +32,38 @@ background-color: blue;
 .logoheader{
   padding-top: 1%;
   width: 33.33%;
-  background-color: yellow;
 }
 
 .account{
-  color: #FFFFFF;
   font-weight:bold;
-  font-size: 1.3em;
-  padding-top: 2%;
+  font-size: 1.5vw;
+  padding-top: 3vh;
   width: 33.33%;
-  background-color: red;
-  padding-left: 5%;
+  text-align: right;
 }
 .account a{
+  margin: 1vw;
+  color: #FFFFFF;
   text-decoration: none;
-  margin-left: 1em;
-  margin-right: 1em;
+  font-size: 1.6vw;
 }
 
+.tchat{
+  position: fixed;
+  color: black;
+  background-color: green;
+  top: 10%;
+  width: 25%;
+  padding: 0.3em;
+  height: 87%;
+  left: 0;
+}
+
+.content{
+  margin-top: 6%;
+  margin-left: 25%;
+  padding: 3em;
+}
 
 
 img.logo{
@@ -73,8 +88,7 @@ a
 }
 
 footer {
-    display: flex;
-    position: absolute;
+    position: fix;
     bottom: 0;
     padding-left: 1%;
 }

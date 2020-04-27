@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('function.php');
+tchat($bdd);
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +29,8 @@ include('function.php');
           </div>
         </header>
 
-        <div class="tchat">
-          test
+        <div class="content">
         </div>
-        test
 
 
 

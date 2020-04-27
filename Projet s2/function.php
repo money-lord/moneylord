@@ -25,7 +25,7 @@ function createAccount($bdd){
 function verfication($bdd){
 	$clientExists = false;
 	if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
-		
+
 		$data = $bdd->query('SELECT Pseudo FROM Clients');
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['pseudo']) {
@@ -74,8 +74,16 @@ function displayUserAccount($bdd){
 			echo '<div><p>Pseudo : '.$checkAccount['Pseudo'].'</p>
 					<p>Nom : '.$checkAccount['Nom'].'</p>
 					<p>Prénom : '.$checkAccount['Prenom'].'</p></div>';
-		}	
+		}
 	}
 }
 
-?>
+function tchat($bdd){
+	echo '<div class="tchat">
+		place du tchat
+	</div>';
+
+
+
+
+}
