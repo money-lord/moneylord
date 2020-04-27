@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('function.php');
+include('Function/function.php');
 tchat($bdd);
 ?>
 
@@ -8,9 +8,9 @@ tchat($bdd);
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
+          <script src="js/jquery.min.js"></script>
           <title>MoneyLord</title>
       </head>
       <body>

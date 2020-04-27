@@ -11,7 +11,6 @@ function createAccount($bdd){
 	$data->bindValue(':MotDePasse', $_POST['password'], PDO::PARAM_STR);
 	$data->execute();
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
-
 	$save = $data1 ->fetch();
 
 	$idClients = $save['ID'];
@@ -79,11 +78,28 @@ function displayUserAccount($bdd){
 }
 
 function tchat($bdd){
-	echo '<div class="tchat">
-		place du tchat
-	</div>';
+	echo '<div class="tchat"><div class="messagesborder"><div class="messages">';
+	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
+	while ($save = $data1 ->fetch()){
+		echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
+	}
+	echo'</div></div>';
+	echo '<br><center><form class="formulaire" action="" method ="POST">
+		<input type="text" name="Message" placeholder="Ton message" size="58"><br><br>
+		<button type="submit" value="Envoyer">Envoyer</button>
+	</form></center>';
+	if (!empty($_POST['Message'])) {
+		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
+		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+		$data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
+		$data2->execute();
+	}
 
-
-
-
-}
+	echo '</div>'; ?>
+	<script>
+		setInterval('load_messages()',500);
+		function load_messages(){
+			$('.messages').load('Function/Message.php');
+		}
+	</script>
+	<?php  }?>

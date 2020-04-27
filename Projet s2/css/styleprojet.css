@@ -51,8 +51,7 @@ header{
 .tchat{
   position: fixed;
   color: black;
-  background-color: green;
-  top: 10%;
+  top: 15%;
   width: 25%;
   padding: 0.3em;
   height: 87%;
@@ -97,4 +96,13 @@ footer p
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
     color: #ffffff;
     font-size: 0.9em;
+}
+
+.messagesborder{
+    border: 1px solid #ffffff;
+    width: 100%;
+    height: 80%;
+}
+.messages{
+    word-wrap: break-word;
 }
