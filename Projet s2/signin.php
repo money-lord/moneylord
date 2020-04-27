@@ -21,7 +21,7 @@ $data = $bdd->query('SELECT Pseudo FROM Clients');
       createAccount($bdd);
       echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
     }
-  }
+  } 
 }
 
 ?>
@@ -31,7 +31,7 @@ $data = $bdd->query('SELECT Pseudo FROM Clients');
       <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" type="text/css" href="css/style.css" />
-          <link rel="stylesheet" href="css/styleIndex.css" type="text/css" media="screen" />
+          <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>Inscription MoneyLord</title>
       </head>
