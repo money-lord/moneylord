@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('function.php');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -19,16 +17,14 @@ include('function.php');
         <header>
 
           <div class="menu">
-            <a href="GameOne.php">JEU 1</a>
-            <a href="GameTwo.php">JEU 2</a>
-            <a href="GameTree.php">JEU 3</a>
+          <?php include('menu.php'); ?>
           </div>
           <div class="logoheader">
             <center>
             <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
           </center>
           </div>
-          <div class="acount">
+          <div class="account">
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
           </div>

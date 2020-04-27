@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('function.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +10,10 @@ include('function.php');
           <link rel="stylesheet" type="text/css" href="css/style.css" /> 
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Jeu 2</title>
+          <title>MoneyLord Roulette</title>
       </head>
       <body>
-
         <header>
-
           <div class="menu">
             <?php include('menu.php'); ?>
           </div>
@@ -25,9 +22,9 @@ include('function.php');
             <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
           </center>
           </div>
-          <div class="acount">
-            <a href="Acount.php">MON COMPTE</a>
-            <a href="Index.php">DECONEXION</a>
+          <div class="account">
+            <a href="account.php">MON COMPTE</a>
+            <a href="Index.php">DECONNEXION</a>
 
           </div>
         </header>

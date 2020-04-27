@@ -33,7 +33,7 @@ background-color: blue;
   background-color: yellow;
 }
 
-.acount{
+.account{
   color: #FFFFFF;
   font-weight:bold;
   font-size: 1.3em;
@@ -42,7 +42,7 @@ background-color: blue;
   background-color: red;
   padding-left: 5%;
 }
-.acount a{
+.account a{
   text-decoration: none;
   margin-left: 1em;
   margin-right: 1em;
