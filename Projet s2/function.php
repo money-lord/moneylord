@@ -27,14 +27,7 @@ function createAccount($bdd){
   $data->bindValue(':Prenom', $_SESSION['firstName'], PDO::PARAM_STR);
   $data->bindValue(':Nom', $_SESSION['lastName'], PDO::PARAM_STR);
   $data->bindValue(':MotDePasse', $_SESSION['password'], PDO::PARAM_STR);
-
-
-  $insertIsOk = $data->execute();
-
-  if($insertIsOk){
-         
-      echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
-  }
-
+  $data->execute();
 }
-?>
+
+	
