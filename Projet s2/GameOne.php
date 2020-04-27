@@ -20,9 +20,7 @@ $userCheck = displayUserAccount($bdd);
         <header>
 
           <div class="menu">
-            <a href="GameOne.php">JEU 1</a>
-            <a href="GameTwo.php">JEU 2</a>
-            <a href="GameTree.php">JEU 3</a>
+            <?php include('menu.php'); ?>
           </div>
           <div class="logoheader">
             <center>
