@@ -32,7 +32,7 @@ $_SESSION['password'] = $_POST['password'];
             <center>
             <h1 class="welcome">Inscription</h1>
             <p>
-              <form class="formulaire">
+              <form class="formulaire" method="post">
                 <p class="field"><input type="text" name="pseudo" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
             		<p class="field"><input type="text" name="lastName" placeholder="Nom"><i class="icon-user icon-large"></i></p>
                 <p class="field"><input type="text" name="firstName" placeholder="Prénom"><i class="icon-user icon-large"></i></p>
