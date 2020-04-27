@@ -10,9 +10,18 @@ if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["la
   $_SESSION['firstName'] = $_POST['firstName'];
   $_SESSION['lastName'] = $_POST['lastName'];
   $_SESSION['password'] = $_POST['password'];
+//verif
+$data = $bdd->query('SELECT Pseudo FROM Clients');
+  while($client = $data->fetch()){
+    if ($client['Pseudo'] == $_POST['pseudo']) {
 
-  createAccount($bdd);
-  echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+      echo 'erreur, votre pseudo est deja pris';
+      echo '<meta http-equiv="Refresh" content="0; URL=createAccount.php" />';
+    }else{
+      createAccount($bdd);
+      echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+    }
+  } 
 }
 
 ?>
