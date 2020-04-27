@@ -3,26 +3,7 @@ session_start();
 
 include('function.php');
 
-$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-
-if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
-  $_SESSION['pseudo'] = $_POST['pseudo'];
-  $_SESSION['firstName'] = $_POST['firstName'];
-  $_SESSION['lastName'] = $_POST['lastName'];
-  $_SESSION['password'] = $_POST['password'];
-//verif
-$data = $bdd->query('SELECT Pseudo FROM Clients');
-  while($client = $data->fetch()){
-    if ($client['Pseudo'] == $_POST['pseudo']) {
-
-      echo 'erreur, votre pseudo est deja pris';
-      echo '<meta http-equiv="Refresh" content="0; URL=signin.php" />';
-    }else{
-      createAccount($bdd);
-      echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
-    }
-  }
-}
+verfication($bdd);
 
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('function.php');
-$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
 
 ?>
 
