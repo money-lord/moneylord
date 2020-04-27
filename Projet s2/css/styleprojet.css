@@ -25,10 +25,11 @@ background-color: blue;
 }
 
 .imglogoheader{
-  max-width: 30%;
+  max-width: 35%;
 
 }
 .logoheader{
+  padding-top: 1%;
   width: 33.33%;
   background-color: yellow;
 }
@@ -47,6 +48,7 @@ background-color: blue;
   margin-left: 1em;
   margin-right: 1em;
 }
+
 
 
 img.logo{
@@ -79,6 +81,6 @@ footer {
 footer p
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #808080;
+    color: #ffffff;
     font-size: 0.9em;
 }
