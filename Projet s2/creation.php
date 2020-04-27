@@ -5,7 +5,7 @@
           <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Connection</title>
+          <title>Connexion</title>
       </head>
       <body>
         <section class="sectionindex">
