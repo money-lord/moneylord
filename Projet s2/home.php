@@ -1,33 +1,54 @@
 <?php
+session_start();
 include('function.php');
 $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 $userCheck = displayUserAccount($bdd);
 
 ?>
+
 <!DOCTYPE html>
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" type="text/css" href="css/style.css" />
+          <link rel="stylesheet" type="text/css" href="css/style.css" /> 
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>MoneyLord</title>
+          <title>Page</title>
       </head>
       <body>
-        <section class="sectionindex">
-          <div class="imageindex">
-            <center>
-            <img src="Images/logo.png" class="logo" alt="Logo" />
-            </center>
+
+        <header>
+
+          <div class="menu">
+            <a href="GameOne.php">JEU 1</a>
+            <a href="GameTwo.php">JEU 2</a>
+            <a href="GameTree.php">JEU 3</a>
           </div>
-        <?php include('menu.php'); ?>
-        </section>
+          <div class="logoheader">
+            <center>
+            <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
+          </center>
+          </div>
+          <div class="acount">
+            <a href="account.php">MON COMPTE</a>
+            <a href="Index.php">DECONNEXION</a>
+          </div>
+        </header>
+
+
+
+
+
+
+
 
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
+
+
       </body>
   </html>
