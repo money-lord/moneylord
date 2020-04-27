@@ -17,10 +17,10 @@ $data = $bdd->query('SELECT Pseudo FROM Clients');
 
       echo 'erreur, votre pseudo est deja pris';
       echo '<meta http-equiv="Refresh" content="0; URL=createAccount.php" />';
-    }else{
+    } }else{
       createAccount($bdd);
       echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
-    }
+   
   } 
 }
 
