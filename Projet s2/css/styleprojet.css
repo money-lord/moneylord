@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans_serif;
+    background: url(../Images/backgroud-index.png) no-repeat;
+    background-size: cover;
+}
+
+.sectionindex{
+  display: flex;
+}
+
+.imageindex{
+  max-width: 50%;
+  margin-top: 20%;
+}
+
+.Connection{
+  min-width: 50%;
+  margin-top: 15%;
+}
+
+.signup{
+  min-width: 50%;
+  margin-top: 10%;
+}
+
+img.logo{
+	max-width: 70%;
+}
+
+.welcome{
+  font-size: 4em;
+}
+
+@font-face {
+    font-family: 'GeosansLight';
+    src: url('../font/GeosansLight.ttf') format('truetype');
+}
+h1
+{
+    font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+    color: #808080;
+}
+
+a
+{
+    font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+    color: #808080;
+}
+
+footer {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    padding-left: 1%;
+}
+footer p
+{
+    font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+    color: #808080;
+    font-size: 0.9em;
+}
