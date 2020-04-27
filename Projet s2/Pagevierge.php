@@ -28,7 +28,7 @@ session_start();
           </div>
           <div class="acount">
             <a href="Acount.php">Mon compte</a>
-            <a href="Index.php">Deconnection</a>
+            <a href="Index.php">Deconnexion</a>
           </div>
         </header>
 
