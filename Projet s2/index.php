@@ -19,7 +19,7 @@
             <center>
             <h1 class="welcome">Bienvenue</h1>
             <p>
-              <form class="formulaire">
+              <form class="formulaire" action="" method ="POST">
             		<p class="field"><input type="text" name="login" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
             		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p>
             		<p class="submit"><button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button></p>
@@ -39,3 +39,22 @@
 
       </body>
   </html>
+
+<?php
+session_start();
+
+try{
+  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'test', 'Moneylord1*');
+}
+catch(Exception $e){
+  die('Erreur :'.$e->getMessage());
+}
+
+if (!empty($_POST['login']) && !empty($_POST['password'])) {
+
+  while ( <= 10) {
+    # code...
+  }
+
+}
+?>
