@@ -15,20 +15,12 @@
             </center>
           </div>
 
-          <div class="signup">
-            <center>
-            <h1 class="welcome">Inscription</h1>
-            <p>
-              <form class="formulaire">
-                <p class="field"><input type="text" name="login" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
-            		<p class="field"><input type="text" name="n" placeholder="Nom"><i class="icon-user icon-large"></i></p>
-                <p class="field"><input type="text" name="prenom" placeholder="Prénom"><i class="icon-user icon-large"></i></p>
-            		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p><br>
-            		<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
-            	</form>
-              <a href="index.html">Vous avez un compte ?</a>
-            </p>
-            </center>
+          <div>
+            <ul>
+              <li>CoinFlip</li>
+              <li>Roulette</li>
+              <li>Jeu Des Couleurs</li>
+            </ul>
           </div>
         </section>
 
