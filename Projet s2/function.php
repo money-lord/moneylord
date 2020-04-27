@@ -65,4 +65,20 @@ function verfication($bdd){
 	}
 }
 
-?>	
+function connection($bdd){
+
+	if (!empty($_POST['login']) && !empty($_POST['password'])){
+		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
+
+		while($client = $data->fetch()){
+			if ($client['Pseudo'] == $_POST['pseudo'] && $client['MotDePasse'] == $_POST['password']) {
+        		echo '<a href="home.php">';
+			}
+		}
+
+	}
+
+}
+	
+?>
+

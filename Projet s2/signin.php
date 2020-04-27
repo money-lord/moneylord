@@ -5,6 +5,7 @@ include('function.php');
 
 verfication($bdd);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ verfication($bdd);
       <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" type="text/css" href="css/style.css" />
-          <link rel="stylesheet" href="css/styleIndex.css" type="text/css" media="screen" />
+          <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>Inscription MoneyLord</title>
       </head>
