@@ -1,3 +1,10 @@
+<?php
+include('function.php');
+$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+$userCheck = displayUserAccount($bdd);
+
+?>
 <!DOCTYPE html>
   <html>
       <head>
@@ -14,7 +21,6 @@
             <img src="Images/logo.png" class="logo" alt="Logo" />
             </center>
           </div>
-
         <?php include('menu.php'); ?>
         </section>
 
