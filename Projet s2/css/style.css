@@ -29,16 +29,16 @@
     box-shadow:
         0 0 1px rgba(0, 0, 0, 0.4),
         0 3px 7px rgba(0, 0, 0, 0.4),
-        inset 0 1px #B5B6B6,
+        inset 0 1px rgba(255,255,255,1),
         inset 0 -3px 2px rgba(0,0,0,0.25);
     border-radius: 8px;
-    background: #B5B6B6;
-    background: -moz-linear-gradient(#eeefef, #B5B6B6 10%);
-    background: -ms-linear-gradient(#eeefef, #B5B6B6 10%);
-    background: -o-linear-gradient(#eeefef, #B5B6B6 10%);
-    background: -webkit-gradient(linear, 0 0, 0 100%, from(#B5B6B6), color-stop(0.1, #B5B6B6));
-    background: -webkit-linear-gradient(#B5B6B6, #B5B6B6 10%);
-    background: linear-gradient(#eeefef, #B5B6B6 10%);
+    background: white;
+    background: -moz-linear-gradient(#eeefef, #ffffff 10%);
+    background: -ms-linear-gradient(#eeefef, #ffffff 10%);
+    background: -o-linear-gradient(#eeefef, #ffffff 10%);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeefef), color-stop(0.1, #ffffff));
+    background: -webkit-linear-gradient(#eeefef, #ffffff 10%);
+    background: linear-gradient(#eeefef, #ffffff 10%);
 }
 
 .formulaire .field {
@@ -54,7 +54,7 @@
 
     /* Line */
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 1px 0 0 #B5B6B6;
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.7);
 
     /* Styles */
     color: #777777;
@@ -84,7 +84,7 @@
         inset 0 0 5px rgba(0,0,0,0.1),
         inset 0 3px 2px rgba(0,0,0,0.1);
     border-radius: 3px;
-    background: #B5B6B6;
+    background: #f9f9f9;
     color: #777;
     -webkit-transition: color 0.3s ease-out;
     -moz-transition: color 0.3s ease-out;
@@ -124,7 +124,7 @@
     z-index: 2;
 
     /* Styles */
-    background: #B5B6B6;
+    background: #ffffff;
     border-radius: 50%;
     box-shadow:
         0 0 2px rgba(0,0,0,0.1),
@@ -142,10 +142,10 @@
     left: 30px;
 
     /* Styles */
-    background: #B5B6B6;
+    background: #ffffff;
 
     /* Other masks trick */
-    box-shadow: 0 62px #B5B6B6, -32px 31px #B5B6B6;
+    box-shadow: 0 62px white, -32px 31px white;
 }
 
 .formulaire button {
@@ -157,7 +157,7 @@
     /* Icon styles */
     font-size: 1.4em;
     line-height: 1.75;
-    color: #B5B6B6;
+    color: white;
 
     /* Styles */
     border: none; /* Remove the default border */
