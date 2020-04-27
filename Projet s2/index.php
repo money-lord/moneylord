@@ -41,22 +41,7 @@
   </html>
 
 <?php
-session_start();
+ include("function.php");
 
-try{
-  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'test', 'Moneylord1*');
-}
-catch(Exception $e){
-  die('Erreur :'.$e->getMessage());
-}
-
-if (!empty($_POST['login']) && !empty($_POST['password'])) {
-  $data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
-  while($client = $data->fetch()){
-      if ($client['Pseudo'] == $_POST['pseudo'] && $client['MotDePasse'] == $_POST['password']) {
-        echo '<a href="home.php">';
-    }
-  }
-
-}
+ connection($bdd);
 ?>
