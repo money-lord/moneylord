@@ -7,7 +7,7 @@ include('function.php');
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" type="text/css" href="css/style.css" /> 
+          <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>MoneyLord Coinflip</title>
@@ -27,6 +27,11 @@ include('function.php');
             <a href="Index.php">DECONNEXION</a>
           </div>
         </header>
+
+        <div class="tchat">
+          test
+        </div>
+        test
 
 
 
