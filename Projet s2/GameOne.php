@@ -1,9 +1,7 @@
 <?php
 session_start();
 include('function.php');
-$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
-$userCheck = displayUserAccount($bdd);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +11,7 @@ $userCheck = displayUserAccount($bdd);
           <link rel="stylesheet" type="text/css" href="css/style.css" /> 
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Page Vierge</title>
+          <title>Jeu 1</title>
       </head>
       <body>
 
