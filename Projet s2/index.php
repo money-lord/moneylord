@@ -24,7 +24,7 @@
             		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p>
             		<p class="submit"><button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button></p>
             	</form>
-              <a href="createAccount.php">Vous n'avez pas de compte ?</a>
+              <a href="signin.php">Vous n'avez pas de compte ?</a>
             </p>
             </center>
           </div>
