@@ -16,7 +16,7 @@ $data = $bdd->query('SELECT Pseudo FROM Clients');
     if ($client['Pseudo'] == $_POST['pseudo']) {
 
       echo 'erreur, votre pseudo est deja pris';
-      echo '<meta http-equiv="Refresh" content="0; URL=createAccount.php" />';
+      echo '<meta http-equiv="Refresh" content="0; URL=signin.php" />';
     }else{
       createAccount($bdd);
       echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
