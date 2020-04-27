@@ -11,12 +11,16 @@ include('function.php');
           <link rel="stylesheet" type="text/css" href="css/style.css" /> 
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Jeu 1</title>
+          <title>Page Vierge</title>
       </head>
       <body>
+
         <header>
+
           <div class="menu">
-            <?php include('menu.php'); ?>
+            <a href="GameOne.php">JEU 1</a>
+            <a href="GameTwo.php">JEU 2</a>
+            <a href="GameTree.php">JEU 3</a>
           </div>
           <div class="logoheader">
             <center>
@@ -25,7 +29,7 @@ include('function.php');
           </div>
           <div class="acount">
             <a href="Acount.php">MON COMPTE</a>
-            <a href="Index.php">DECONEXION</a>
+            <a href="Index.php">DECONNEXION</a>
 
           </div>
         </header>

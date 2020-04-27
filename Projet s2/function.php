@@ -78,6 +78,4 @@ function displayUserAccount($bdd){
 	}
 }
 
-
-	
 ?>
