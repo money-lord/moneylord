@@ -2,25 +2,6 @@
 
 $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
-function displayUserAccount($bdd){
-
-	if (!empty($_POST['userAccount'])) {
-		$userAccount = $_POST['userAccount'];
-	} else {
-		$userAccount = false;
-	}
-	$req = $bdd->query('SELECT * FROM Clients');
-	while ($checkAccount = $req->fetch()) {
-		if ($_SESSION['pseudo'] == $checkAccount['pseudo'] && $_SESSION['firstName'] == $checkAccount['firstName'] && 
-			$_SESSION['lastName'] == $checkAccount['lastName'] && $_SESSION['password'] == $checkAccount['password']) { // Vérif correspondance entre compte client et client connecté
-
-			echo '<div><p>Pseudo : '.$checkAccount['Pseudo'].'</p>
-					<p>Nom : '.$checkAccount['Nom'].'</p>
-					<p>Prénom : '.$checkAccount['Prenom'].'</p></div>';
-		}	
-	}
-}
-
 function createAccount($bdd){
 
 	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
@@ -40,10 +21,11 @@ function createAccount($bdd){
 	$data2->execute();
 
 }
+
 function verfication($bdd){
 	$clientExists = false;
 	if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
-
+		
 		$data = $bdd->query('SELECT Pseudo FROM Clients');
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['pseudo']) {
@@ -68,6 +50,8 @@ function connection($bdd){
 
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_POST['password']) {
+				$_SESSION['pseudo'] = $_POST['login'];
+				$_SESSION['password'] = $_POST['password'];
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
@@ -75,6 +59,25 @@ function connection($bdd){
 	}
 
 }
+
+function displayUserAccount($bdd){
+
+	if (!empty($_POST['userAccount'])) {
+		$userAccount = $_POST['userAccount'];
+	} else {
+		$userAccount = false;
+	}
+	$req = $bdd->query('SELECT * FROM Clients');
+	while ($checkAccount = $req->fetch()) {
+		if ($_SESSION['pseudo'] == $checkAccount['pseudo'] && $_SESSION['password'] == $checkAccount['password']) { // Vérif correspondance entre compte client et client connecté
+
+			echo '<div><p>Pseudo : '.$checkAccount['Pseudo'].'</p>
+					<p>Nom : '.$checkAccount['Nom'].'</p>
+					<p>Prénom : '.$checkAccount['Prenom'].'</p></div>';
+		}	
+	}
+}
+
+
 	
 ?>
-
