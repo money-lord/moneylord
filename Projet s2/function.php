@@ -24,12 +24,12 @@ function displayUserAccount($bdd){
 function createAccount($bdd){
 
 	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
-	$data->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
-	$data->bindValue(':Prenom', $_SESSION['firstName'], PDO::PARAM_STR);
-	$data->bindValue(':Nom', $_SESSION['lastName'], PDO::PARAM_STR);
-	$data->bindValue(':MotDePasse', $_SESSION['password'], PDO::PARAM_STR);
+	$data->bindValue(':Pseudo', $_POST['pseudo'], PDO::PARAM_STR);
+	$data->bindValue(':Prenom', $_POST['firstName'], PDO::PARAM_STR);
+	$data->bindValue(':Nom', $_POST['lastName'], PDO::PARAM_STR);
+	$data->bindValue(':MotDePasse', $_POST['password'], PDO::PARAM_STR);
 	$data->execute();
-	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_SESSION['pseudo'].'\'');
+	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 
 	$save = $data1 ->fetch();
 
@@ -43,25 +43,21 @@ function createAccount($bdd){
 function verfication($bdd){
 	$clientExists = false;
 	if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
-	  $_SESSION['pseudo'] = $_POST['pseudo'];
-	  $_SESSION['firstName'] = $_POST['firstName'];
-	  $_SESSION['lastName'] = $_POST['lastName'];
-	  $_SESSION['password'] = $_POST['password'];
-	//verif
-	$data = $bdd->query('SELECT Pseudo FROM Clients');
-	  while($client = $data->fetch()){
-	  	if ($client['Pseudo'] == $_POST['pseudo']) {
-	  		$clientExists = true;
-	  	}
-	  }
-	  	if ($clientExists == true) {
 
-	  		return true;
+		$data = $bdd->query('SELECT Pseudo FROM Clients');
+		while($client = $data->fetch()){
+			if ($client['Pseudo'] == $_POST['pseudo']) {
+				$clientExists = true;
+			}
+		}
+		if ($clientExists == true) {
 
-	    }else{
-	      createAccount($bdd);
-	      echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
-	    }
+			return true;
+
+		}else{
+			createAccount($bdd);
+			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+		}
 	}
 }
 
@@ -71,8 +67,8 @@ function connection($bdd){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
 		while($client = $data->fetch()){
-			if ($client['Pseudo'] == $_POST['pseudo'] && $client['MotDePasse'] == $_POST['password']) {
-        		echo '<a href="home.php">';
+			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_POST['password']) {
+        		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
 
