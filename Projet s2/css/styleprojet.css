@@ -17,7 +17,7 @@ header{
 .menu{
 padding-left: 10%;
 padding-top: 2%;
-width: 33%;
+width: 33.33%;
 background-color: blue;
 }
 
@@ -35,8 +35,8 @@ background-color: blue;
 }
 
 .logoheader{
-  width: 33%;
-  background-color: yellow; 
+  width: 33.33%;
+  background-color: yellow;
 }
 
 .acount{
@@ -45,11 +45,8 @@ background-color: blue;
   font-weight:bold;
   font-size: 1.4em;
   padding-top: 2%;
-  width: 33%;
+  width: 33.33%;
   background-color: red;
-
-
-
 }
 
 .acount a{
