@@ -21,7 +21,7 @@ function displayUserAccount($bdd){
 
 function createAccount($bdd){
 
-  $data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse, 0)');
+  $data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
 
   $data->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
   $data->bindValue(':Prenom', $_SESSION['firstName'], PDO::PARAM_STR);
