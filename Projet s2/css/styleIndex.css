@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans_serif;
+    background: url(../Images/backgroud-index.png) no-repeat;
     background-size: cover;
 }
 
@@ -18,7 +19,6 @@ header{
 padding-left: 10%;
 padding-top: 2%;
 width: 33%;
-background-color: blue;
 }
 
 .menu a{
@@ -35,26 +35,23 @@ background-color: blue;
 
 .logoheader{
   width: 33%;
-  background-color: yellow; 
 }
 
 .acount{
+  margin: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+
   color: #808080;
   font-weight:bold;
-  font-size: 1.4em;
-  padding-top: 2%;
-  width: 33%;
-  background-color: red;
-
+  font-size: 1.5em;
+  text-align: left;
 
 
 }
 
 .acount a{
   text-decoration: none;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin: 1em;
 }
 
 

@@ -27,12 +27,12 @@ session_start();
           </center>
           </div>
           <div class="acount">
-            <a href="Acount.php">Mon compte</a>
-            <a href="Index.php">Deconnection</a>
+            <a href="Acount.php">MON COMPTE</a>
+            <a href="Index.php">DECONEXION</a>
           </div>
         </header>
 
-        
+
 
 
 
