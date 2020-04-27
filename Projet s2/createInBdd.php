@@ -6,7 +6,7 @@ $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=
 //préparation de la requete de création de compte
 $data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse)');
 //on lie chaque marqueur a une valeur
-$data>bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+$data->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
 $data->bindValue(':Prenom', $_SESSION['firstName'], PDO::PARAM_STR);
 $data->bindValue(':Nom', $_SESSION['lastName'], PDO::PARAM_STR);
 $data->bindValue(':MotDePasse', $_SESSION['password'], PDO::PARAM_STR);
