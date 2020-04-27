@@ -15,13 +15,7 @@
             </center>
           </div>
 
-          <div>
-              <ul>
-                <li>CoinFlip</li>
-                <li>Roulette</li>
-                <li>Jeu des Couleurs</li>                
-              </ul>
-          </div>
+        <?php include('menu.php'); ?>
         </section>
 
         <footer>
