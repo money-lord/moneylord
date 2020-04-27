@@ -1,12 +1,18 @@
 <?php
 session_start();
-if (isset($_POST["pseudo"]) && isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["password"])){
-$_SESSION['pseudo'] = $_POST['pseudo'];
-$_SESSION['firstName'] = $_POST['firstName'];
-$_SESSION['lastName'] = $_POST['lastName'];
-$_SESSION['password'] = $_POST['password'];
 
-  echo '<meta http-equiv="Refresh" content="0; URL=createInBdd.php" />';
+include('function.php');
+
+$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
+  $_SESSION['pseudo'] = $_POST['pseudo'];
+  $_SESSION['firstName'] = $_POST['firstName'];
+  $_SESSION['lastName'] = $_POST['lastName'];
+  $_SESSION['password'] = $_POST['password'];
+
+  createAccount($bdd);
+
 }
 
 ?>

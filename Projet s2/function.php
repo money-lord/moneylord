@@ -15,4 +15,22 @@ function displayUserAccount($bdd){
 	}
 }
 
+function createAccount($bdd){
+
+  $data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse, 0)');
+
+  $data->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+  $data->bindValue(':Prenom', $_SESSION['firstName'], PDO::PARAM_STR);
+  $data->bindValue(':Nom', $_SESSION['lastName'], PDO::PARAM_STR);
+  $data->bindValue(':MotDePasse', $_SESSION['password'], PDO::PARAM_STR);
+
+
+  $insertIsOk = $data->execute();
+
+  if($insertIsOk){
+         
+      echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+  }
+
+}
 ?>
