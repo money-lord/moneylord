@@ -1,7 +1,3 @@
-<div>
-  <ul>
-    <li>CoinFlip</li>
-    <li>Roulette</li>
-    <li>Jeu Des Couleurs</li>
-  </ul>
-</div>
+<a href="GameOne.php">COINFLIP</a>
+<a href="GameTwo.php">ROULETTE</a>
+<a href="GameTree.php">COULEUR</a>
