@@ -10,6 +10,50 @@ body{
   display: flex;
 }
 
+header{
+  display: flex;
+}
+
+.menu{
+padding-left: 10%;
+padding-top: 2%;
+width: 33%;
+}
+
+.menu a{
+  margin: 1em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  color: #808080;
+  font-weight:bold;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+.imglogoheader{
+  max-width: 60%;
+}
+
+.logoheader{
+  width: 33%;
+}
+
+.acount{
+  margin: 1em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+
+  color: #808080;
+  font-weight:bold;
+  font-size: 1.5em;
+  text-align: left;
+
+
+}
+
+.acount a{
+  text-decoration: none;
+  margin: 1em;
+}
+
+
 .imageindex{
   max-width: 50%;
   margin-top: 20%;
