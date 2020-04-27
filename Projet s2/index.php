@@ -1,3 +1,7 @@
+<?php
+ include('function.php');
+ connection($bdd);
+?>
 <!DOCTYPE html>
   <html>
       <head>
@@ -39,9 +43,3 @@
 
       </body>
   </html>
-
-<?php
- include("function.php");
-
- connection($bdd);
-?>
