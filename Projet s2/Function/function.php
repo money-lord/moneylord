@@ -108,16 +108,30 @@ function displayChat($bdd){
 }
 
 function chat($bdd){
-	echo '<div class="chat"><div class="messagesborder"><div class="messages">';
-	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
+	echo '<div class="chat"><div class="messagesborder"><div class="clear"><div class="messages">';
+	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 15');
+	$i = 14;
 	while ($save = $data1 ->fetch()){
-		echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
+		if(isset($save['Pseudo']) && isset($save['Message'])){
+			$tableChat[$i][0] = $save['Pseudo'];
+			$tableChat[$i][1] = $save['Message'];
+			$i--;
+			if ($i < 1 ) {
+				break;
+			}
+		}
 	}
-	echo'</div></div>';
+	for($j=0; $j < 10 ;$j++){
+		if(!empty($tableChat[$j][0])){
+			echo '<p>'.$tableChat[$j][0].' : '.$tableChat[$j][1].'<p>';
+		}
+	}
+	echo'</div></div></div>';
 	echo '<br><center><form class="formulaire" action="" method ="POST">
-		<input type="text" name="Message" placeholder="Ton message" size="58"><br><br>
+		<input type="text" name="Message" placeholder="Ton message" size="59"><br><br>
 		<button type="submit" value="Envoyer">Envoyer</button>
 	</form></center>';
+
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
 		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
@@ -127,10 +141,12 @@ function chat($bdd){
 
 	echo '</div>'; ?>
 	<script>
+
 		setInterval('load_messages()',500);
 		function load_messages(){
 			$('.messages').load('Function/Message.php');
 		}
+
 	</script>
 <?php  
 
