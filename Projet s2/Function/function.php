@@ -108,12 +108,12 @@ function displayChat($bdd){
 
 function displayBalance($bdd){
 
-	$displayBalance = $bdd->query('SELECT Solde FROM Clients');
+	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients');
 
 		while($display = $displayBalance->fetch()){
-			//if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_POST['password']) {
-				echo 'Solde :'.$display["Solde"];
-			//}
+			if ($display['Pseudo'] == $_SESSION['login']) {
+				echo 'Solde : '.$display["Solde"];
+			}
 		}
 
 }
