@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('Function/function.php');
+//include('Function/function.php');
 ?>
 
 <!DOCTYPE html>
@@ -25,17 +25,18 @@ include('Function/function.php');
             </center>
           </div>
           <div class="account">
+
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
           </div>
         </header>
         <div class="content">
-          <?php displayUserAccount($bdd);?>
+          <?php// modifyAccount($bdd);?>
         </div>
-
         <footer>
 
           <center>
+          <a href="formModificationAccount.php">Modifier son compte</a>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
