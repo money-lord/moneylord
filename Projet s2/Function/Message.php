@@ -1,3 +1,4 @@
+
 <div class="clear"><div class="messages"><div class="mask"></div>
 <?php
 $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');

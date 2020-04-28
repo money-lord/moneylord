@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('Function/function.php');
-if ($_POST['change'] != NULL) {
+if (!empty($_POST['change']) && $_POST['change'] != null) {
   changeData($bdd);
 
 }

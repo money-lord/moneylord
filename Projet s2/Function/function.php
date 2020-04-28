@@ -92,19 +92,6 @@ function displayUserAccount($bdd){
 		}
 	}
 }
-/*
-function chat($bdd){
-
-	if (isset($_POST['message']) AND !empty($_POST['message'])) {
-		$pseudo = htmlspecialchars($_SESSION['pseudo']);
-		$message = htmlspecialchars($_POST['message']);
-		$data = $bdd ->prepare('INSERT INTO Chat VALUES(NULL,:pseudo,:message)');
-		$data->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-		$data->bindParam(':message', $message, PDO::PARAM_STR);
-		$data->execute();
-	}
-}*/
-
 
 function displayChat($bdd){
 
@@ -130,43 +117,57 @@ function changeData($bdd){
 }
 
 function statClient($bdd){
-	$data = $bdd->query('SELECT stats.SoldeActuel sold,stats.TotalBet belt,
-												stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
-										 		stats.TotalBetCouleur coulor, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
-												FROM Statistiques stats INNER JOIN Clients c ON stats.Clients_ID = c.ID
-												WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
+	$data = $bdd->query('SELECT stats.SoldeActuel solde,stats.TotalBet bet,
+							stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
+							stats.TotalBetCouleur couleur, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
+							FROM Statistiques AS stats 
+							INNER JOIN Clients AS c 
+							ON stats.Clients_ID = c.ID
+							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' ');
+
   $afficher = $data->fetch();
   echo ' <center>
 			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p>
 			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br> <br>
-			<p> Votre sold est actuelement de '.$afficher['sold'].' euros</p> <br>
-			<p> Vous avez joué '.$afficher['flip'].' au Coin Flip.</p>
+			<p> Votre solde est actuelement de '.$afficher['solde'].' euros</p> <br>
+			<p> Vous avez joué '.$afficher['flip'].' au CoinFlip.</p>
 			<p> Vous avez joué '.$afficher['roulette'].' à la Roulette.</p>
-			<p> Vous avez joué '.$afficher['coulor'].' au jeu des Couleur.</p> <br> <br>
+			<p> Vous avez joué '.$afficher['couleur'].' au jeu des Couleurs.</p> <br> <br>
 
-			<p> Vous avez joué en tout  '.$afficher['belt'].' à tous les jeux.</p> <br> <br>
+			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 
-			</center>
-	 ';
+			</center>';
 
 	}
 
 function displayBalance($bdd){
 
-	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$display = $displayBalance->fetch();
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
 
 function chat($bdd){
+/*
+	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
+	$donnees = $data2->fetch();
+	$data2->closeCursor();
+	
+	if ( $donnees['nbID'] > 50) {
+		while ($donnees['nbID'] > 49) {
+
+			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
+		}
+	}*/
+	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
 	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
 	while ($save = $data1 ->fetch()){
 		echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
 	}
 	echo'</div></div>';
-	echo '<br><center><form class="formulaire" action="" method ="POST">
-		<input type="text" name="Message" placeholder="Ton message" size="58"><br><br>
+	echo '<br><center><form action="" method ="POST">
+		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
 		<button type="submit" value="Envoyer">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
