@@ -29,10 +29,7 @@ chat($bdd);
           <div class="account">
 
             <?php
-
-            include('Function/function.php');
             displayBalance($bdd);
-            
             ?>
 
             <a href="account.php">MON COMPTE</a>
