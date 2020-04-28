@@ -100,10 +100,21 @@ function displayChat($bdd){
 
 	$displayMessage = $bdd->query('SELECT * FROM Chat ORDER BY Message desc');
 
-
 	while($message = $displayMessage->fetch()){
 		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
 	}
+
+}
+
+function displayBalance($bdd){
+
+	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients');
+
+		while($display = $displayBalance->fetch()){
+			if ($display['Pseudo'] == $_SESSION['pseudo']) {
+				echo 'Solde : '.$display["Solde"];
+			}
+		}
 
 }
 
