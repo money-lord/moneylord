@@ -114,14 +114,14 @@ function statClient($bdd){
 												WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
   $afficher = $data->fetch();
   echo ' <center>
-			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p> <br>
-			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br>
+			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p>
+			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br> <br>
 			<p> Votre sold est actuelement de '.$afficher['sold'].' euros</p> <br>
-			<p> Vous avez joué '.$afficher['flip'].' au Coin Flip.</p> <br>
-			<p> Vous avez joué '.$afficher['roulette'].' à la Roulette.</p> <br>
+			<p> Vous avez joué '.$afficher['flip'].' au Coin Flip.</p>
+			<p> Vous avez joué '.$afficher['roulette'].' à la Roulette.</p>
 			<p> Vous avez joué '.$afficher['coulor'].' au jeu des Couleur.</p> <br> <br>
 
-			<p> Vous avez joué en tout  '.$afficher['belt'].' au jeu des Couleur.</p> <br> <br>
+			<p> Vous avez joué en tout  '.$afficher['belt'].' à tous les jeux.</p> <br> <br>
 
 			</center>
 	 ';
