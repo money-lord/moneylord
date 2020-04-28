@@ -1,4 +1,12 @@
-<?
+<?php
+session_start();
+ $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+ $data = $bdd->prepare('SELECT * FROM Clients WHERE Pseudo = :pseudo ');
+ $data->bindValue(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+ $data->execute();
+ $info = $data->fetch();
+ //var_dump($info);
+ ?>
 <!DOCTYPE html>
   <html>
       <head>
@@ -20,14 +28,14 @@
             <center>
             <h1 class="welcome">Modification de compte</h1>
             <p>
-              <form class="formulaire" method="post">
-                <p class="field"><input type="text" name="pseudo" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
-            		<p class="field"><input type="text" name="lastName" placeholder="Nom"><i class="icon-user icon-large"></i></p>
-                <p class="field"><input type="text" name="firstName" placeholder="Prénom"><i class="icon-user icon-large"></i></p>
-            		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p><br>
+            <form action = "modification.php" method = "post" >
+                <p class="field"><input type="text" name="pseudo" value = <?= $info['Pseudo']; ?> ><i class="icon-user icon-large"></i></p>
+            		<p class="field"><input type="text" name="lastName" value = <?= $info['Nom']; ?>><i class="icon-user icon-large"></i></p>
+                <p class="field"><input type="text" name="firstName" value = <?= $info['Prenom']; ?>><i class="icon-user icon-large"></i></p>
+            		<p class="field"><input type="password" name="password"value = <?= $info['MotDePasse']; ?>><i class="icon-lock icon-large"></i></p><br>
             		<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
             	</form>
-              <a href="account.php">Vous ne désirez plus le modifier+ ?</a>
+              <a href="account.php">Vous ne désirez plus le modifier ?</a>
             </p>
             </center>
           </div>
@@ -42,5 +50,3 @@
 
       </body>
   </html>
-  ?>
-  echo 'test';
