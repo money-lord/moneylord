@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('Function/function.php');
-tchat($bdd);
+chat($bdd);
 ?>
 
 <!DOCTYPE html>
