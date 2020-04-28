@@ -111,7 +111,7 @@ function displayBalance($bdd){
 	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients');
 
 		while($display = $displayBalance->fetch()){
-			if ($display['Pseudo'] == $_POST['login']) {
+			if ($display['Pseudo'] == $_SESSION['pseudo']) {
 				echo 'Solde : '.$display["Solde"];
 			}
 		}
