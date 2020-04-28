@@ -10,7 +10,7 @@ session_start();
           <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Compte Client MoneyLord</title>
+          <title>Créditer mon compte</title>
       </head>
       <body>
 
