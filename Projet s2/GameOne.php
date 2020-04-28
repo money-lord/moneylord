@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-include('function.php');
-
 //chat($bdd);
 include('Function/function.php');
 chat($bdd);
@@ -25,7 +23,9 @@ chat($bdd);
           </div>
           <div class="logoheader">
             <center>
+            <a href="home.php">
             <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
+            </a>
           </center>
           </div>
           <div class="account">
@@ -36,17 +36,17 @@ chat($bdd);
 
         <div class="content">
         </div>
-
+        <?php /*
         <section>
-        <?php displayChat($bdd);?>
+// displayChat($bdd);
         <div class="chat"> 
           <form method="POST" action="">
             <input type="text" name="message" placeholder="Message">
             <input type="submit" name="Envoyer">
           </form>
         </div>  
-        </section>
-
+        </section> */
+?>
 
 
         <footer>
