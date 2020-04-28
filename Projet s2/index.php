@@ -1,6 +1,5 @@
 <?php
   session_start();
-  $_POST['login'] == $_SESSION['login'];
   include('Function/function.php');
  connection($bdd);
 ?>
