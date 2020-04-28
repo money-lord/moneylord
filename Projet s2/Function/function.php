@@ -100,11 +100,39 @@ function displayChat($bdd){
 
 	$displayMessage = $bdd->query('SELECT * FROM Chat ORDER BY Message desc');
 
-
 	while($message = $displayMessage->fetch()){
 		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
 	}
 
+}
+
+function statClient($bdd){
+	$data = $bdd->query('SELECT stats.SoldeActuel sold,stats.TotalBet belt,
+												stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
+										 		stats.TotalBetCouleur coulor, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
+												FROM Statistiques stats INNER JOIN Clients c ON stats.Clients_ID = c.ID
+												WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
+  $afficher = $data->fetch();
+  echo ' <center>
+			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p>
+			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br> <br>
+			<p> Votre sold est actuelement de '.$afficher['sold'].' euros</p> <br>
+			<p> Vous avez joué '.$afficher['flip'].' au Coin Flip.</p>
+			<p> Vous avez joué '.$afficher['roulette'].' à la Roulette.</p>
+			<p> Vous avez joué '.$afficher['coulor'].' au jeu des Couleur.</p> <br> <br>
+
+			<p> Vous avez joué en tout  '.$afficher['belt'].' à tous les jeux.</p> <br> <br>
+
+			</center>
+	 ';
+
+	}
+
+function displayBalance($bdd){
+
+	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$display = $displayBalance->fetch();
+	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
 
 function chat($bdd){
@@ -148,9 +176,8 @@ function chat($bdd){
 		}
 
 	</script>
-<?php  
+<?php
 
 }
 
 ?>
-

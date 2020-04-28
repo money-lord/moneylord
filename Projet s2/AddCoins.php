@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('Function/function.php');
+//include('Function/function.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ include('Function/function.php');
           <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
-          <title>Compte Client MoneyLord</title>
+          <title>Créditer mon compte</title>
       </head>
       <body>
 
@@ -24,6 +24,7 @@ include('Function/function.php');
               <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
             </center>
           </div>
+          
           <div class="account">
 
             <a href="account.php">MON COMPTE</a>
@@ -31,15 +32,12 @@ include('Function/function.php');
           </div>
         </header>
         <div class="content">
-          <center>
-          <?php statClient($bdd); ?>
-          <br> <br>
-          <a href="formModificationAccount.php">Modifier son compte</a>
-          </center>
+          <?php// modifyAccount($bdd);?>
         </div>
         <footer>
 
           <center>
+          <a href="formModificationAccount.php">Modifier son compte</a>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
