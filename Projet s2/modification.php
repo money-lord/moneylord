@@ -1,6 +1,7 @@
 <?php
+session_start();
 $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-$data = $bdd->prepare('UPDATE CLients set Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password');
+$data = $bdd->prepare('UPDATE CLients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo='.$_SESSION['pseudo'].'');
 $data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 $data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 $data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
@@ -29,7 +30,12 @@ else {
       <body>
     <div class="login-box">
     <h1>Confirmation Modification</h1>
-    <p><?php echo $message; ?></p>
+    <p><?php  echo $message; ?></p>
+    <p><?php echo $_POST['pseudo']; ?></p>
+    <p><?php echo $_POST['lastName']; ?></p>
+    <p><?php echo $_POST['firstName']; ?></p>
+    <p><?php echo $_POST['password']; ?></p>
+
 <form action = "account.php" method = "POST" >
         <p>
         <button>Retour</button>
