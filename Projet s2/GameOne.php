@@ -1,7 +1,9 @@
 <?php
 session_start();
+
 include('Function/function.php');
-tchat($bdd);
+chat($bdd);
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +22,9 @@ tchat($bdd);
           </div>
           <div class="logoheader">
             <center>
+            <a href="home.php">
             <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
+            </a>
           </center>
           </div>
           <div class="account">
@@ -32,12 +36,17 @@ tchat($bdd);
         <div class="content">
         </div>
 
-
-
-
-
-
-
+<?php /*
+        <section>
+// displayChat($bdd);
+        <div class="chat"> 
+          <form method="POST" action="">
+            <input type="text" name="message" placeholder="Message">
+            <input type="submit" name="Envoyer">
+          </form>
+        </div>  
+        </section> */
+?>
 
         <footer>
           <center>
