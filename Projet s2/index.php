@@ -1,5 +1,6 @@
 <?php
- include('function.php');
+  session_start();
+  include('Function/function.php');
  connection($bdd);
 ?>
 <!DOCTYPE html>

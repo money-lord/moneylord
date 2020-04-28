@@ -1,18 +1,22 @@
 <?php
 session_start();
+
 include('function.php');
 
+//chat($bdd);
+include('Function/function.php');
 chat($bdd);
+
 ?>
 
 <!DOCTYPE html>
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" type="text/css" href="css/style.css" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>MoneyLord Coinflip</title>
+          <script src="js/jquery.min.js"></script>
       </head>
       <body>
         <header>
@@ -30,8 +34,8 @@ chat($bdd);
           </div>
         </header>
 
-
-
+        <div class="content">
+        </div>
 
         <section>
         <?php displayChat($bdd);?>

@@ -17,7 +17,6 @@ function createAccount($bdd){
 	$data->execute();
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
-
 	$save = $data1 ->fetch();
 
 	$idClients = $save['ID'];
@@ -33,7 +32,7 @@ function verfication($bdd){
 	$clientExists = false;
 
 	if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
-		
+
 		$data = $bdd->query('SELECT Pseudo FROM Clients');
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['pseudo']) {
@@ -82,9 +81,10 @@ function displayUserAccount($bdd){
 			echo '<div><p>Pseudo : '.$checkAccount['Pseudo'].'</p>
 					<p>Nom : '.$checkAccount['Nom'].'</p>
 					<p>Prénom : '.$checkAccount['Prenom'].'</p></div>';
-		}	
+		}
 	}
 }
+/*
 function chat($bdd){
 
 	if (isset($_POST['message']) AND !empty($_POST['message'])) {
@@ -95,14 +95,46 @@ function chat($bdd){
 		$data->bindParam(':message', $message, PDO::PARAM_STR);
 		$data->execute();
 	}
-}
+}*/
 function displayChat($bdd){
 
 	$displayMessage = $bdd->query('SELECT * FROM Chat ORDER BY Message desc');
+
 
 	while($message = $displayMessage->fetch()){
 		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
 	}
 
 }
+
+function chat($bdd){
+	echo '<div class="chat"><div class="messagesborder"><div class="messages">';
+	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
+	while ($save = $data1 ->fetch()){
+		echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
+	}
+	echo'</div></div>';
+	echo '<br><center><form class="formulaire" action="" method ="POST">
+		<input type="text" name="Message" placeholder="Ton message" size="58"><br><br>
+		<button type="submit" value="Envoyer">Envoyer</button>
+	</form></center>';
+	if (!empty($_POST['Message'])) {
+		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
+		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+		$data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
+		$data2->execute();
+	}
+
+	echo '</div>'; ?>
+	<script>
+		setInterval('load_messages()',500);
+		function load_messages(){
+			$('.messages').load('Function/Message.php');
+		}
+	</script>
+<?php  
+
+}
+
 ?>
+

@@ -1,16 +1,17 @@
 <?php
 session_start();
-include('function.php');
+include('Function/function.php');
+tchat($bdd);
 ?>
 
 <!DOCTYPE html>
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" type="text/css" href="css/style.css" /> 
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>MoneyLord Roulette</title>
+          <script src="js/jquery.min.js"></script>
       </head>
       <body>
         <header>
@@ -25,9 +26,11 @@ include('function.php');
           <div class="account">
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
-
           </div>
         </header>
+
+        <div class="content">
+        </div>
 
 
 

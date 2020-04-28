@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('function.php');
+include('Function/function.php');
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ include('function.php');
         <header>
 
           <div class="menu">
-            <?php include('menu.php'); ?>          
+            <?php include('menu.php'); ?>
           </div>
           <div class="logoheader">
             <center>
@@ -29,8 +29,12 @@ include('function.php');
             <a href="Index.php">DECONNEXION</a>
           </div>
         </header>
-<?php displayUserAccount($bdd);?>
+        <div class="content">
+          <?php displayUserAccount($bdd);?>
+        </div>
+
         <footer>
+
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
