@@ -89,36 +89,36 @@ footer p
 .chat{
   position: fixed;
   color: black;
-  top: 15%;
+  top: 13%;
   width: 25%;
   padding: 0.3em;
   height: 87%;
   left: 0;
-  background-color: green; 
 }
 .messagesborder{
     border: 1px solid #ffffff;
     width: 100%;
     height: 80%;
-    position:relative;
-    background-color:red ;
-}
-
-.messagesborder > .clear {
-  clear: both;
-  height: 0; overflow: hidden; /* Précaution pour IE 7 */
 }
 
 .messages{
-    background-color:orange ;
+    word-wrap : break-word;
     position: fixed;
-    display: block;
-    overflow-wrap: break-word;
-    overflow: auto;
-    max-width: 25%;
-    bottom:15 %;
+    bottom: 17%;
+    left: 0.6%;
+    width: 24.6%;
+    text-overflow: ellipsis;
+
+
 }
-.messages > .clear {
-  clear: both;
-  height: 0; overflow: hidden; /* Précaution pour IE 7 */
+.mask{
+    background-color: #808080 ;
+    top: 0;
+    position: fixed;
+    height: 13.6%;
+    width: 24.6%;
+    border-bottom: 1px solid #ffffff;
+
+
+
 }
