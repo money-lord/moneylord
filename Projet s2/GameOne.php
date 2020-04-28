@@ -30,6 +30,7 @@ chat($bdd);
           <div class="account">
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
+            <br><?php displayBalance($bdd); ?>
           </div>
         </header>
 
@@ -39,12 +40,12 @@ chat($bdd);
 <?php /*
         <section>
 // displayChat($bdd);
-        <div class="chat"> 
+        <div class="chat">
           <form method="POST" action="">
             <input type="text" name="message" placeholder="Message">
             <input type="submit" name="Envoyer">
           </form>
-        </div>  
+        </div>
         </section> */
 ?>
 

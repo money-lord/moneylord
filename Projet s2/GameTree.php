@@ -21,7 +21,7 @@ chat($bdd);
           </div>
           <div class="logoheader">
             <center>
-            <a href="home.php">              
+            <a href="home.php">
             <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
             </a>
           </center>
@@ -29,6 +29,7 @@ chat($bdd);
           <div class="account">
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
+            <br><?php displayBalance($bdd); ?>
           </div>
         </header>
 

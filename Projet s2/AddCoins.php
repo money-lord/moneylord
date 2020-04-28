@@ -1,6 +1,9 @@
 <?php
 session_start();
-//include('Function/function.php');
+include('Function/function.php');
+if ($_POST['addcoin'] != NULL) {
+  addcoin($bdd);
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,20 +27,28 @@ session_start();
               <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
             </center>
           </div>
-          
+
           <div class="account">
 
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
+            <br><?php displayBalance($bdd); ?>
           </div>
         </header>
-        <div class="content">
-          <?php// modifyAccount($bdd);?>
-        </div>
-        <footer>
 
+        <div class="content">
           <center>
-          <a href="formModificationAccount.php">Modifier son compte</a>
+            <h1>Ajout d'argent</h1> <br> <br>
+            <form action="" method="post">
+              Montant : <input type="number" name="addcoin" min="0">
+              <br><input type="submit" name="" value="Ajouter">
+            </form>
+          </center>
+        </div>
+
+
+        <footer>
+          <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
