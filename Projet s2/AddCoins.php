@@ -24,6 +24,7 @@ session_start();
               <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
             </center>
           </div>
+          
           <div class="account">
 
             <a href="account.php">MON COMPTE</a>
