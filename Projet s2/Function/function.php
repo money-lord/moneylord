@@ -96,6 +96,8 @@ function chat($bdd){
 		$data->execute();
 	}
 }*/
+
+
 function displayChat($bdd){
 
 	$displayMessage = $bdd->query('SELECT * FROM Chat ORDER BY Message desc');
@@ -103,6 +105,19 @@ function displayChat($bdd){
 	while($message = $displayMessage->fetch()){
 		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
 	}
+
+}
+
+function changeData($bdd){
+
+	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
+	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
+	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
+	$data->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
+
+	$ExecuteIsOk = $data->execute();
+	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
 
 }
 
