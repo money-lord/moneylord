@@ -110,7 +110,7 @@ function displayBalance($bdd){
 
 	$displayBalance = $bdd->query('SELECT Pseudo, Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$display = $displayBalance->fetch();
-	echo 'Solde : '.$display["Solde"];
+	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
 
 function chat($bdd){
