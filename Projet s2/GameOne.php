@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-include('function.php');
-
-//chat($bdd);
 include('Function/function.php');
 chat($bdd);
 
@@ -36,19 +32,6 @@ chat($bdd);
 
         <div class="content">
         </div>
-
-        <section>
-        <?php displayChat($bdd);?>
-        <div class="chat"> 
-          <form method="POST" action="">
-            <input type="text" name="message" placeholder="Message">
-            <input type="submit" name="Envoyer">
-          </form>
-        </div>  
-        </section>
-
-
-
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
