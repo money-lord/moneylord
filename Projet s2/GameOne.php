@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-//chat($bdd);
 include('Function/function.php');
 chat($bdd);
 
@@ -36,7 +35,8 @@ chat($bdd);
 
         <div class="content">
         </div>
-        <?php /*
+
+<?php /*
         <section>
 // displayChat($bdd);
         <div class="chat"> 
@@ -47,7 +47,6 @@ chat($bdd);
         </div>  
         </section> */
 ?>
-
 
         <footer>
           <center>
