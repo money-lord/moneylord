@@ -4,12 +4,18 @@ $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=
 
 function createAccount($bdd){
 
+	$pseudo = htmlspecialchars($_POST['pseudo']);
+	$nom = htmlspecialchars($_POST['lastName']);
+	$prenom = htmlspecialchars($_POST['firstName']);
+	$mdp = htmlspecialchars($_POST['password']);
+
 	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
-	$data->bindValue(':Pseudo', $_POST['pseudo'], PDO::PARAM_STR);
-	$data->bindValue(':Prenom', $_POST['firstName'], PDO::PARAM_STR);
-	$data->bindValue(':Nom', $_POST['lastName'], PDO::PARAM_STR);
-	$data->bindValue(':MotDePasse', $_POST['password'], PDO::PARAM_STR);
+	$data->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
+	$data->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
+	$data->bindValue(':Nom', $nom, PDO::PARAM_STR);
+	$data->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
 	$data->execute();
+
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 
 	$save = $data1 ->fetch();
@@ -23,7 +29,9 @@ function createAccount($bdd){
 }
 
 function verfication($bdd){
+
 	$clientExists = false;
+
 	if (!empty($_POST["pseudo"]) && !empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["password"])){
 		
 		$data = $bdd->query('SELECT Pseudo FROM Clients');
@@ -50,8 +58,8 @@ function connection($bdd){
 
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_POST['password']) {
-				$_SESSION['pseudo'] = $_POST['login'];
-				$_SESSION['password'] = $_POST['password'];
+				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
+				$_SESSION['password'] = htmlspecialchars($_POST['password']);
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
@@ -63,7 +71,7 @@ function connection($bdd){
 function displayUserAccount($bdd){
 
 	if (!empty($_POST['userAccount'])) {
-		$userAccount = $_POST['userAccount'];
+		$userAccount = htmlspecialchars($_POST['userAccount']);
 	} else {
 		$userAccount = false;
 	}
@@ -77,5 +85,24 @@ function displayUserAccount($bdd){
 		}	
 	}
 }
+function chat($bdd){
 
+	if (isset($_POST['message']) AND !empty($_POST['message'])) {
+		$pseudo = htmlspecialchars($_SESSION['pseudo']);
+		$message = htmlspecialchars($_POST['message']);
+		$data = $bdd ->prepare('INSERT INTO Chat VALUES(NULL,:pseudo,:message)');
+		$data->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+		$data->bindParam(':message', $message, PDO::PARAM_STR);
+		$data->execute();
+	}
+}
+function displayChat($bdd){
+
+	$displayMessage = $bdd->query('SELECT * FROM Chat ORDER BY Message desc');
+
+	while($message = $displayMessage->fetch()){
+		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
+	}
+
+}
 ?>

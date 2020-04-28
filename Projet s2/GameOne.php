@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('function.php');
+
+chat($bdd);
 ?>
 
 <!DOCTYPE html>
@@ -28,15 +30,18 @@ include('function.php');
           </div>
         </header>
 
-        <div class="tchat">
-          test
-        </div>
-        test
 
 
 
-
-
+        <section>
+        <?php displayChat($bdd);?>
+        <div class="chat"> 
+          <form method="POST" action="">
+            <input type="text" name="message" placeholder="Message">
+            <input type="submit" name="Envoyer">
+          </form>
+        </div>  
+        </section>
 
 
 
