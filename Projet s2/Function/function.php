@@ -187,10 +187,13 @@ function chat($bdd){
 	$donnees = $data2->fetch();
 	$data2->closeCursor();
 
+
+// reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
 	if ( $donnees['nbID'] > 50) {
 		while ($donnees['nbID'] > 49) {
 
 			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
+			$data2->execute();
 		}
 	}
 
