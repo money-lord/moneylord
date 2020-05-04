@@ -12,10 +12,7 @@ chat($bdd);
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <script src="js/jquery.min.js"></script>
           <title>MoneyLord</title>
-          <div id='stars'></div>
-          <div id='stars2'></div>
-          <div id='stars3'></div>
-          <div id='title'></div>
+          <div id='stars'></div><div id='stars2'></div><div id='stars3'></div><div id='title'></div>
       </head>
       <body>
 
