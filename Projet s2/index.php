@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $_SESSION['pass2'] = md5($_POST['password']);
   include('Function/function.php');
  connection($bdd);
 ?>

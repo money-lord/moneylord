@@ -56,7 +56,7 @@ function connection($bdd){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
 		while($client = $data->fetch()){
-			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_POST['password']) {
+			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
 				$_SESSION['password'] = htmlspecialchars($_POST['password']);
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
