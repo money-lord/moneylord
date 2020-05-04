@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #808080;
+    background-color: white;
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
 }
 
@@ -10,32 +10,34 @@ header{
   top: 0;
   display: flex;
   height: 15%;
-  background: linear-gradient(#808080,90%, transparent);
+  background:url(../Images/header.png) no-repeat;
+  background-position: bottom;
+  background-size: 100%;
+
 }
 .menu{
   font-weight:bold;
   padding-top: 3vh;
   width: 33.33%;
   font-size: 1.5vw;
-  border-bottom: solid 1px #ffffff;
-  border-right: solid 1px #ffffff;
+
 }
 .menu a{
   margin: 1vw;
-  color: #FFFFFF;
+  color: #808080;
   text-decoration: none;
   font-size: 1.6vw;
 
 }
 
 .imglogoheader{
-  max-width: 35%;
+  max-width: 60%;
 
 }
 .logoheader{
   padding-top: 1%;
   width: 33.33%;
-  border-bottom: solid 1px #ffffff;
+
 }
 
 .account{
@@ -44,14 +46,13 @@ header{
   padding-top: 3vh;
   width: 33.33%;
   text-align: right;
-  border-bottom: solid 1px #ffffff;
-  border-left: solid 1px #ffffff;
+
 }
 .account a{
   margin: 1vw;
   margin-top: 2px;
   padding-left: 2px;
-  color: #FFFFFF;
+  color: #808080;
   text-decoration: none;
   font-size: 1.6vw;
 }
@@ -74,13 +75,13 @@ img.logo{
 h1
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: white;
+    color: #808080;
 }
 
 a
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #FFFFFF;
+    color: #808080;
 }
 
 footer {
@@ -91,7 +92,7 @@ footer {
 footer p
 {
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-    color: #ffffff;
+    color: #808080;
     font-size: 0.9em;
 }
 .txtZone{
@@ -99,11 +100,12 @@ footer p
   width: 100%;
   height: 50px;
   padding: 0px 15px 0px 15px;
-  
+  border-radius: 10px;
+
   background: transparent;
   outline: none;
-  
-  border: solid 1px #ffffff;
+
+  border: solid 1px #808080;
 }
 .chat{
   position: fixed;
@@ -111,11 +113,11 @@ footer p
   top: 13%;
   width: 25%;
   padding: 0.3em;
-  height: 87%;
+  height: 80%;
   left: 0;
 }
 .messagesborder{
-    border: 1px solid #ffffff;
+    border: 1px solid #808080;
     width: 100%;
     height: 80%;
 }
@@ -123,7 +125,7 @@ footer p
 .messages{
     word-wrap : break-word;
     position: fixed;
-    bottom: 17%;
+    bottom: 23%;
     left: 0.6%;
     width: 24.6%;
     text-overflow: ellipsis;
@@ -131,13 +133,193 @@ footer p
 
 }
 .mask{
-    background-color: #808080 ;
+    background-color: #FFFFFF ;
     top: 0;
     position: fixed;
     height: 13.6%;
     width: 24.6%;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #808080;
 
 
 
 }
+
+/* Button */
+
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button,
+	.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		box-shadow: inset 0 0 0 3px #808080;
+		color: #808080 !important;
+		border-radius: 30px;
+		border: 0;
+		cursor: pointer;
+		display: inline-block;
+		font-size: .75em;
+		font-weight: 400;
+		height: 3.75em;
+		line-height: 3.85em;
+		letter-spacing: 2px;
+		padding: 0 4em;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		input[type="button"]:hover,
+		button:hover,
+		.button:hover {
+			background-color: rgba(108, 192, 145, 0.15);
+		}
+
+		input[type="submit"]:active,
+		input[type="reset"]:active,
+		input[type="button"]:active,
+		button:active,
+		.button:active {
+			background-color: rgba(108, 192, 145, 0.15);
+		}
+
+		input[type="submit"].icon,
+		input[type="reset"].icon,
+		input[type="button"].icon,
+		button.icon,
+		.button.icon {
+			padding-left: 1.35em;
+		}
+
+			input[type="submit"].icon:before,
+			input[type="reset"].icon:before,
+			input[type="button"].icon:before,
+			button.icon:before,
+			.button.icon:before {
+				margin-right: 0.5em;
+			}
+
+		input[type="submit"].fit,
+		input[type="reset"].fit,
+		input[type="button"].fit,
+		button.fit,
+		.button.fit {
+			display: block;
+			margin: 0 0 1em 0;
+			width: 100%;
+		}
+
+		input[type="submit"].small,
+		input[type="reset"].small,
+		input[type="button"].small,
+		button.small,
+		.button.small {
+			font-size: 0.8em;
+		}
+
+		input[type="submit"].big,
+		input[type="reset"].big,
+		input[type="button"].big,
+		button.big,
+		.button.big {
+			font-size: 1.35em;
+		}
+
+		input[type="submit"].alt,
+		input[type="reset"].alt,
+		input[type="button"].alt,
+		button.alt,
+		.button.alt {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 3px #FFF;
+			color: #fff !important;
+		}
+
+			input[type="submit"].alt:hover,
+			input[type="reset"].alt:hover,
+			input[type="button"].alt:hover,
+			button.alt:hover,
+			.button.alt:hover {
+				background-color: #7ec89e;
+			}
+
+			input[type="submit"].alt:active,
+			input[type="reset"].alt:active,
+			input[type="button"].alt:active,
+			button.alt:active,
+			.button.alt:active {
+				background-color: #7ec89e;
+			}
+
+			input[type="submit"].alt.icon:before,
+			input[type="reset"].alt.icon:before,
+			input[type="button"].alt.icon:before,
+			button.alt.icon:before,
+			.button.alt.icon:before {
+				color: #bbb;
+			}
+
+		input[type="submit"].special,
+		input[type="reset"].special,
+		input[type="button"].special,
+		button.special,
+		.button.special {
+			background-color: #6cc091;
+			color: #ffffff !important;
+		}
+
+			input[type="submit"].special:hover,
+			input[type="reset"].special:hover,
+			input[type="button"].special:hover,
+			button.special:hover,
+			.button.special:hover {
+				background-color: #7ec89e;
+			}
+
+			input[type="submit"].special:active,
+			input[type="reset"].special:active,
+			input[type="button"].special:active,
+			button.special:active,
+			.button.special:active {
+				background-color: #5ab884;
+			}
+
+		input[type="submit"].disabled, input[type="submit"]:disabled,
+		input[type="reset"].disabled,
+		input[type="reset"]:disabled,
+		input[type="button"].disabled,
+		input[type="button"]:disabled,
+		button.disabled,
+		button:disabled,
+		.button.disabled,
+		.button:disabled {
+			background-color: #9a9a9a !important;
+			box-shadow: inset 0 -0.15em 0 0 rgba(0, 0, 0, 0.15);
+			color: #fff !important;
+			cursor: default;
+			opacity: 0.25;
+		}
+
+		@media screen and (max-width: 480px) {
+
+			input[type="submit"],
+			input[type="reset"],
+			input[type="button"],
+			button,
+			.button {
+				padding: 0;
+				width: 100%;
+			}
+
+		}

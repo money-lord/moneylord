@@ -27,7 +27,6 @@ chat($bdd);
           </center>
           </div>
           <div class="account">
-
             <a href="account.php">MON COMPTE</a>
             <a href="Index.php">DECONNEXION</a>
             <br><?php displayBalance($bdd); ?>

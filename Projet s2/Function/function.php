@@ -211,6 +211,7 @@ function chat($bdd){
 	echo'</div></div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
+		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
