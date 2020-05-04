@@ -33,7 +33,7 @@
               <a href="signin.php">Vous n'avez pas de compte ?</a>
             </p>
             <div class="errorred">
-            <p> <?php echo $message; ?> </p>  
+            <p> <?php echo $message; ?> </p>
             </div>
             </center>
           </div>
