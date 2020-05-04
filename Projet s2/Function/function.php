@@ -3,18 +3,18 @@
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 function createAccount($bdd){
-
+	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = htmlspecialchars($_SESSION['password']);
+	$mdp = $_POST['password'];
 
-	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
-	$data->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
-	$data->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
-	$data->bindValue(':Nom', $nom, PDO::PARAM_STR);
-	$data->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
-	$data->execute();
+	$data4 = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse, 0)');
+	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
+	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
+	$data4->bindValue(':Nom', $nom, PDO::PARAM_STR);
+	$data4->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
+	$data4->execute();
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1 ->fetch();
@@ -49,12 +49,12 @@ function verfication($bdd){
 		}
 	}
 	else {
-		return 'Un ou plusieurs des champs n\'est pas rempli';
+		return 'Un ou plusieurs des champs nest pas rempli';
 	}
 }
 
 function connection($bdd){
-
+	$connect = FALSE;
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
@@ -62,12 +62,15 @@ function connection($bdd){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
 				$_SESSION['password'] = htmlspecialchars($_POST['password']);
+				$connect = TRUE;
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
-
-		return 'identifiant ou mot-de-passe incorrecte';
-
+		if ($connect == TRUE) {
+			echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+		}else {
+			return 'identifiant ou mot-de-passe incorrecte';
+		}
 	}
 }
 

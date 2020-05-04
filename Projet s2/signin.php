@@ -1,7 +1,6 @@
 <?php
 session_start();
-$_SESSION['password'] = md5($_POST['password']);
-$_SESSION['pseudo'] = md5($_POST['pseudo']);
+$_POST['password'] = md5($_POST['password']);
 include('Function/function.php');
 if ($_POST['verif']!=null) {
   $message = verfication($bdd);
