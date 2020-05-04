@@ -128,6 +128,7 @@ function changeavatar($bdd){
 
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
 			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
 			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
