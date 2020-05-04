@@ -1,7 +1,7 @@
 <?php
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
+
 function createAccount($bdd){
 
 	$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -122,10 +122,10 @@ function changeData($bdd){
 }
 
 function changeavatar($bdd){
-
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
 
+<<<<<<< HEAD
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
@@ -148,6 +148,8 @@ function changeavatar($bdd){
 		echo "Votre Avatar de doit pas dépasser 2Mo !";
 	}
 
+=======
+>>>>>>> e2862d1165d6b1eba1615a96b548d32dc2e910fc
 }
 
 function statClient($bdd){
