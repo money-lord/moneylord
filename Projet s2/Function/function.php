@@ -116,6 +116,12 @@ function changeData($bdd){
 
 }
 
+function changeavatar($bdd){
+	$tailleMax = 2097152;
+	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+
+}
+
 function statClient($bdd){
 	$data = $bdd->query('SELECT stats.SoldeActuel solde,stats.TotalBet bet,
 							stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
