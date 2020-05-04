@@ -181,17 +181,6 @@ function displayBalance($bdd){
 }
 
 function chat($bdd){
-/*
-	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
-	$donnees = $data2->fetch();
-	$data2->closeCursor();
-
-	if ( $donnees['nbID'] > 50) {
-		while ($donnees['nbID'] > 49) {
-
-			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
-		}
-	}*/
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
 	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
@@ -201,7 +190,6 @@ function chat($bdd){
 	echo'</div></div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
-		<button type="submit" value="Envoyer">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
