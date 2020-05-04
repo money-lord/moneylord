@@ -41,12 +41,15 @@ function verfication($bdd){
 		}
 		if ($clientExists == true) {
 
-			return true;
+			return "Cette identifient existe déjà.";
 
 		}else{
 			createAccount($bdd);
 			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 		}
+	}
+	else {
+		return 'Un ou plusieurs des champs n\'est pas rempli';
 	}
 }
 
@@ -62,6 +65,8 @@ function connection($bdd){
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
+
+		return 'identifiant ou mot-de-passe incorrecte';
 
 	}
 }

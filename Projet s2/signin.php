@@ -4,8 +4,7 @@ $_SESSION['password'] = md5($_POST['password']);
 $_SESSION['pseudo'] = md5($_POST['pseudo']);
 include('Function/function.php');
 
-verfication($bdd);
-
+$message = verfication($bdd);
 
 ?>
 
@@ -39,6 +38,9 @@ verfication($bdd);
             	</form>
               <a href="index.php">Vous avez un compte ?</a>
             </p>
+            <div class="errorred">
+            <p> <?php echo $message; ?> </p>
+            </div>
             </center>
           </div>
         </section>
