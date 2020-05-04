@@ -1,7 +1,7 @@
 <?php
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
+
 function createAccount($bdd){
 
 	$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -122,12 +122,12 @@ function changeData($bdd){
 }
 
 function changeavatar($bdd){
-
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
 
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
 			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
 			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
@@ -146,6 +146,7 @@ function changeavatar($bdd){
 	}else{
 		echo "Votre Avatar de doit pas dépasser 2Mo !";
 	}
+
 
 }
 
@@ -182,21 +183,25 @@ function displayBalance($bdd){
 
 function chat($bdd){
 
-
 	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
 	$donnees = $data2->fetch();
 	$data2->closeCursor();
 
 
+
 // reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
+
 	if ( $donnees['nbID'] > 50) {
 		while ($donnees['nbID'] > 49) {
 
 			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
+
 			$data2->execute();
 		}
 	}
 
+		}
+	}
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
 	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
@@ -206,6 +211,7 @@ function chat($bdd){
 	echo'</div></div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
+		<button type="submit" value="Envoyer">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');

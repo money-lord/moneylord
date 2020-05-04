@@ -2,6 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ chat($bdd);
           </div>
           <div class="account">
 
-            <a href="account.php">MON COMPTE</a>
+            <a href="account.php"><img src="/ImagesClients/"<?php.$_SESSION['pseudo'].".".$_SESSION['upload'] ?>></a>
             <a href="Index.php">DECONNEXION</a>
             <br><?php displayBalance($bdd); ?>
           </div>
