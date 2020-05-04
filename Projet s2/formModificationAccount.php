@@ -5,6 +5,10 @@ if (!empty($_POST['change']) && $_POST['change'] != null) {
   changeData($bdd);
 
 }
+if (isset($_FILES['avatar']) /*AND !empty($_FILES['avatar']['name'])*/) {
+  changeavatar($bdd);
+}
+
 $displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
 $info = $displayBalance->fetch();
 
@@ -29,11 +33,12 @@ $info = $displayBalance->fetch();
             <center>
             <h1 >Modification de compte</h1>
             <p>
-            <form action = "" method = "post" >
-                <p ><input type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
-            		<p ><input type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
-                <p ><input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
-            		<p ><input type="password" name="password"value = "<?= $info['MotDePasse']; ?>"></p><br>
+            <form action = "" method = "post" enctype="multipart/form-data" >
+                <p >Pseudo : <input type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
+            		<p >Nom : <input type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
+                <p >Prénom : <input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
+            		<p >Mot de Passe : <input type="password" name="password"value = "<?= $info['MotDePasse']; ?>"></p>
+                <p >Avatar : <input type="file" name="avatar"></p><br>
                 <input type="hidden" name="change" value = "change" >
                 <input type="submit" name="" value="Modifier">
             	</form>
