@@ -1,5 +1,6 @@
 <?php
-$bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+$bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 function createAccount($bdd){
 
@@ -119,8 +120,8 @@ function statClient($bdd){
 	$data = $bdd->query('SELECT stats.SoldeActuel solde,stats.TotalBet bet,
 							stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
 							stats.TotalBetCouleur couleur, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
-							FROM Statistiques AS stats 
-							INNER JOIN Clients AS c 
+							FROM Statistiques AS stats
+							INNER JOIN Clients AS c
 							ON stats.Clients_ID = c.ID
 							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' ');
 
@@ -151,7 +152,7 @@ function chat($bdd){
 	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
 	$donnees = $data2->fetch();
 	$data2->closeCursor();
-	
+
 	if ( $donnees['nbID'] > 50) {
 		while ($donnees['nbID'] > 49) {
 
