@@ -106,3 +106,15 @@ footer p
     color: #B5B6B6;
     font-size: 0.9em;
 }
+
+.errorred{
+  padding-top: 2em;
+
+}
+
+.errorred p{
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  color: red;
+  font-size: 0.9em;
+
+}

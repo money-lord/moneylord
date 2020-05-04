@@ -1,7 +1,7 @@
 <?php
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-
+echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 function createAccount($bdd){
 
 	$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -41,12 +41,15 @@ function verfication($bdd){
 		}
 		if ($clientExists == true) {
 
-			return true;
+			return "Cette identifient existe déjà.";
 
 		}else{
 			createAccount($bdd);
 			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 		}
+	}
+	else {
+		return 'Un ou plusieurs des champs n\'est pas rempli';
 	}
 }
 
@@ -62,6 +65,8 @@ function connection($bdd){
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
+
+		return 'identifiant ou mot-de-passe incorrecte';
 
 	}
 }

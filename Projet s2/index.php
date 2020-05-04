@@ -2,7 +2,7 @@
   session_start();
   $_SESSION['pass2'] = md5($_POST['password']);
   include('Function/function.php');
- connection($bdd);
+  $message = connection($bdd);
 ?>
 <!DOCTYPE html>
   <html>
@@ -32,6 +32,9 @@
             	</form>
               <a href="signin.php">Vous n'avez pas de compte ?</a>
             </p>
+            <div class="errorred">
+            <p> <?php echo $message; ?> </p>
+            </div>
             </center>
           </div>
         </section>
