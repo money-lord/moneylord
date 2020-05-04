@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['password'] = md5($_POST['password']);
 $_SESSION['pseudo'] = md5($_POST['pseudo']);
 include('Function/function.php');
 

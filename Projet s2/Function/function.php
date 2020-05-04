@@ -4,10 +4,10 @@ $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8',
 
 function createAccount($bdd){
 
-	$pseudo = htmlspecialchars($_SESSION['pseudo']);
+	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = htmlspecialchars($_POST['password']);
+	$mdp = htmlspecialchars($_SESSION['password']);
 
 	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
 	$data->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
