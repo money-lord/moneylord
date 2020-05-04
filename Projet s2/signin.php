@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$_SESSION['pseudo'] = md5($_POST['pseudo']);
 include('Function/function.php');
 
 verfication($bdd);

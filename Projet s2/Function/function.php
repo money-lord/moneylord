@@ -1,10 +1,9 @@
 <?php
-
 $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 function createAccount($bdd){
 
-	$pseudo = htmlspecialchars($_POST['pseudo']);
+	$pseudo = htmlspecialchars($_SESSION['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = htmlspecialchars($_POST['password']);
