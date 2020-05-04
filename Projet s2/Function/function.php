@@ -117,8 +117,30 @@ function changeData($bdd){
 }
 
 function changeavatar($bdd){
+
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+
+	if ($_FILES['avatar']['size'] <= $tailleMax) {
+		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+		if (in_array($extensionsUpload, $extensionsValides)) {
+			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
+			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+			if ($resultat) {
+				$updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
+				$updateavatar->execute(array(
+					'avatar' => $_SESSION['pseudo'].".".$extensionsUpload,
+					'pseudo' => $_SESSION['pseudo']
+				));
+			}else{
+				echo "Il y a eu une erreur lors de l'importation de votre avatar.";
+			}
+		}else{
+			echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
+		}
+	}else{
+		echo "Votre Avatar de doit pas dépasser 2Mo !";
+	}
 
 }
 
