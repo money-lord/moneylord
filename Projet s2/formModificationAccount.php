@@ -11,6 +11,7 @@ if (isset($_FILES['avatar']) /*AND !empty($_FILES['avatar']['name'])*/) {
 
 $displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
 $info = $displayBalance->fetch();
+$mdp = $info[md5('MotDePasse')];
 
  ?>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ $info = $displayBalance->fetch();
                 <p >Pseudo : <input type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
             		<p >Nom : <input type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
                 <p >Prénom : <input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
-            		<p >Mot de Passe : <input type="password" name="password"value = "<?= $info['MotDePasse']; ?>"></p>
+            		<p >Mot de Passe : <input type="password" name="password"value = "<?= $mdp; ?>"></p>
                 <p >Avatar : <input type="file" name="avatar"></p><br>
                 <input type="hidden" name="change" value = "change" >
                 <input type="submit" name="" value="Modifier">

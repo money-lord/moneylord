@@ -7,7 +7,7 @@ function createAccount($bdd){
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = htmlspecialchars($_SESSION['password']);
+	$mdp = htmlspecialchars($_POST['password']);
 
 	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
 	$data->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
@@ -27,7 +27,7 @@ function createAccount($bdd){
 
 }
 
-function verfication($bdd){
+function verification($bdd){
 
 	$clientExists = false;
 
@@ -61,7 +61,7 @@ function connection($bdd){
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
-				$_SESSION['password'] = htmlspecialchars($_POST['password']);
+				$_SESSION['pass2'] = htmlspecialchars($_POST['password']);
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
