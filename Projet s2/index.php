@@ -12,7 +12,6 @@
           <link rel="stylesheet" href="css/styleIndex.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
           <title>Connexion MoneyLord</title>
-
       </head>
       <body>
         <section class="sectionindex">
