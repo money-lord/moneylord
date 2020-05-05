@@ -12,6 +12,7 @@ if (isset($_FILES['avatar']) /*AND !empty($_FILES['avatar']['name'])*/) {
 $displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
 $info = $displayBalance->fetch();
 
+
  ?>
 <!DOCTYPE html>
   <html>
