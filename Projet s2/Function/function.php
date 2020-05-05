@@ -187,7 +187,6 @@ function chat($bdd){
 
 	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
 	$donnees = $data2->fetch();
-	$data2->closeCursor();
 
 // reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
 
@@ -195,11 +194,11 @@ function chat($bdd){
 		$i = 0;
 		while ($data2->fetch()) {
 
-			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= :i');
-			$data2->bindParam(':i', $i, PDO::PARAM_STR)
-			$data2->execute();
+			$data3 = $bdd->prepare('DELETE FROM CHAT WHERE ID= :i');
+			$data3->bindParam(':i', $i, PDO::PARAM_STR);
+			$data3->execute();
 			$i++;
-			if($i === 1){
+			if($i == 1){
 				break;
 			}
 		}
