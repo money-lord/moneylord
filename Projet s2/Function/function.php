@@ -3,18 +3,18 @@
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 function createAccount($bdd){
-
+	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = htmlspecialchars($_SESSION['password']);
+	$mdp = $_POST['password'];
 
-	$data = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Nom, :Prenom, :Pseudo, :MotDePasse, 0)');
-	$data->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
-	$data->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
-	$data->bindValue(':Nom', $nom, PDO::PARAM_STR);
-	$data->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
-	$data->execute();
+	$data4 = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse, 0)');
+	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
+	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
+	$data4->bindValue(':Nom', $nom, PDO::PARAM_STR);
+	$data4->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
+	$data4->execute();
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1 ->fetch();
@@ -49,12 +49,12 @@ function verification($bdd){
 		}
 	}
 	else {
-		return 'Un ou plusieurs des champs n\'est pas rempli';
+		return 'Un ou plusieurs des champs nest pas rempli';
 	}
 }
 
 function connection($bdd){
-
+	$connect = FALSE;
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
@@ -65,9 +65,11 @@ function connection($bdd){
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
-
-		return 'identifiant ou mot-de-passe incorrecte';
-
+		if ($connect == TRUE) {
+			echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+		}else {
+			return 'identifiant ou mot-de-passe incorrecte';
+		}
 	}
 }
 
@@ -128,6 +130,7 @@ function changeavatar($bdd){
 
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
 			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
 			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
@@ -181,6 +184,23 @@ function displayBalance($bdd){
 }
 
 function chat($bdd){
+
+	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
+	$donnees = $data2->fetch();
+	$data2->closeCursor();
+
+
+// reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
+
+	if ( $donnees['nbID'] > 50) {
+		while ($donnees['nbID'] > 49) {
+
+			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
+
+			$data2->execute();
+		}
+	}
+
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
 	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
@@ -190,6 +210,7 @@ function chat($bdd){
 	echo'</div></div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
+		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
