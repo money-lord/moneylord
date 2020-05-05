@@ -41,7 +41,7 @@ if ($_POST['addcoin'] != NULL) {
             <h1>Ajout d'argent</h1> <br> <br>
             <form action="" method="post">
               Montant : <input type="number" name="addcoin" min="0">
-              <br><input type="submit" name="" value="Ajouter">
+              <br><br><input type="submit" name="" value="Ajouter">
             </form>
           </center>
         </div>
