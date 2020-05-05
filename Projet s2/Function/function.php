@@ -131,6 +131,7 @@ function changeavatar($bdd){
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
 
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
+		echo "ZEIB FZUFNBPSNFD? OFNZOINF BNQJDNF QLKNDFMLSKNDFMSLQKDNFMQLSKDNFMSLKDNFMQSLKDNFMQSKLDKFN";
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
