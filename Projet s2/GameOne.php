@@ -35,6 +35,7 @@ chat($bdd);
         </header>
 
         <div class="content">
+          <iframe src=moby2.htm width=400 height=250 scrolling=no></iframe>
         </div>
 
 <?php /*
