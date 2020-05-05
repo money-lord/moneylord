@@ -2,6 +2,7 @@
 session_start();
 include('Function/function.php');
 if (!empty($_POST['addcoin'])) {
+
   addcoin($bdd);
 }
 ?>
@@ -40,21 +41,20 @@ if (!empty($_POST['addcoin'])) {
           <center>
             <h1>Déposer de l'argent</h1> <br> <br>
             <form action="" method="post">
-              <a href=""><input type="button" name="addcoin" value="5"></a>
-              <a href=""><input type="button" name="addcoin" value="10"></a>
-              <a href=""><input type="button" name="addcoin" value="20"></a>
-              <a href=""><input type="button" name="addcoin" value="50"></a>
-              <a href=""><input type="button" name="addcoin" value="100"></a>
-              <a href=""><input type="button" name="addcoin" value="200"></a>
-              <a href=""><input type="button" name="addcoin" value="500"></a>
-              <a href=""><input type="button" name="addcoin" value="1000"></a>
+              <input type="button" name="addcoin" value="5">
+              <input type="button" name="addcoin" value="10">
+              <input type="button" name="addcoin" value="20">
+              <input type="button" name="addcoin" value="50">
+              <input type="button" name="addcoin" value="100">
+              <input type="button" name="addcoin" value="200">
+              <input type="button" name="addcoin" value="500">
+              <input type="button" name="addcoin" value="1000">
               <br><br>
               <input type="number" name="addcoin" value="<?php echo $_POST['addcoin'] ?>">
               <input type="submit" name="Ajouter ce montant à mon solde">
             </form>
           </center>
         </div>
-
 
         <footer>
           <center>

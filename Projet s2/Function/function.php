@@ -171,11 +171,11 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
-	$_POST['addcoin'];
 
 	$MONEY = $bdd->query('UPDATE Clients SET Solde ='.$_POST['addcoin'].'  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$MONEY = $MONEY->fetch();
-	echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+	header('Location: home.php');
+	//echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 
 }
 
