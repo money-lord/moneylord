@@ -1,7 +1,7 @@
 <?php
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-
+echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 function createAccount($bdd){
 
 	$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -27,7 +27,7 @@ function createAccount($bdd){
 
 }
 
-function verfication($bdd){
+function verification($bdd){
 
 	$clientExists = false;
 
@@ -61,7 +61,7 @@ function connection($bdd){
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
-				$_SESSION['password'] = htmlspecialchars($_POST['password']);
+				$_SESSION['pass2'] = htmlspecialchars($_POST['password']);
         		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 			}
 		}
@@ -122,8 +122,30 @@ function changeData($bdd){
 }
 
 function changeavatar($bdd){
+
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+
+	if ($_FILES['avatar']['size'] <= $tailleMax) {
+		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+		if (in_array($extensionsUpload, $extensionsValides)) {
+			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
+			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+			if ($resultat) {
+				$updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
+				$updateavatar->execute(array(
+					'avatar' => $_SESSION['pseudo'].".".$extensionsUpload,
+					'pseudo' => $_SESSION['pseudo']
+				));
+			}else{
+				echo "Il y a eu une erreur lors de l'importation de votre avatar.";
+			}
+		}else{
+			echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
+		}
+	}else{
+		echo "Votre Avatar de doit pas dépasser 2Mo !";
+	}
 
 }
 
@@ -159,17 +181,6 @@ function displayBalance($bdd){
 }
 
 function chat($bdd){
-/*
-	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
-	$donnees = $data2->fetch();
-	$data2->closeCursor();
-
-	if ( $donnees['nbID'] > 50) {
-		while ($donnees['nbID'] > 49) {
-
-			$data2 = $bdd->prepare('DELETE FROM CHAT WHERE ID= ');
-		}
-	}*/
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
 	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
@@ -179,7 +190,6 @@ function chat($bdd){
 	echo'</div></div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
-		<button type="submit" value="Envoyer">Envoyer</button>
 	</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
