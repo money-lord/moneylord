@@ -112,11 +112,13 @@ function displayChat($bdd){
 
 function changeData($bdd){
 
+	$password = md5($_POST['password']);
+
 	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
-	$data->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
+	$data->bindValue(':password', $password, PDO::PARAM_STR);
 
 	$ExecuteIsOk = $data->execute();
 	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
