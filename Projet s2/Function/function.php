@@ -73,15 +73,6 @@ function connection($bdd){
 	}
 }
 
-function addcoin($bdd){
-	$_POST['addcoin'];
-
-	$MONEY = $bdd->query('UPDATE Clients SET Solde ='.$_POST['addcoin'].'  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
-	$MONEY = $MONEY->fetch();
-	echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
-
-}
-
 function displayUserAccount($bdd){
 
 	if (!empty($_POST['userAccount'])) {
@@ -174,7 +165,16 @@ function statClient($bdd){
 
 			</center>';
 
-	}
+}
+
+function addcoin($bdd){
+	$_POST['addcoin'];
+
+	$MONEY = $bdd->query('UPDATE Clients SET Solde ='.$_POST['addcoin'].'  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$MONEY = $MONEY->fetch();
+	echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+
+}
 
 function displayBalance($bdd){
 

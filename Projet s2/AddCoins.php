@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('Function/function.php');
-if ($_POST['addcoin'] != NULL) {
+if (!empty($_POST['addcoin'])) {
   addcoin($bdd);
 }
 ?>
@@ -36,12 +36,21 @@ if ($_POST['addcoin'] != NULL) {
           </div>
         </header>
 
-        <div class="content">
+        <div class="addMoney">
           <center>
-            <h1>Ajout d'argent</h1> <br> <br>
+            <h1>Déposer de l'argent</h1> <br> <br>
             <form action="" method="post">
-              Montant : <input type="number" name="addcoin" min="0">
-              <br><br><input type="submit" name="" value="Ajouter">
+              <a href=""><input type="button" name="addcoin" value="5"></a>
+              <a href=""><input type="button" name="addcoin" value="10"></a>
+              <a href=""><input type="button" name="addcoin" value="20"></a>
+              <a href=""><input type="button" name="addcoin" value="50"></a>
+              <a href=""><input type="button" name="addcoin" value="100"></a>
+              <a href=""><input type="button" name="addcoin" value="200"></a>
+              <a href=""><input type="button" name="addcoin" value="500"></a>
+              <a href=""><input type="button" name="addcoin" value="1000"></a>
+              <br><br>
+              <input type="number" name="addcoin" value="<?php echo $_POST['addcoin'] ?>">
+              <input type="submit" name="Ajouter ce montant à mon solde">
             </form>
           </center>
         </div>

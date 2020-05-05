@@ -61,7 +61,10 @@ header{
   margin-left: 25%;
   padding: 3em;
 }
-
+.addMoney{
+  margin-top: 6%;
+  padding: 3em;
+}
 
 img.logo{
 	max-width: 70%;
