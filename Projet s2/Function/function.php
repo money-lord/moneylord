@@ -103,11 +103,13 @@ function displayChat($bdd){
 
 function changeData($bdd){
 
+	$password = md5($_POST['password']);
+
 	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
-	$data->bindValue(':password', $_POST['password'], PDO::PARAM_STR);
+	$data->bindValue(':password', $password, PDO::PARAM_STR);
 
 	$ExecuteIsOk = $data->execute();
 	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
@@ -120,6 +122,7 @@ function changeavatar($bdd){
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
 
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
+		echo "ZEIB FZUFNBPSNFD? OFNZOINF BNQJDNF QLKNDFMLSKNDFMSLQKDNFMQLSKDNFMSLKDNFMQSLKDNFMQSKLDKFN";
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
