@@ -174,6 +174,14 @@ function statClient($bdd){
 
 			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 
+			<TABLE BORDER="1">
+			<CAPTION> Informations du compte </CAPTION>
+			<TR>
+			<TH> Nom </TH> 
+			<TH> '.$afficher['nom'].' </TH> 
+			</TR>
+			</TABLE>
+
 			</center>';
 
 }
