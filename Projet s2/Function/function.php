@@ -2,24 +2,20 @@
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
+
 function createAccount($bdd){
 	//hachage du mdp
-	//if ($_POST['password'] != NULL){
-	//	$_SESSION['password'] = md5($_POST['password']);
-	//	}
+	if ($_POST['password'] != NULL){
+		$_SESSION['password'] = md5($_POST['password']);
+		}
 
-//	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = $_POST['password'];
+	$mdp = $_SESSION['password'];
 
-	$data4 = $bdd->prepare('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Pseudo) VALUES (:Nom,:Prenom,:Pseudo,:MotDePasse,0)');
-	$data4->bindValue(':Nom', $nom, PDO::PARAM_STR);
-	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
-	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
-	$data4->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
-	$data4->execute();
+	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
+
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1 ->fetch();
@@ -60,9 +56,6 @@ function verification($bdd){
 
 function connection($bdd){
 	$connect = FALSE;
-	//if(!empty($_POST['password'])){
-	//	$_SESSION['pass2'] = md5($_POST['password']);
-	  //}
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
@@ -174,11 +167,23 @@ function statClient($bdd){
 
 			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 
-			<TABLE BORDER="1">
+			<TABLE>
 			<CAPTION> Informations du compte </CAPTION>
 			<TR>
-			<TH> Nom </TH> 
-			<TH> '.$afficher['nom'].' </TH> 
+			<TH> Nombre de partie joué au Coinflip</TH>
+			<TD> '.$afficher['flip'].' </TD>
+			</TR>
+			<TR>
+			<TH> Nombre de partie joué a la roulette</TH>
+			<TD> '.$afficher['roulette'].' </TD>
+			</TR>
+			<TR>
+			<TH> Nombre de partie joué au jeu des couleurs</TH>
+			<TD> '.$afficher['couleur'].' </TD>
+			</TR>
+			<TR>
+			<TH> Solde </TH>
+			<TD> '.$afficher['solde'].' </TD>
 			</TR>
 			</TABLE>
 
@@ -187,7 +192,7 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
-	
+
 	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$recupSolde = $recupSolde->fetch();
 
