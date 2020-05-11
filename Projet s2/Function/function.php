@@ -119,13 +119,19 @@ function changeData($bdd){
 
 function changeavatar($bdd){
 
-	$tailleMax = 2097152;
+	$tailleMax = 22097152;
+	$dossier = 'ImagesClients/';
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-	if ($_FILES['avatar']['size'] <= $tailleMax) {
+	$extension = strrchr($_FILES['avatar']['name'], '.');
+		$fichier = basename($_FILES['avatar']['name']);
+		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
+
+
+	/*if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
-			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload."/";
+			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
 			echo $chemin;
 			$resultat = move_uploaded_file($_FILES['avatar'], $chemin);
 			if ($resultat) {
@@ -142,8 +148,7 @@ function changeavatar($bdd){
 		}
 	}else{
 		echo "Votre Avatar de doit pas dépasser 2Mo !";
-	}
-
+	}*/
 }
 
 function statClient($bdd){

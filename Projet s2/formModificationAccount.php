@@ -2,13 +2,12 @@
 session_start();
 include('Function/function.php');
 if (!empty($_POST['change']) && $_POST['change'] != null) {
+  if (isset($_FILES['avatar'])) {
+    changeavatar($bdd);
+  }
   changeData($bdd);
 
 }
-if (isset($_FILES['avatar']) /*AND !empty($_FILES['avatar']['name'])*/) {
-  changeavatar($bdd);
-}
-
 $displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
 $info = $displayBalance->fetch();
 
