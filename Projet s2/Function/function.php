@@ -121,14 +121,13 @@ function changeavatar($bdd){
 
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-echo "OH NON C PAS PASSE ";
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
-		echo "OUAI ON EST LA ";
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
-			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
-			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload."/";
+			echo $chemin;
+			$resultat = move_uploaded_file($_FILES['avatar'], $chemin);
 			if ($resultat) {
 				$updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
 				$updateavatar->execute(array(
