@@ -2,6 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
+    
 ?>
 
 <!DOCTYPE html>

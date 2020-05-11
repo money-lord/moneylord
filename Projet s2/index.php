@@ -1,8 +1,10 @@
 <?php
   session_start();
-  $_SESSION['pass2'] = md5($_POST['password']);
   include('Function/function.php');
-  $message = connection($bdd);
+  if(!empty($_POST['password'])){
+    $_SESSION['pass2'] = md5($_POST['password']);
+    $message = connection($bdd);
+  }
 ?>
 <!DOCTYPE html>
   <html>
@@ -33,7 +35,12 @@
               <a href="signin.php">Vous n'avez pas de compte ?</a>
             </p>
             <div class="errorred">
-            <p> <?php echo $message; ?> </p>
+            <p> <?php
+            if(!empty($_POST['password'])){
+              echo $message;
+            }
+
+             ?> </p>
             </div>
             </center>
           </div>
