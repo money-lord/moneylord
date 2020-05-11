@@ -19,7 +19,7 @@
         <section class="sectionindex">
           <div class="imageindex">
             <center>
-            <img src="Images/tenor.gif" class="logo" alt="Logo" />
+            <img src="Images/logo.png" class="logo" alt="Logo" />
             </center>
           </div>
 
