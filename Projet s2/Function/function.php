@@ -9,7 +9,6 @@ function createAccount($bdd){
 	//	$_SESSION['password'] = md5($_POST['password']);
 	//	}
 
-	echo $_POST['pseudo'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
@@ -171,16 +170,16 @@ function statClient($bdd){
 			<TABLE>
 			<CAPTION> Informations du compte </CAPTION>
 			<TR>
-			<TH> Nombre de partie joué au Coinflip</TH> 
-			<TD> '.$afficher['flip'].' </TD> 
+			<TH> Nombre de partie joué au Coinflip</TH>
+			<TD> '.$afficher['flip'].' </TD>
 			</TR>
 			<TR>
-			<TH> Nombre de partie joué a la roulette</TH> 
-			<TD> '.$afficher['roulette'].' </TD> 
+			<TH> Nombre de partie joué a la roulette</TH>
+			<TD> '.$afficher['roulette'].' </TD>
 			</TR>
 			<TR>
-			<TH> Nombre de partie joué au jeu des couleurs</TH> 
-			<TD> '.$afficher['couleur'].' </TD> 
+			<TH> Nombre de partie joué au jeu des couleurs</TH>
+			<TD> '.$afficher['couleur'].' </TD>
 			</TR>
 			<TR>
 			<TH> Solde </TH>
@@ -193,7 +192,7 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
-	
+
 	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$recupSolde = $recupSolde->fetch();
 
