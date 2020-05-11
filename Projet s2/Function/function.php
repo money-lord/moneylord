@@ -60,9 +60,6 @@ function verification($bdd){
 
 function connection($bdd){
 	$connect = FALSE;
-	//if(!empty($_POST['password'])){
-	//	$_SESSION['pass2'] = md5($_POST['password']);
-	  //}
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
@@ -174,11 +171,23 @@ function statClient($bdd){
 
 			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 
-			<TABLE BORDER="1">
+			<TABLE>
 			<CAPTION> Informations du compte </CAPTION>
 			<TR>
-			<TH> Nom </TH> 
-			<TH> '.$afficher['nom'].' </TH> 
+			<TH> Nombre de partie joué au Coinflip</TH> 
+			<TD> '.$afficher['flip'].' </TD> 
+			</TR>
+			<TR>
+			<TH> Nombre de partie joué a la roulette</TH> 
+			<TD> '.$afficher['roulette'].' </TD> 
+			</TR>
+			<TR>
+			<TH> Nombre de partie joué au jeu des couleurs</TH> 
+			<TD> '.$afficher['couleur'].' </TD> 
+			</TR>
+			<TR>
+			<TH> Solde </TH>
+			<TD> '.$afficher['solde'].' </TD>
 			</TR>
 			</TABLE>
 
