@@ -5,15 +5,15 @@ echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 
 function createAccount($bdd){
 	//hachage du mdp
-	//if ($_POST['password'] != NULL){
-	//	$_SESSION['password'] = md5($_POST['password']);
-	//	}
+	if ($_POST['password'] != NULL){
+		$_SESSION['password'] = md5($_POST['password']);
+		}
 
 	echo $_POST['pseudo'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
-	$mdp = $_POST['password'];
+	$mdp = $_SESSION['password'];
 
 	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
 
@@ -47,7 +47,7 @@ function verification($bdd){
 
 		}else{
 			createAccount($bdd);
-			//echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 		}
 	}
 	else {
