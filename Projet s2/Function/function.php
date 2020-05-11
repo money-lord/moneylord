@@ -3,16 +3,21 @@
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 function createAccount($bdd){
-	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
+	//hachage du mdp
+	//if ($_POST['password'] != NULL){
+	//	$_SESSION['password'] = md5($_POST['password']);
+	//	}
+
+//	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = $_POST['password'];
 
-	$data4 = $bdd->prepare('INSERT INTO Clients VALUES (NULL, :Pseudo, :Prenom, :Nom, :MotDePasse, 0)');
-	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
-	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
+	$data4 = $bdd->prepare('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Pseudo) VALUES (:Nom,:Prenom,:Pseudo,:MotDePasse,0)');
 	$data4->bindValue(':Nom', $nom, PDO::PARAM_STR);
+	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
+	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
 	$data4->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
 	$data4->execute();
 
@@ -55,6 +60,9 @@ function verification($bdd){
 
 function connection($bdd){
 	$connect = FALSE;
+	//if(!empty($_POST['password'])){
+	//	$_SESSION['pass2'] = md5($_POST['password']);
+	  //}
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
