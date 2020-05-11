@@ -171,14 +171,28 @@ function statClient($bdd){
 
 			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 
+			<TABLE BORDER="1">
+			<CAPTION> Informations du compte </CAPTION>
+			<TR>
+			<TH> Nom </TH> 
+			<TH> '.$afficher['nom'].' </TH> 
+			</TR>
+			</TABLE>
+
 			</center>';
 
 }
 
 function addcoin($bdd){
+	
+	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$recupSolde = $recupSolde->fetch();
 
-	$MONEY = $bdd->query('UPDATE Clients SET Solde ='.$_POST['addcoin'].'  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
-	$MONEY = $MONEY->fetch();
+	$nouveauSolde = ($recupSolde['Solde']+$_POST['addcoin']);
+
+	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
+	$modifSolde = $modifSolde->execute();
 	header('Location: home.php');
 	//echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 

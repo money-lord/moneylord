@@ -1,9 +1,9 @@
 <?php
   session_start();
   include('Function/function.php');
-  //if(!empty($_POST['password'])){
-    //$_SESSION['pass2'] = md5($_POST['password']);
-  //}
+  if(!empty($_POST['password'])){
+    $_SESSION['pass2'] = md5($_POST['password']);
+  }
   $message = connection($bdd);
 ?>
 <!DOCTYPE html>
