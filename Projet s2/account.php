@@ -2,7 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
-
+changeavatar($bdd);
 ?>
 
 <!DOCTYPE html>

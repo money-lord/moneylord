@@ -121,9 +121,9 @@ function changeavatar($bdd){
 
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-
+echo "OUAI ON EST LA ";
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
-		echo "ZEIB FZUFNBPSNFD? OFNZOINF BNQJDNF QLKNDFMLSKNDFMSLQKDNFMQLSKDNFMSLKDNFMQSLKDNFMQSKLDKFN";
+		echo "OUAI ON EST LA ";
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 		$_SESSION['upload'] = $extensionsUpload;
 		if (in_array($extensionsUpload, $extensionsValides)) {
