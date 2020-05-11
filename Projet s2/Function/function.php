@@ -121,7 +121,7 @@ function changeavatar($bdd){
 
 	$tailleMax = 2097152;
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-echo "OUAI ON EST LA ";
+echo "OH NON C PAS PASSE ";
 	if ($_FILES['avatar']['size'] <= $tailleMax) {
 		echo "OUAI ON EST LA ";
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
