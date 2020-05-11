@@ -2,24 +2,21 @@
 
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
+
 function createAccount($bdd){
 	//hachage du mdp
 	//if ($_POST['password'] != NULL){
 	//	$_SESSION['password'] = md5($_POST['password']);
 	//	}
 
-//	echo $_POST['pseudo'].$_POST['lastName'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
+	echo $_POST['pseudo'].$_POST['lastName'].$_POST['firstName'].$_POST['password'];
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = $_POST['password'];
 
-	$data4 = $bdd->prepare('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Pseudo) VALUES (:Nom,:Prenom,:Pseudo,:MotDePasse,0)');
-	$data4->bindValue(':Nom', $nom, PDO::PARAM_STR);
-	$data4->bindValue(':Prenom', $prenom, PDO::PARAM_STR);
-	$data4->bindValue(':Pseudo', $pseudo, PDO::PARAM_STR);
-	$data4->bindValue(':MotDePasse', $mdp, PDO::PARAM_STR);
-	$data4->execute();
+	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
+
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1 ->fetch();
@@ -50,7 +47,7 @@ function verification($bdd){
 
 		}else{
 			createAccount($bdd);
-			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
+			//echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 		}
 	}
 	else {
@@ -196,9 +193,15 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
+	
+	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$recupSolde = $recupSolde->fetch();
 
-	$MONEY = $bdd->query('UPDATE Clients SET Solde ='.$_POST['addcoin'].'  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
-	$MONEY = $MONEY->fetch();
+	$nouveauSolde = ($recupSolde['Solde']+$_POST['addcoin']);
+
+	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
+	$modifSolde = $modifSolde->execute();
 	header('Location: home.php');
 	//echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 
