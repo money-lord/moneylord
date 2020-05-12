@@ -4,10 +4,10 @@ $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8',
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 
 function createAccount($bdd){
-	//hachage du mdp
+
 	if ($_POST['password'] != NULL){
 		$_SESSION['password'] = md5($_POST['password']);
-		}
+	}
 
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
@@ -15,10 +15,7 @@ function createAccount($bdd){
 	$mdp = $_SESSION['password'];
 
 	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
-
-
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
-	$save = $data1 ->fetch();
 
 	$idClients = $save['ID'];
 
@@ -55,7 +52,7 @@ function verification($bdd){
 }
 
 function connection($bdd){
-	$connect = FALSE;
+
 	if (!empty($_POST['login']) && !empty($_POST['password'])){
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
@@ -63,15 +60,12 @@ function connection($bdd){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
 				$_SESSION['pass2'] = htmlspecialchars($_POST['password']);
-        		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+        echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+				return ' ';
 			}
 		}
-		if ($connect == TRUE) {
-			echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
-		}else {
-			return 'identifiant ou mot-de-passe incorrecte';
-		}
 	}
+		return 'identifiant ou mot-de-passe incorrecte';
 }
 
 function displayUserAccount($bdd){
@@ -99,7 +93,6 @@ function displayChat($bdd){
 	while($message = $displayMessage->fetch()){
 		echo ''.$message['Pseudo'].' :'.$message['Message'].'';
 	}
-
 }
 
 function changeData($bdd){
@@ -114,7 +107,6 @@ function changeData($bdd){
 
 	$ExecuteIsOk = $data->execute();
 	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
-
 }
 
 function changeavatar($bdd){
@@ -133,11 +125,11 @@ function changeavatar($bdd){
 	$extensionsAutorisees = array("jpeg", "jpg", "gif", "png");
 	if (!(in_array($extensionFichier, $extensionsAutorisees))) {
     	echo "Le fichier n'a pas l'extension attendue";
-	} else {    
+	} else {
     $repertoireDestination = 'ImagesClients/';
     $nomDestination = $_SESSION['pseudo'].".".$extensionFichier;
     $_SESSION['upload'] = $extensionFichier;
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"], 
+        if (move_uploaded_file($_FILES["photo"]["tmp_name"],
                                      $repertoireDestination.$nomDestination)) {
         echo "Le fichier temporaire ".$_FILES["photo"]["tmp_name"].
                 " a été déplacé vers ".$repertoireDestination.$nomDestination;
@@ -182,30 +174,51 @@ function statClient($bdd){
 							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' ');
 
   $afficher = $data->fetch();
+			$max = max($afficher['flip'],$afficher['roulette'],$afficher['couleur']);
+			if ($max == $afficher['flip']) {
+				$max = 'Coinflip';
+			}
+			if ($max == $afficher['roulette']) {
+				$max = 'Roulette';
+			}
+			if ($max == $afficher['couleur']) {
+				$max = 'Couleur';
+			}
+
   echo ' <center>
-			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p>
-			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br> <br>
-			<TABLE>
-			<CAPTION> Informations du compte </CAPTION>
-			<TR>
-			<TH> Nombre de partie joué au Coinflip</TH>
-			<TD> '.$afficher['flip'].' </TD>
-			</TR>
-			<TR>
-			<TH> Nombre de partie joué a la roulette</TH>
-			<TD> '.$afficher['roulette'].' </TD>
-			</TR>
-			<TR>
-			<TH> Nombre de partie joué au jeu des couleurs</TH>
-			<TD> '.$afficher['couleur'].' </TD>
-			</TR>
-			<TR>
-			<TH> Solde </TH>
-			<TD> '.$afficher['solde'].' </TD>
-			</TR>
-			</TABLE>
-			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
-			</center>';
+
+			<p> Bienvenue <em class="yellow">'.$afficher['nom'].' '.$afficher['prenom'].'</em></p>
+			<p> Votre pseudo est <em class="yellow">'.$afficher['pseudo'].'</em></p> <br> <br>
+
+			<div class="lev2">
+				<div class="graphjeu"> <canvas id="myChart"></canvas> </div>
+				<div class="statgraphjeu">';
+					if ($afficher['flip'] != 0 || $afficher['roulette'] != 0 ||$afficher['couleur'] != 0 ) {
+						echo 'Le jeu le plus jouer est <em class="yellow">'.$max.'</em>';
+					}
+			echo '</div>
+				</div>
+				<br>
+				<p> Vous avez misé au TOTAL : <em class="yellow">'.$afficher['bet'].' </em>€ </p><br><br>
+			</center>';?>
+
+			<script>
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+					type: 'doughnut',
+					data: {
+							labels: ['Coinflip', 'Couleurs', 'Roulette'],
+							datasets: [{
+									label: 'My First dataset',
+									backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
+									data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
+							}]
+					},
+					options: {}
+			});
+
+			</script>
+			<?php
 
 }
 

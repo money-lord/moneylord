@@ -61,6 +61,14 @@ header{
   margin-left: 25%;
   padding: 3em;
 }
+
+.contentstat{
+  margin-top: 6%;
+  margin-left: 25%;
+  padding: 3em;
+  font-size: 1.2em;
+}
+
 .addMoney{
   margin-top: 6%;
   padding: 3em;
@@ -326,3 +334,26 @@ footer p
 			}
 
 		}
+
+
+em.yellow{
+  color: #EDD602;
+
+}
+
+.lev2{
+  display: flex;
+}
+
+.graphjeu{
+
+  width: 60%;
+
+
+}
+
+.statgraphjeu{
+
+  padding-top: 15%;
+
+}
