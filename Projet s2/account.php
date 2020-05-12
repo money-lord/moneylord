@@ -9,12 +9,12 @@ changeavatar($bdd);
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
-          <link rel="icon" type="image/png" href="Images/minilogo.png" />
+         <!-- <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
+          <link rel="icon" type="image/png" href="Images/minilogo.png" />-->
           <title>Compte Client MoneyLord</title>
       </head>
       <body>
-
+<!--
         <header>
 
           <div class="menu">
@@ -34,6 +34,7 @@ changeavatar($bdd);
             <br><?php displayBalance($bdd); ?>
           </div>
         </header>
+-->
         <div class="content">
           <center>
           <?php statClient($bdd); ?>
