@@ -185,13 +185,6 @@ function statClient($bdd){
   echo ' <center>
 			<p> Bienvenue '.$afficher['nom'].' '.$afficher['prenom'].'</p>
 			<p> Votre pseudo est '.$afficher['pseudo'].'</p> <br> <br>
-			<p> Votre solde est actuelement de '.$afficher['solde'].' euros</p> <br>
-			<p> Vous avez joué '.$afficher['flip'].' au CoinFlip.</p>
-			<p> Vous avez joué '.$afficher['roulette'].' à la Roulette.</p>
-			<p> Vous avez joué '.$afficher['couleur'].' au jeu des Couleurs.</p> <br> <br>
-
-			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
-
 			<TABLE>
 			<CAPTION> Informations du compte </CAPTION>
 			<TR>
@@ -211,7 +204,7 @@ function statClient($bdd){
 			<TD> '.$afficher['solde'].' </TD>
 			</TR>
 			</TABLE>
-
+			<p> Vous avez misé au TOTAL : '.$afficher['bet'].' € </p><br><br>
 			</center>';
 
 }
