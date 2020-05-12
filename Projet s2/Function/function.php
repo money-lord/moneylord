@@ -196,10 +196,10 @@ function statClient($bdd){
 					if ($afficher['flip'] != 0 || $afficher['roulette'] != 0 ||$afficher['couleur'] != 0 ) {
 						echo 'Le jeu le plus jouer est <em class="yellow">'.$max.'</em>';
 					}
-			echo '</div>
-				</div>
-				<br>
-				<p> Vous avez misé au TOTAL : <em class="yellow">'.$afficher['bet'].' </em>€ </p><br><br>
+	echo '</div>
+			</div>
+			<br>
+			<p> Vous avez misé au TOTAL : <em class="yellow">'.$afficher['bet'].' </em>€ </p><br><br>
 			</center>';?>
 
 			<script>
@@ -209,9 +209,9 @@ function statClient($bdd){
 					data: {
 							labels: ['Coinflip', 'Couleurs', 'Roulette'],
 							datasets: [{
-									label: 'My First dataset',
-									backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
-									data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
+								label: 'My First dataset',
+								backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
+								data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
 							}]
 					},
 					options: {}
@@ -275,7 +275,7 @@ function chat($bdd){
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
 		<button type="submit" value="Envoyer" class="button">Envoyer</button>
-	</form></center>';
+		</form></center>';
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
 		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
