@@ -119,13 +119,34 @@ function changeData($bdd){
 
 function changeavatar($bdd){
 
-	$tailleMax = 22097152;
+	/*$tailleMax = 22097152;
 	$dossier = 'ImagesClients/';
 	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
 	$extension = strrchr($_FILES['avatar']['name'], '.');
 		$fichier = basename($_FILES['avatar']['name']);
-		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
+		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);*/
 
+	$nomOrigine = $_FILES['photo']['name'];
+	$elementsChemin = pathinfo($nomOrigine);
+	$extensionFichier = $elementsChemin['extension'];
+	echo$extensionFichier;
+	$extensionsAutorisees = array("jpeg", "jpg", "gif", "png");
+	if (!(in_array($extensionFichier, $extensionsAutorisees))) {
+    	echo "Le fichier n'a pas l'extension attendue";
+	} else {    
+    $repertoireDestination = 'ImagesClients/';
+    $nomDestination = $_SESSION['pseudo'].".".$extensionFichier;
+    $_SESSION['upload'] = $extensionFichier;
+        if (move_uploaded_file($_FILES["photo"]["tmp_name"], 
+                                     $repertoireDestination.$nomDestination)) {
+        echo "Le fichier temporaire ".$_FILES["photo"]["tmp_name"].
+                " a été déplacé vers ".$repertoireDestination.$nomDestination;
+    } else {
+        echo "Le fichier n'a pas été uploadé (trop gros ?) ou ".
+                "Le déplacement du fichier temporaire a échoué".
+                " vérifiez l'existence du répertoire ".$repertoireDestination;
+    }
+}
 
 	/*if ($_FILES['avatar']['size'] <= $tailleMax) {
 		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
