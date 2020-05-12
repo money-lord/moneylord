@@ -42,7 +42,7 @@ changeavatar($bdd);
           </center>
         </div>
         <footer>
-
+          <a href="profil.php">test profil</a>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
