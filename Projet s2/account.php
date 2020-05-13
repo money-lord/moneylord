@@ -11,6 +11,7 @@ changeavatar($bdd);
           <meta charset="utf-8" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
           <title>Compte Client MoneyLord</title>
       </head>
       <body>
@@ -29,20 +30,25 @@ changeavatar($bdd);
           </div>
           <div class="account">
 
-            <a href="account.php"><img src="/ImagesClients/"<?php.$_SESSION['pseudo'].".".$_SESSION['upload'] ?>></a>
+            <a href="account.php"><img src="/ImagesClients/"<?php.$_SESSION['pseudo'].".".$_SESSION['upload'] ?></a>
             <a href="Index.php">DECONNEXION</a>
             <br><?php displayBalance($bdd); ?>
           </div>
         </header>
-        <div class="content">
+
+
+
+        <div class="contentstat">
           <center>
           <?php statClient($bdd); ?>
           <br> <br>
           <a href="formModificationAccount.php">Modifier son compte</a>
           </center>
         </div>
+
         <footer>
           <a href="profil.php">test profil</a>
+
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
