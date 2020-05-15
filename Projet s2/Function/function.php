@@ -100,68 +100,50 @@ function changeData($bdd){
 	$password = md5($_POST['password']);
 
 	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
 	$data->bindValue(':password', $password, PDO::PARAM_STR);
 
 	$ExecuteIsOk = $data->execute();
-	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
-}
 
-function changeavatar($bdd){
 
-	/*$tailleMax = 22097152;
-	$dossier = 'ImagesClients/';
-	$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-	$extension = strrchr($_FILES['avatar']['name'], '.');
-		$fichier = basename($_FILES['avatar']['name']);
-		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);*/
+	if (isset($_FILES['avatar'])) {
 
-	$nomOrigine = $_FILES['photo']['name'];
-	$elementsChemin = pathinfo($nomOrigine);
-	$extensionFichier = $elementsChemin['extension'];
-	echo$extensionFichier;
-	$extensionsAutorisees = array("jpeg", "jpg", "gif", "png");
-	if (!(in_array($extensionFichier, $extensionsAutorisees))) {
-    	echo "Le fichier n'a pas l'extension attendue";
-	} else {
-    $repertoireDestination = 'ImagesClients/';
-    $nomDestination = $_SESSION['pseudo'].".".$extensionFichier;
-    $_SESSION['upload'] = $extensionFichier;
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"],
-                                     $repertoireDestination.$nomDestination)) {
-        echo "Le fichier temporaire ".$_FILES["photo"]["tmp_name"].
-                " a été déplacé vers ".$repertoireDestination.$nomDestination;
-    } else {
-        echo "Le fichier n'a pas été uploadé (trop gros ?) ou ".
-                "Le déplacement du fichier temporaire a échoué".
-                " vérifiez l'existence du répertoire ".$repertoireDestination;
-    }
-}
+	    $tailleMax = 22097152;
+	    $dossier = 'ImagesClients/';
+	    $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+	    $extension = strrchr($_FILES['avatar']['name'], '.');
+	    $fichier = basename($_FILES['avatar']['name']);
+	    move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
 
-	/*if ($_FILES['avatar']['size'] <= $tailleMax) {
-		$extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-		$_SESSION['upload'] = $extensionsUpload;
-		if (in_array($extensionsUpload, $extensionsValides)) {
-			$chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
-			echo $chemin;
-			$resultat = move_uploaded_file($_FILES['avatar'], $chemin);
-			if ($resultat) {
-				$updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
-				$updateavatar->execute(array(
-					'avatar' => $_SESSION['pseudo'].".".$extensionsUpload,
-					'pseudo' => $_SESSION['pseudo']
-				));
-			}else{
-				echo "Il y a eu une erreur lors de l'importation de votre avatar.";
-			}
-		}else{
-			echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
-		}
+	    if ($_FILES['avatar']['size'] <= $tailleMax) {
+	        $extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+	        $_SESSION['upload'] = $extensionsUpload;
+	        if (in_array($extensionsUpload, $extensionsValides)) {
+	            $chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
+	            echo $chemin;
+	            $resultat = move_uploaded_file($_SESSION['pseudo'].".".$extensionsUpload, $chemin);
+	            if (isset($resultat)) {
+	                $updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
+	                echo $_SESSION['pseudo'].".".$extensionsUpload;
+	                $updateavatar->	bindParam(':avatar', $_SESSION['pseudo'].".".$extensionsUpload, PDO::PARAM_STR);
+	                $updateavatar->	bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+	                $updateavatar->execute();
+	            }else{
+	                echo "Il y a eu une erreur lors de l'importation de votre avatar.";
+	            }
+	        }else{
+	            echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
+	        }
+	    }else{
+	        echo "Votre Avatar de doit pas dépasser 2Mo !";
+	    }
 	}else{
-		echo "Votre Avatar de doit pas dépasser 2Mo !";
-	}*/
+	    echo "ça marche pas !";
+	}
+	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
 }
 
 function statClient($bdd){
@@ -251,7 +233,7 @@ function chat($bdd){
 
 // reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
 
-	if ($donnees['nbID'] > 50) {
+	if ($donnees['nbID'] > 10) {
 		$i = 0;
 		while ($data2->fetch()) {
 

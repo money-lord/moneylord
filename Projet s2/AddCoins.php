@@ -21,6 +21,7 @@ if (!empty($_POST['addcoin'])) {
 
         <header>
 
+
           <div class="menu">
             <?php include('menu.php'); ?>
           </div>

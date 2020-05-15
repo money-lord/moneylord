@@ -2,12 +2,11 @@
 session_start();
 include('Function/function.php');
 if (!empty($_POST['change']) && $_POST['change'] != null) {
-  if (isset($_FILES['avatar'])) {
-    changeavatar($bdd);
-  }
+
   changeData($bdd);
 
 }
+
 $displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
 $info = $displayBalance->fetch();
 
@@ -32,7 +31,7 @@ $info = $displayBalance->fetch();
             <center>
             <h1 >Modification de compte</h1>
             <p>
-            <form action = "" method = "post" enctype="multipart/form-data" >
+            <form action="" method="post" enctype="multipart/form-data" >
                 <p >Pseudo : <input type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
             		<p >Nom : <input type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
                 <p >Prénom : <input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
@@ -47,7 +46,6 @@ $info = $displayBalance->fetch();
             </center>
           </div>
         </section>
-
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
