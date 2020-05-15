@@ -4,7 +4,7 @@ session_start();
   //$_SESSION['password'] = md5($_POST['password']);
   //}
   include('Function/function.php');
-  
+
   verification($bdd);
 
 ?>
