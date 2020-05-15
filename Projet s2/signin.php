@@ -1,8 +1,5 @@
 <?php
-session_start();
-//if ($_POST['password'] != NULL){
-  //$_SESSION['password'] = md5($_POST['password']);
-  //}
+  session_start();
   include('Function/function.php');
 
   verification($bdd);
