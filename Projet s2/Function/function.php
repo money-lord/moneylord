@@ -292,7 +292,7 @@ function chat($bdd){
 
 	echo'</div>';
 	echo '<br><center><form action="" method ="POST">
-		<input class="txtZone"type="text" name="Message" placeholder="Message" max="250" ><br><br>
+		<input class="txtZone" type="text" name="Message" placeholder="Message" max="250" ><br><br>
 		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 		</form></center>';
 	if (!empty($_POST['Message'])) {
