@@ -1,7 +1,10 @@
+
+<link rel="icon" type="image/png" href="Images/minilogo.png" />'
+
 <?php
-echo '<link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />';
+
+
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
-echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 
 function createAccount($bdd){
 
