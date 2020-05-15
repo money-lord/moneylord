@@ -13,7 +13,7 @@
 
 <nav>
   <h2><?php echo '<img src="./ImagesClients/'.$image.'"  class="image-ronde" > '?></h2>
-      <input id="toggle" type="checkbox" checked>
+      <input class="toggle" id="toggle" type="checkbox" checked>
    <ul>
       <li><a href="AddCoins.php"><?php displayBalance($bdd); ?></a></li>
       <li><a href="account.php">MON COMPTE</a></li>
