@@ -35,7 +35,7 @@ chat($bdd);
         </header>
 
         <div class="content">
-          <iframe src=moby2.htm width=400 height=250 scrolling=no></iframe>
+        
         </div>
 
 <?php /*
@@ -55,6 +55,7 @@ chat($bdd);
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
+
 
 
       </body>
