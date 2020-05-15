@@ -17,7 +17,7 @@ function createAccount($bdd){
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = $_SESSION['password'];
 
-	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,fichier) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
+	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
@@ -104,7 +104,7 @@ function changeData($bdd){
 	$password = md5($_POST['password']);
 
 	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
-	
+
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
@@ -121,23 +121,23 @@ function changeData($bdd){
 	    exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement !');
 	  }
 	}
-	 
+
 	if(!empty($_POST)){
 	  // On verifie si le champ est rempli
 	    if( !empty($_FILES['fichier']['name']) ){
 		    // Recuperation de l'extension du fichier
 		    $extension  = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
-	 
+
 		    // On verifie l'extension du fichier
 		    if(in_array(strtolower($extension),$tabExt)) {
-	 
+
 		        // On verifie la taille de l'image
 		        if((filesize($_FILES['fichier']['tmp_name']) <= $maxSize)){
 	            // Parcours du tableau d'erreurs
 		            if(isset($_FILES['fichier']['error']) && UPLOAD_ERR_OK === $_FILES['fichier']['error']){
 		            // On renomme le fichier
 		            	$nomImage = $_SESSION['pseudo'].'.'. $extension;
-		 	
+
 			            // Si c'est OK, on teste l'upload
 			            if(move_uploaded_file($_FILES['fichier']['tmp_name'], $target.$nomImage)){
 			              	$message = 'Upload réussi !';
