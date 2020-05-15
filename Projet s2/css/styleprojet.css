@@ -136,24 +136,17 @@ footer p
 .messages{
     word-wrap : break-word;
     position: fixed;
-    bottom: 23%;
-    left: 0.6%;
+    bottom: 0;
+    left: 1%;
     width: 24.6%;
     text-overflow: ellipsis;
 
 
 }
-.mask{
-    background-color: #FFFFFF ;
-    top: 0;
-    position: fixed;
-    height: 13.6%;
-    width: 24.6%;
-    border-bottom: 1px solid #808080;
 
 
 
-}
+
 
 /* Button */
 
@@ -430,4 +423,3 @@ em.yellow{
   padding-top: 15%;
 
 }
-

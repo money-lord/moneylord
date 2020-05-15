@@ -1,5 +1,5 @@
 <?php
-
+echo '<link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />';
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 echo '<link rel="icon" type="image/png" href="Images/minilogo.png" />';
 
@@ -15,8 +15,9 @@ function createAccount($bdd){
 	$mdp = $_SESSION['password'];
 
 	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
-	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 
+	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
+	$save = $data1->fetch();
 	$idClients = $save['ID'];
 
 	$data2 = $bdd->prepare('INSERT INTO Statistiques VALUES (NULL,0,0,0,0,0,:idclients)');
@@ -141,9 +142,11 @@ function changeData($bdd){
 	        echo "Votre Avatar de doit pas dépasser 2Mo !";
 	    }
 	}else{
+
 	    echo "ça marche pas !";
 	}
 	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
+
 }
 
 function statClient($bdd){
@@ -185,19 +188,19 @@ function statClient($bdd){
 			</center>';?>
 
 			<script>
-			var ctx = document.getElementById('myChart').getContext('2d');
-			var chart = new Chart(ctx, {
-					type: 'doughnut',
-					data: {
-							labels: ['Coinflip', 'Couleurs', 'Roulette'],
-							datasets: [{
-								label: 'My First dataset',
-								backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
-								data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
-							}]
-					},
-					options: {}
-			});
+				var ctx = document.getElementById('myChart').getContext('2d');
+				var chart = new Chart(ctx, {
+						type: 'doughnut',
+						data: {
+								labels: ['Coinflip', 'Couleurs', 'Roulette'],
+								datasets: [{
+									label: 'My First dataset',
+									backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
+									data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
+								}]
+						},
+						options: {}
+				});
 
 			</script>
 			<?php
@@ -248,14 +251,16 @@ function chat($bdd){
 	}
 
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
-	echo '<div class="chat"><div class="messagesborder"><div class="messages"><div class="mask"></div>';
-	$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
-	while ($save = $data1 ->fetch()){
-		echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
-	}
-	echo'</div></div>';
+	echo '<div class="chat"><div class="messagesborder">';
+
+
+
+	echo '  <iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
+
+
+	echo'</div>';
 	echo '<br><center><form action="" method ="POST">
-		<input class="txtZone"type="text" name="Message" placeholder="Message"><br><br>
+		<input class="txtZone"type="text" name="Message" placeholder="Message" max="250" ><br><br>
 		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 		</form></center>';
 	if (!empty($_POST['Message'])) {
