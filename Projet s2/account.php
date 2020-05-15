@@ -40,7 +40,7 @@ $image = printAvatar($bdd);
 
         <div class="contentstat">
           <center>
-          <?php statClient($bdd); ?>
+          <?php statClient($bdd);?>
           <br> <br>
           <a href="formModificationAccount.php">Modifier son compte</a>
           </center>

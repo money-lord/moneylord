@@ -2,8 +2,7 @@
 <link rel="icon" type="image/png" href="Images/minilogo.png" />'
 
 <?php
-
-
+include('functionCache.php');
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 function createAccount($bdd){
@@ -172,14 +171,14 @@ function changeData($bdd){
 
 function printAvatar($bdd){
 
-	$req=$bdd->query('SELECT Avatar FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
-	while ($verif = $req->fetch()){
-		if($verif['Avatar'] == 0){
-			return 'anonyme.jpg';
-		}else {
-			return $verif['Avatar'];
-		}
+	$req=$bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$verif = $req->fetch();
+	if($verif['Avatar'] == '0'){
+		return 'anonyme.jpg';	
+	}else {
+		return $verif['Avatar'];
 	}
+	
 }
 
 function statClient($bdd){
