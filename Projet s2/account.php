@@ -2,7 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
-$image = printAvatar($bdd);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,29 +15,7 @@ $image = printAvatar($bdd);
           <title>Compte Client MoneyLord</title>
       </head>
       <body>
-
-        <header>
-
-          <div class="menu">
-            <?php include('menu.php'); ?>
-          </div>
-          <div class="logoheader">
-            <center>
-              <a href="home.php">
-              <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
-              </a>
-            </center>
-          </div>
-          <div class="account">
-            
-            <a href="account.php"><?php echo '<img src="./ImagesClients/'.$image.'"  class="image-ronde" > '?></a>
-            <a href="Index.php">DECONNEXION</a>
-            <br><?php displayBalance($bdd); ?>
-          </div>
-        </header>
-
-
-
+        <?php include('header.php'); ?>
         <div class="contentstat">
           <center>
           <?php statClient($bdd);?>

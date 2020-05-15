@@ -15,25 +15,7 @@ chat($bdd);
           <title>MoneyLord</title>
       </head>
       <body>
-
-        <header>
-          <div class="menu">
-          <?php include('menu.php'); ?>
-          </div>
-          <div class="logoheader">
-            <center>
-            <a href="home.php">
-            <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
-            </a>
-          </center>
-          </div>
-          <div class="account">
-            <a href="account.php">MON COMPTE</a>
-            <a href="Index.php">DECONNEXION</a>
-            <br><?php displayBalance($bdd); ?>
-          </div>
-        </header>
-
+        <?php include('header.php'); ?>
         <div class="content">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis lectus vitae ornare fringilla. Nullam semper faucibus est vitae facilisis. Phasellus sodales velit tortor, vitae elementum mi maximus a. Nam suscipit, eros vitae porta consequat, mauris lectus aliquam elit, quis consequat lorem odio vitae lorem. Nullam at auctor neque. Sed fermentum molestie leo non imperdiet. Morbi at iaculis dolor. Vestibulum vitae metus non magna venenatis mollis. Phasellus nec tincidunt eros, vel vulputate est. Donec finibus iaculis felis at lacinia. Phasellus pellentesque imperdiet est, eu mollis tortor pretium in. Nam leo metus, pharetra ut cursus ac, mattis a ipsum. Cras imperdiet dictum gravida.
 

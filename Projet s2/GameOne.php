@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include('Function/function.php');
 chat($bdd);
 
@@ -16,40 +15,10 @@ chat($bdd);
           <script src="js/jquery.min.js"></script>
       </head>
       <body>
-        <header>
-          <div class="menu">
-            <?php include('menu.php'); ?>
-          </div>
-          <div class="logoheader">
-            <center>
-            <a href="home.php">
-            <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
-            </a>
-          </center>
-          </div>
-          <div class="account">
-            <a href="account.php">MON COMPTE</a>
-            <a href="Index.php">DECONNEXION</a>
-            <br><?php displayBalance($bdd); ?>
-          </div>
-        </header>
+        <?php include('header.php'); ?>
 
         <div class="content">
-        
         </div>
-
-<?php /*
-        <section>
-// displayChat($bdd);
-        <div class="chat">
-          <form method="POST" action="">
-            <input type="text" name="message" placeholder="Message">
-            <input type="submit" name="Envoyer">
-          </form>
-        </div>
-        </section> */
-?>
-
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>

@@ -17,49 +17,30 @@ include('Function/function.php');
       </head>
       <body>
 
-        <header>
+        <?php include('header.php'); ?>
+        <button class="open-button" onclick="openForm()">Chat</button>
 
-          <div class="menu">
-            <?php include('menu.php'); ?>
-          </div>
-          <div class="logoheader">
-            <center>
-              <a href="home.php">
-              <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
-              </a>
-            </center>
-          </div>
+        <div class="chat-popup" id="myForm">
+          <form action="profil.php" class="form-container">
+            <h1>Chat</h1>
 
-          <div class="account">
+            <label for="msg"><b>Message</b></label>
+            <textarea placeholder="Type message.." name="msg" required></textarea>
 
-            <a href="account.php">MON COMPTE</a>
-            <a href="Index.php">DECONNEXION</a>
-            <br><?php displayBalance($bdd); ?>
-          </div>
-        </header>
-<button class="open-button" onclick="openForm()">Chat</button>
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
 
-<div class="chat-popup" id="myForm">
-  <form action="profil.php" class="form-container">
-    <h1>Chat</h1>
+        <script>
+        function openForm() {
+          document.getElementById("myForm").style.display = "block";
+        }
 
-    <label for="msg"><b>Message</b></label>
-    <textarea placeholder="Type message.." name="msg" required></textarea>
-
-    <button type="submit" class="btn">Send</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-
-<script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+        </script>
 
         <footer>
           <center>

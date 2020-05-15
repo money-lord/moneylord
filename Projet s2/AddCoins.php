@@ -18,29 +18,7 @@ if (!empty($_POST['addcoin'])) {
           <title>Créditer mon compte</title>
       </head>
       <body>
-
-        <header>
-
-
-          <div class="menu">
-            <?php include('menu.php'); ?>
-          </div>
-          <div class="logoheader">
-            <center>
-              <a href="home.php">
-              <img src="Images/logo.png" class="imglogoheader" alt="Logo" />
-              </a>
-            </center>
-          </div>
-
-          <div class="account">
-
-            <a href="account.php">MON COMPTE</a>
-            <a href="Index.php">DECONNEXION</a>
-            <br><?php displayBalance($bdd); ?>
-          </div>
-        </header>
-
+        <?php include('header.php'); ?>
         <div class="addMoney">
           <center>
             <h1>Déposer de l'argent</h1> <br> <br>
