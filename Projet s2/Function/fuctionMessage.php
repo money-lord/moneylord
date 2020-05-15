@@ -19,9 +19,22 @@ include('function.php');
 					echo '<div class="messages">';
 					echo 'test';
 					$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
-	  	  	while ($save = $data1 ->fetch()){
-						echo '<p>'.$save['Pseudo'].' : '.$save['Message'].'<p>';
-		    	}
+          $i = 14;
+          while ($save = $data1 ->fetch()){
+          	if(isset($save['Pseudo']) && isset($save['Message'])){
+          		$tableChat[$i][0] = $save['Pseudo'];
+          		$tableChat[$i][1] = $save['Message'];
+          		$i--;
+          		if ($i < 1 ) {
+          			break;
+          		}
+          	}
+          }
+          for($j=0; $j < 15 ;$j++){
+          	if(!empty($tableChat[$j][0])){
+          		echo '<p>'.$tableChat[$j][0].' : '.$tableChat[$j][1].'<p>';
+          	}
+          }
 					echo'</div>';
 		  	?>
 
