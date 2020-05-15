@@ -160,7 +160,7 @@ function changeavatar($bdd){
 			echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
 		}
 	}else{
-		echo "Votre Avatar de doit pas dépasser 2Mo !";
+		echo "Votre Avatar se doit pas dépasser 2Mo !";
 	}*/
 }
 
