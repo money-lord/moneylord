@@ -37,8 +37,8 @@ $info = $displayBalance->fetch();
                 <p >Prénom : <input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
             		<p >Mot de Passe : <input type="password" name="password"value = ""></p><br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="22097152" />
-                <p >Avatar : <input type="file" name="photo" />
-                <input type="hidden" name="change" value = "change" >
+                <p >Avatar : <input type="file" name="avatar" />
+                <input type="hidden" name="change" value="change">
                 <input type="submit" name="" value="Modifier">
             	</form>
               <a href="account.php">Vous ne désirez plus le modifier ?</a>

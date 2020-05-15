@@ -115,23 +115,31 @@ function changeData($bdd){
 	    $tailleMax = 22097152;
 	    $dossier = 'ImagesClients/';
 	    $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-	    $extension = strrchr($_FILES['avatar']['name'], '.');
+	    /*$extension = strrchr($_FILES['avatar']['name'], '.');
 	    $fichier = basename($_FILES['avatar']['name']);
-	    move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
+	    move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier.$fichier);*/
 
 	    if ($_FILES['avatar']['size'] <= $tailleMax) {
-	        $extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-	        $_SESSION['upload'] = $extensionsUpload;
+	        $extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1)); // Récupère l'extension et la met en minuscule
+	        $_SESSION['upload'] = $extensionsUpload; // On définit un session upload, extensionUpload correspond a l'extension de l'image de profil
+	        $pseudoJoueur = strtolower($_SESSION['pseudo']);// ici on met en minuscule le pseudo du joueur pour le nom du fichier
+	        $nomFichier = $pseudoJoueur.".".$extensionsUpload; // ici on met dans nomFichier le nom du fichier
+
 	        if (in_array($extensionsUpload, $extensionsValides)) {
-	            $chemin = "/ImagesClients/".$_SESSION['pseudo'].".".$extensionsUpload;
-	            echo $chemin;
-	            $resultat = move_uploaded_file($_SESSION['pseudo'].".".$extensionsUpload, $chemin);
+	            $chemin = "/ImagesClients/".$nomFichier;// ici on définit le chemin pour aller jusqu'a l'image du client
+
+	            echo "chemin : ".$chemin;
+	            echo "<br>";
+				echo "nom Fichier : ".$nomFichier;
+
+	            $resultat = move_uploaded_file($nomFichier, $chemin);//Ici on déplace le fichier si le chemin et le nom du fichier correspondent
+	            var_dump($resultat);
 	            if (isset($resultat)) {
-	                $updateavatar = $bdd->prepare('UPDATE Clients SET avatar = :avatar WHERE pseudo = :pseudo');
-	                echo $_SESSION['pseudo'].".".$extensionsUpload;
-	                $updateavatar->	bindParam(':avatar', $_SESSION['pseudo'].".".$extensionsUpload, PDO::PARAM_STR);
-	                $updateavatar->	bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
-	                $updateavatar->execute();
+	                $updateAvatar = $bdd->prepare('UPDATE Clients SET Avatar = :avatar WHERE Pseudo = :pseudo');
+	               // echo $_SESSION['pseudo'].".".$extensionsUpload;
+	                $updateAvatar->	bindParam(':avatar', $nomFichier, PDO::PARAM_STR);
+	                $updateAvatar->	bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+	                $updateAvatar->execute();
 	            }else{
 	                echo "Il y a eu une erreur lors de l'importation de votre avatar.";
 	            }
@@ -145,7 +153,8 @@ function changeData($bdd){
 
 	    echo "ça marche pas !";
 	}
-	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
+	//echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
+
 
 }
 
