@@ -3,7 +3,7 @@ session_start();
 include('Function/function.php');
 if (!empty($_POST['change']) && $_POST['change'] != null) {
 
-  changeData($bdd);
+  $message = changeData($bdd);
 
 }
 
@@ -42,6 +42,7 @@ $info = $displayBalance->fetch();
             	</form>
               <a href="account.php">Vous ne désirez plus le modifier ?</a>
             </p>
+            <p> <?php  if(!empty($_POST['change'])){ echo $message;}?> </p>
             </center>
           </div>
         </section>

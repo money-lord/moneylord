@@ -35,12 +35,7 @@
               <a href="signin.php">Vous n'avez pas de compte ?</a>
             </p>
             <div class="errorred">
-            <p> <?php
-            if(!empty($_POST['password'])){
-              echo $message;
-            }
-
-             ?> </p>
+            <p> <?php  if(!empty($_POST['password'])){ echo $message;}?> </p>
             </div>
             </center>
           </div>
