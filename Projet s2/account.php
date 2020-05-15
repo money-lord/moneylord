@@ -2,7 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
-
+$image = printAvatar($bdd);
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +29,8 @@ chat($bdd);
             </center>
           </div>
           <div class="account">
- 
-            <a href="account.php"><?php echo '<img src="/ImagesClients/'.$_SESSION['pseudo'].'.'.$_SESSION['upload'].'" > '?></a>
+            
+            <a href="account.php"><?php echo '<img src="./ImagesClients/'.$image.'"  class="image-ronde" > '?></a>
             <a href="Index.php">DECONNEXION</a>
             <br><?php displayBalance($bdd); ?>
           </div>

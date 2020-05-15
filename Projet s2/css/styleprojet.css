@@ -13,27 +13,26 @@ header{
   background:url(../Images/header.png) no-repeat;
   background-position: bottom;
   background-size: 100%;
-
 }
+
 .menu{
   font-weight:bold;
   padding-top: 3vh;
   width: 33.33%;
   font-size: 1.5vw;
-
 }
+
 .menu a{
   margin: 1vw;
   color: #808080;
   text-decoration: none;
   font-size: 1.6vw;
-
 }
 
 .imglogoheader{
   max-width: 60%;
-
 }
+
 .logoheader{
   padding-top: 1%;
   width: 33.33%;
@@ -46,8 +45,8 @@ header{
   padding-top: 3vh;
   width: 33.33%;
   text-align: right;
-
 }
+
 .account a{
   margin: 1vw;
   margin-top: 2px;
@@ -56,6 +55,7 @@ header{
   text-decoration: none;
   font-size: 1.6vw;
 }
+
 .content{
   margin-top: 6%;
   margin-left: 25%;
@@ -83,14 +83,12 @@ img.logo{
     font-family: 'GeosansLight';
     src: url('../font/GeosansLight.ttf') format('truetype');
 }
-h1
-{
+h1{
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
     color: #808080;
 }
 
-a
-{
+a{
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
     color: #808080;
 }
@@ -100,8 +98,7 @@ footer {
     bottom: 0;
     padding-left: 1%;
 }
-footer p
-{
+footer p{
     font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
     color: #808080;
     font-size: 0.9em;
@@ -140,14 +137,7 @@ footer p
     left: 1%;
     width: 24.6%;
     text-overflow: ellipsis;
-
-
 }
-
-
-
-
-
 /* Button */
 
 	input[type="submit"],
@@ -400,8 +390,6 @@ footer p
   opacity: 1;
 }
 
-
-
 em.yellow{
   color: #EDD602;
 
@@ -412,14 +400,17 @@ em.yellow{
 }
 
 .graphjeu{
-
   width: 60%;
-
-
 }
 
 .statgraphjeu{
-
   padding-top: 15%;
+}
 
+.image-ronde{
+  width : 150px; height : 150px;
+  border: none;
+  -moz-border-radius : 75px;
+  -webkit-border-radius : 75px;
+  border-radius : 75px;
 }

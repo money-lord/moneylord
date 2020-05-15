@@ -17,7 +17,7 @@ function createAccount($bdd){
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = $_SESSION['password'];
 
-	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
+	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,fichier) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
 
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
@@ -112,53 +112,74 @@ function changeData($bdd){
 
 	$ExecuteIsOk = $data->execute();
 
+	$target = './ImagesClients/';
+	$maxSize = 22097152;
+	$tabExt = array('jpg','gif','png','jpeg');// Extensions autorisees
 
-	if (isset($_FILES['avatar'])) {
-
-	    $tailleMax = 22097152;
-	    $dossier = 'ImagesClients/';
-	    $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-	    /*$extension = strrchr($_FILES['avatar']['name'], '.');
-	    $fichier = basename($_FILES['avatar']['name']);
-	    move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier.$fichier);*/
-
-	    if ($_FILES['avatar']['size'] <= $tailleMax) {
-	        $extensionsUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1)); // Récupère l'extension et la met en minuscule
-	        $_SESSION['upload'] = $extensionsUpload; // On définit un session upload, extensionUpload correspond a l'extension de l'image de profil
-	        $pseudoJoueur = strtolower($_SESSION['pseudo']);// ici on met en minuscule le pseudo du joueur pour le nom du fichier
-	        $nomFichier = $pseudoJoueur.".".$extensionsUpload; // ici on met dans nomFichier le nom du fichier
-
-	        if (in_array($extensionsUpload, $extensionsValides)) {
-	            $chemin = "/ImagesClients/".$nomFichier;// ici on définit le chemin pour aller jusqu'a l'image du client
-
-	            echo "chemin : ".$chemin;
-	            echo "<br>";
-				echo "nom Fichier : ".$nomFichier;
-
-	            $resultat = move_uploaded_file($nomFichier, $chemin);//Ici on déplace le fichier si le chemin et le nom du fichier correspondent
-	            var_dump($resultat);
-	            if (isset($resultat)) {
-	                $updateAvatar = $bdd->prepare('UPDATE Clients SET Avatar = :avatar WHERE Pseudo = :pseudo');
-	               // echo $_SESSION['pseudo'].".".$extensionsUpload;
-	                $updateAvatar->	bindParam(':avatar', $nomFichier, PDO::PARAM_STR);
-	                $updateAvatar->	bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
-	                $updateAvatar->execute();
-	            }else{
-	                echo "Il y a eu une erreur lors de l'importation de votre avatar.";
-	            }
-	        }else{
-	            echo "Votre avatar doit être au format jpg, jpeg, gif ou png !";
-	        }
-	    }else{
-	        echo "Votre Avatar de doit pas dépasser 2Mo !";
-	    }
-	}else{
-
-	    echo "ça marche pas !";
+	if( !is_dir($target) ) {
+	  if( !mkdir($target, 0755) ) {
+	    exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement !');
+	  }
 	}
-	//echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
+	 
+	if(!empty($_POST)){
+	  // On verifie si le champ est rempli
+	    if( !empty($_FILES['fichier']['name']) ){
+		    // Recuperation de l'extension du fichier
+		    $extension  = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
+	 
+		    // On verifie l'extension du fichier
+		    if(in_array(strtolower($extension),$tabExt)) {
+	 
+		        // On verifie la taille de l'image
+		        if((filesize($_FILES['fichier']['tmp_name']) <= $maxSize)){
+	            // Parcours du tableau d'erreurs
+		            if(isset($_FILES['fichier']['error']) && UPLOAD_ERR_OK === $_FILES['fichier']['error']){
+		            // On renomme le fichier
+		            	$nomImage = $_SESSION['pseudo'].'.'. $extension;
+		 	
+			            // Si c'est OK, on teste l'upload
+			            if(move_uploaded_file($_FILES['fichier']['tmp_name'], $target.$nomImage)){
+			              	$message = 'Upload réussi !';
+			              	$updateAvatar = $bdd->prepare('UPDATE Clients SET Avatar = :avatar WHERE Pseudo = :pseudo');
+		                   	// echo $_SESSION['pseudo'].".".$extensionsUpload;
+		                    $updateAvatar->bindParam(':avatar', $nomImage, PDO::PARAM_STR);
+		                    $updateAvatar->bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+		                    $updateAvatar->execute();
+			              	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
+			            } else {
+			              // Sinon on affiche une erreur systeme
+			              $message = 'Problème lors de l\'upload !';
+			            }
+					}else{
+						$message = 'Une erreur interne a empêché l\'uplaod de l\'image';
+					}
+		        } else {  // Sinon erreur sur les dimensions et taille de l'image
+		          $message = 'Erreur dans les dimensions de l\'image !';
+		        }
 
+		    }else {
+		      // Sinon on affiche une erreur pour l'extension
+		      $message = 'L\'extension du fichier est incorrecte !';
+		    }
+		} else {
+			// Sinon on affiche une erreur pour le champ vide
+			$message = 'Veuillez remplir le formulaire svp !';
+		}
+		return $message;
+	}
+}
 
+function printAvatar($bdd){
+
+	$req=$bdd->query('SELECT Avatar FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	while ($verif = $req->fetch()){
+		if($verif['Avatar'] == 0){
+			return 'anonyme.jpg';
+		}else {
+			return $verif['Avatar'];
+		}
+	}
 }
 
 function statClient($bdd){
