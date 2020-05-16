@@ -9,8 +9,8 @@ chat($bdd);
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
-          <link rel="icon" type="image/png" href="Images/minilogo.png" /> 
+        <!--  <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
+          <link rel="icon" type="image/png" href="Images/minilogo.png" /> !-->
           <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
           <title>Compte Client MoneyLord</title>
       </head>

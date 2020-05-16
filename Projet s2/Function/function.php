@@ -250,7 +250,6 @@ function addcoin($bdd){
 	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
 	$modifSolde = $modifSolde->execute();
 	header('Location: home.php');
-	//echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 
 }
 
@@ -262,25 +261,6 @@ function displayBalance($bdd){
 }
 
 function chat($bdd){
-
-	$data2 = $bdd->query('SELECT COUNT(ID) AS nbID FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
-	$donnees = $data2->fetch();
-
-// reflexion sur le chat pour mardi 5 mai : Pour la suppression on compte avec COUNT(ID) Le nombre d'éléments dans la table chat, de supprimer chaque éléments se trouvant avant les 50 derniers messages
-
-	if ($donnees['nbID'] > 10) {
-		$i = 0;
-		while ($data2->fetch()) {
-
-			$data3 = $bdd->prepare('DELETE FROM CHAT WHERE ID= :i');
-			$data3->bindParam(':i', $i, PDO::PARAM_STR);
-			$data3->execute();
-			$i++;
-			if($i == 1){
-				break;
-			}
-		}
-	}
 
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder">';
@@ -309,5 +289,26 @@ function chat($bdd){
 			$('.messages').load('Function/Message.php');
 		}
 	</script>
+
 <?php
+
+	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
+	$donnees = $data2->fetch();
+
+	if ($donnees['COUNT(ID)'] > 100) {
+		$firstId = $bdd->query('SELECT * FROM Chat ORDER BY ID LIMIT 1');
+		$firstId = $firstId->fetch();
+		echo 'premiere ID '.$firstId['ID'];
+		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { 
+			
+			$data3 = $bdd->prepare('DELETE FROM Chat WHERE ID= :i');
+			$data3->bindParam(':i', $i, PDO::PARAM_STR);
+			$data3->execute();
+		}
+
+	}
+
+	//echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 }
+
+?>
