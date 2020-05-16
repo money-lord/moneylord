@@ -305,10 +305,7 @@ function chat($bdd){
 			$data3->bindParam(':i', $i, PDO::PARAM_STR);
 			$data3->execute();
 		}
-
 	}
-
-	//echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 }
 
 ?>
