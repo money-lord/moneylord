@@ -1,5 +1,5 @@
 <header>
-	<link rel="icon" type="image/png" href="Images/minilogo.png" />
+	<link rel="icon" type="image/png" href="../Images/minilogo.png" />
 </header>
 
 
