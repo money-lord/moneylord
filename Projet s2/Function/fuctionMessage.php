@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include('function.php');
 
 ?>
@@ -14,10 +13,8 @@ include('function.php');
           <script src="../js/jquery.min.js"></script>
       </head>
       <body>
-
 				<?php
 					echo '<div class="messages">';
-					echo 'test';
 					$data1 = $bdd->query('SELECT Pseudo,Message FROM Chat ORDER BY ID DESC LIMIT 10');
           $i = 14;
           while ($save = $data1 ->fetch()){

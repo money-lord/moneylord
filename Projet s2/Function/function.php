@@ -1,5 +1,5 @@
 
-<link rel="icon" type="image/png" href="Images/minilogo.png" />'
+<link rel="icon" type="image/png" href="Images/minilogo.png" />
 
 <?php
 include('functionCache.php');
@@ -174,11 +174,11 @@ function printAvatar($bdd){
 	$req=$bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$verif = $req->fetch();
 	if($verif['Avatar'] == '0'){
-		return 'anonyme.jpg';	
+		return 'anonyme.jpg';
 	}else {
 		return $verif['Avatar'];
 	}
-	
+
 }
 
 function statClient($bdd){
@@ -255,7 +255,7 @@ function addcoin($bdd){
 
 function displayBalance($bdd){
 
-	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\' ');
 	$display = $displayBalance->fetch();
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
@@ -267,7 +267,7 @@ function chat($bdd){
 
 
 
-	echo '  <iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
+	echo ' <iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"> </iframe>';
 
 
 	echo'</div>';
@@ -299,8 +299,8 @@ function chat($bdd){
 		$firstId = $bdd->query('SELECT * FROM Chat ORDER BY ID LIMIT 1');
 		$firstId = $firstId->fetch();
 		echo 'premiere ID '.$firstId['ID'];
-		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { 
-			
+		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) {
+
 			$data3 = $bdd->prepare('DELETE FROM Chat WHERE ID= :i');
 			$data3->bindParam(':i', $i, PDO::PARAM_STR);
 			$data3->execute();
