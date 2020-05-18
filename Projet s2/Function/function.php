@@ -1,5 +1,7 @@
+<header>
+	<link rel="icon" type="image/png" href="Images/minilogo.png" />
+</header>
 
-<link rel="icon" type="image/png" href="Images/minilogo.png" />
 
 <?php
 include('functionCache.php');
@@ -211,7 +213,7 @@ function statClient($bdd){
 				<div class="graphjeu"> <canvas id="myChart"></canvas> </div>
 				<div class="statgraphjeu">';
 					if ($afficher['flip'] != 0 || $afficher['roulette'] != 0 ||$afficher['couleur'] != 0 ) {
-						echo 'Le jeu le plus jouer est <em class="yellow">'.$max.'</em>';
+						echo 'Le jeu le plus joué est <em class="yellow">'.$max.'</em>';
 					}
 	echo '</div>
 			</div>
