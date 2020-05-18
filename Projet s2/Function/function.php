@@ -264,17 +264,13 @@ function chat($bdd){
 
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder">';
-
-
-
-	echo '  <iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
-
-
+	echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
 	echo'</div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone" type="text" name="Message" placeholder="Message" max="250" ><br><br>
 		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 		</form></center>';
+
 	if (!empty($_POST['Message'])) {
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
 		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
