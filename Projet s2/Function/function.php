@@ -1,25 +1,23 @@
-<header>
-	<link rel="icon" type="image/png" href="../Images/minilogo.png" />
-</header>
-
 
 <?php
-include('functionCache.php');
-$bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
-function createAccount($bdd){
+//appel de la bdd
+$bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+include('functionCache.php');
+
+function createAccount($bdd){ // creation de compte
 
 	if ($_POST['password'] != NULL){
 		$_SESSION['password'] = md5($_POST['password']);
 	}
-
+	// on evite les surprise avec htmlspecialchars
 	$pseudo = htmlspecialchars($_POST['pseudo']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
 	$mdp = $_SESSION['password'];
-
+	//on les rentre dans la bdd
 	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
-
+	// on recupere son ID pour la creation de la ligne du client dans les Statistiques
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
 	$idClients = $save['ID'];
@@ -30,7 +28,7 @@ function createAccount($bdd){
 
 }
 
-function verification($bdd){
+function verification($bdd){ // ici on retour les erreur, verifie si le client existe deja, et on lance al fonction de creation de compte
 
 	$clientExists = false;
 
@@ -58,7 +56,7 @@ function verification($bdd){
 
 function connection($bdd){
 
-	if (!empty($_POST['login']) && !empty($_POST['password'])){
+	if (!empty($_POST['login']) && !empty($_POST['password'])){ // on verifie si l'id existe et si le mdp correction a l'id
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
 
 		while($client = $data->fetch()){
@@ -102,8 +100,8 @@ function displayChat($bdd){
 
 function changeData($bdd){
 
-	$password = md5($_POST['password']);
-
+	$password = md5($_POST['password']); // chiffrement du mot de passe
+	 // on prepare la requete pour les modification
 	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
@@ -112,11 +110,11 @@ function changeData($bdd){
 	$data->bindValue(':password', $password, PDO::PARAM_STR);
 
 	$ExecuteIsOk = $data->execute();
-
+	// on prepare l'upload de l'image et selectionnant son chemin, la taille maximal, et le format qu'il peut importer
 	$target = './ImagesClients/';
 	$maxSize = 22097152;
 	$tabExt = array('jpg','gif','png','jpeg');// Extensions autorisees
-
+	// verification de l'existance du fichier ou l'on copie l'image
 	if( !is_dir($target) ) {
 	  if( !mkdir($target, 0755) ) {
 	    exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement !');
@@ -172,7 +170,7 @@ function changeData($bdd){
 }
 
 function printAvatar($bdd){
-
+	//on affiche l'avatar si il en un sinon on affiche l'avatar par defaut
 	$req=$bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$verif = $req->fetch();
 	if($verif['Avatar'] == '0'){
@@ -190,10 +188,10 @@ function statClient($bdd){
 							FROM Statistiques AS stats
 							INNER JOIN Clients AS c
 							ON stats.Clients_ID = c.ID
-							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' ');
+							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' '); // on recupere les données que lon souhaite dans les deux tables
 
   $afficher = $data->fetch();
-			$max = max($afficher['flip'],$afficher['roulette'],$afficher['couleur']);
+			$max = max($afficher['flip'],$afficher['roulette'],$afficher['couleur']); // on cherche le nom du plus grand des trois sans se soucier d'une egalité quelquonque
 			if ($max == $afficher['flip']) {
 				$max = 'Coinflip';
 			}
@@ -242,12 +240,12 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
-
+	//Recuperation du solde
 	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$recupSolde = $recupSolde->fetch();
-
+	//preparation du nouveau sold.
 	$nouveauSolde = ($recupSolde['Solde']+$_POST['addcoin']);
-
+	// on reinjecte le nouveau sold dans la bdd
 	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
 	$modifSolde = $modifSolde->execute();
@@ -256,7 +254,7 @@ function addcoin($bdd){
 }
 
 function displayBalance($bdd){
-
+	// affichage du solde.
 	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\' ');
 	$display = $displayBalance->fetch();
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
@@ -264,7 +262,6 @@ function displayBalance($bdd){
 
 function chat($bdd){
 
-	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder">';
 
 	echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
@@ -275,7 +272,7 @@ function chat($bdd){
 		<button type="submit" value="Envoyer" class="button">Envoyer</button>
 		</form></center>';
 
-	if (!empty($_POST['Message'])) {
+	if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
 		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
 		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
 		$data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
@@ -292,14 +289,14 @@ function chat($bdd){
 
 <?php
 
-	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat '); // Début fonction pour supprimer les messages quand il y en a plus de 50 dans la bdd
+	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat '); // suppression les messages quand il y en a plus de 100 dans la bdd
 	$donnees = $data2->fetch();
 
 	if ($donnees['COUNT(ID)'] > 100) {
 		$firstId = $bdd->query('SELECT * FROM Chat ORDER BY ID LIMIT 1');
 		$firstId = $firstId->fetch();
 		echo 'premiere ID '.$firstId['ID'];
-		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) {
+		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { // on en suprime 30 pour redescendre a 70 messages pour toujours garder un historique de quelques messages
 
 			$data3 = $bdd->prepare('DELETE FROM Chat WHERE ID= :i');
 			$data3->bindParam(':i', $i, PDO::PARAM_STR);
@@ -309,3 +306,9 @@ function chat($bdd){
 }
 
 ?>
+<!DOCTYPE html>
+  <html>
+      <head>
+					<link rel="icon" type="image/png" href="Images/minilogo.png" />
+			</header>
+	</html>
