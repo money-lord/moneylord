@@ -488,7 +488,7 @@ nav ul li {
   margin: 0;
   margin-bottom: 5px;
   background: #EDD602;
-  transition: background 3s;
+  transition: white 3s ;
   box-shadow: 2px 2px 10px -2px );
 
 }
@@ -496,7 +496,7 @@ nav ul li {
 nav ul li:hover {
   background: mediumorchid;
   transition: background .45s;
-  background-color: transparent;
+  background-color: black;
 }
 
 nav ul a {

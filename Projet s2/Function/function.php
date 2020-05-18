@@ -1,5 +1,5 @@
 
-<link rel="icon" type="image/png" href="Images/minilogo.png" />'
+<link rel="icon" type="image/png" href="Images/minilogo.png" />
 
 <?php
 include('functionCache.php');
@@ -22,7 +22,7 @@ function createAccount($bdd){
 	$save = $data1->fetch();
 	$idClients = $save['ID'];
 
-	$data2 = $bdd->prepare('INSERT INTO Statistiques VALUES (NULL,0,0,0,0,0,:idclients)');
+	$data2 = $bdd->prepare('INSERT INTO Statistiques VALUES (NULL,0,0,0,0,:idclients)');
 	$data2->bindValue(':idclients', $idClients, PDO::PARAM_STR);
 	$data2->execute();
 
@@ -174,15 +174,15 @@ function printAvatar($bdd){
 	$req=$bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$verif = $req->fetch();
 	if($verif['Avatar'] == '0'){
-		return 'anonyme.jpg';	
+		return 'anonyme.jpg';
 	}else {
 		return $verif['Avatar'];
 	}
-	
+
 }
 
 function statClient($bdd){
-	$data = $bdd->query('SELECT stats.SoldeActuel solde,stats.TotalBet bet,
+	$data = $bdd->query('SELECT c.Solde solde,stats.TotalBet bet,
 							stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
 							stats.TotalBetCouleur couleur, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
 							FROM Statistiques AS stats
@@ -255,7 +255,7 @@ function addcoin($bdd){
 
 function displayBalance($bdd){
 
-	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\' ');
 	$display = $displayBalance->fetch();
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
@@ -264,7 +264,9 @@ function chat($bdd){
 
 	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat ');
 	echo '<div class="chat"><div class="messagesborder">';
+
 	echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
+
 	echo'</div>';
 	echo '<br><center><form action="" method ="POST">
 		<input class="txtZone" type="text" name="Message" placeholder="Message" max="250" ><br><br>
@@ -295,8 +297,8 @@ function chat($bdd){
 		$firstId = $bdd->query('SELECT * FROM Chat ORDER BY ID LIMIT 1');
 		$firstId = $firstId->fetch();
 		echo 'premiere ID '.$firstId['ID'];
-		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { 
-			
+		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) {
+
 			$data3 = $bdd->prepare('DELETE FROM Chat WHERE ID= :i');
 			$data3->bindParam(':i', $i, PDO::PARAM_STR);
 			$data3->execute();
