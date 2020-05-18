@@ -22,7 +22,7 @@ function createAccount($bdd){
 	$save = $data1->fetch();
 	$idClients = $save['ID'];
 
-	$data2 = $bdd->prepare('INSERT INTO Statistiques VALUES (NULL,0,0,0,0,0,:idclients)');
+	$data2 = $bdd->prepare('INSERT INTO Statistiques VALUES (NULL,0,0,0,0,:idclients)');
 	$data2->bindValue(':idclients', $idClients, PDO::PARAM_STR);
 	$data2->execute();
 
@@ -182,7 +182,7 @@ function printAvatar($bdd){
 }
 
 function statClient($bdd){
-	$data = $bdd->query('SELECT stats.SoldeActuel solde,stats.TotalBet bet,
+	$data = $bdd->query('SELECT c.Solde solde,stats.TotalBet bet,
 							stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
 							stats.TotalBetCouleur couleur, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
 							FROM Statistiques AS stats
