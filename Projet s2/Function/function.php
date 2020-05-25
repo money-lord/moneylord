@@ -13,7 +13,7 @@ function createAccount($bdd){ // creation de compte
 	$dateToday = date('d-m-Y', $stat['atime']);
 
 	if ($_POST['password'] != NULL){
-		$_SESSION['password'] = md5($_POST['password']);
+		$_SESSION['password'] = $_POST['password'];
 	}
 	// on evite les surprise avec htmlspecialchars
 	$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -24,7 +24,7 @@ function createAccount($bdd){ // creation de compte
 	$mdp = $_SESSION['password'];
 	//on les rentre dans la bdd
 	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar,DateInscription,Email,Age) 
-							VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0,\''.$dateToday.'\',\''.$email.'\',\''.$age.'\')');
+							VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.MD5($mdp).'\', 0,0,\''.$dateToday.'\',\''.$email.'\',\''.$age.'\')');
 	// on recupere son ID pour la creation de la ligne du client dans les Statistiques
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
@@ -66,6 +66,7 @@ function connection($bdd){
 
 	if (!empty($_POST['login']) && !empty($_POST['password'])){ // on verifie si l'id existe et si le mdp correction a l'id
 		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
+
 
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {

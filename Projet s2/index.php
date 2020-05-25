@@ -3,7 +3,7 @@
   session_start();
   include('Function/function.php');
   if(!empty($_POST['password'])){
-    $_SESSION['pass2'] = md5($_POST['password']);
+    $_SESSION['pass2'] = $_POST['password'];
   }
   $message = connection($bdd);
 ?>
