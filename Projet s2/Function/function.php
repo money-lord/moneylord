@@ -6,7 +6,7 @@ $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8',
 include('functionCache.php');
 
 function createAccount($bdd){ // creation de compte
-	
+
 	$stat = stat('C:\wamp64\www\GitHub\moneylord\Projet s2');
 
 	$ip = $_SERVER['REMOTE_ADDR'];
@@ -23,8 +23,18 @@ function createAccount($bdd){ // creation de compte
 	$age = htmlspecialchars($_POST['age']);
 	$mdp = $_SESSION['password'];
 	//on les rentre dans la bdd
-	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar,DateInscription,Email,Age) 
-							VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0,\''.$dateToday.'\',\''.$email.'\',\''.$age.'\')');
+
+	$data4 = $bdd->prepare('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar,DateInscription,Email,Age)
+							VALUES (:nom,:prenom,:pseudo,:mdp, 0,0,:dateToday,:email,:age)');
+	$data4->bindValue(':nom', $nom, PDO::PARAM_STR);
+	$data4->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+	$data4->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+	$data4->bindValue(':mdp', $mdp, PDO::PARAM_STR);
+	$data4->bindValue(':dateToday', $dateToday, PDO::PARAM_STR);
+	$data4->bindValue(':email', $email, PDO::PARAM_STR);
+	$data4->bindValue(':age', $age, PDO::PARAM_STR);
+	$data4->execute();
+
 	// on recupere son ID pour la creation de la ligne du client dans les Statistiques
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
