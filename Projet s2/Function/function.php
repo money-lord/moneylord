@@ -10,7 +10,7 @@ function createAccount($bdd){ // creation de compte
 	$stat = stat('C:\wamp64\www\GitHub\moneylord\Projet s2');
 
 	$ip = $_SERVER['REMOTE_ADDR'];
-	$dateToday = date('d-m-Y', $stat['atime']);
+	$dateToday = date("Y-m-d"); 
 
 	if ($_POST['password'] != NULL){
 		$_SESSION['password'] = md5($_POST['password']);
