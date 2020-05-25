@@ -6,16 +6,15 @@ function surligne(champ, erreur){
 }
 function verifPseudo(champ){
    
-   var regex = new RegExp("[a-z0-9]", "i");
+   var regex = new RegExp("\\w+[-|\\s]+\\w", "i");
    var valid;  
    for (x = 0; x < chars.value.length; x++) {
       valid = regex.test(chars.value.charAt(x));
       if (valid == false) {
           chars.value = chars.value.substr(0, x) + chars.value.substr(x + 1, chars.value.length - x + 1); x--;
-      }
-   }   
+      }   }   
 
-   if(champ.value.length < 5 || champ.value.length > 25){
+   if(champ.value.length < 5 || champ.value.length > 25 && valid == false){
       surligne(champ, true);
       return false;
    } else {
