@@ -24,12 +24,18 @@ function createAccount($bdd){ // creation de compte
 	$mdp = $_SESSION['password'];
 	//on les rentre dans la bdd
 
+
+	$file = fopen("./keyOf.txt", "r");
+	$key = fread($file, filesize('keyOf.txt'));
+	fclose($file);
+
 	$data4 = $bdd->prepare('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar,DateInscription,Email,Age)
-							VALUES (:nom,:prenom,:pseudo,:mdp, 0,0,:dateToday,:email,:age)');
+							VALUES (:nom,:prenom,:pseudo, AES_ENCRYPT(:mdp, :keyOf), 0,0,:dateToday,:email,:age)');
+	$data4->bindValue(':keyOf', $key, PDO::PARAM_STR);
 	$data4->bindValue(':nom', $nom, PDO::PARAM_STR);
 	$data4->bindValue(':prenom', $prenom, PDO::PARAM_STR);
 	$data4->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-	$data4->bindValue(':mdp', MD5($mdp), PDO::PARAM_STR);
+	$data4->bindValue(':mdp', $mdp, PDO::PARAM_STR);
 	$data4->bindValue(':dateToday', $dateToday, PDO::PARAM_STR);
 	$data4->bindValue(':email', $email, PDO::PARAM_STR);
 	$data4->bindValue(':age', $age, PDO::PARAM_STR);
@@ -46,7 +52,7 @@ function createAccount($bdd){ // creation de compte
 
 }
 
-function verification($bdd){ // ici on retour les erreur, verifie si le client existe deja, et on lance al fonction de creation de compte
+function verification($bdd){ // ici on retourne les erreur, verifie si le client existe deja, et on lance al fonction de creation de compte
 
 	$clientExists = false;
 
@@ -74,12 +80,17 @@ function verification($bdd){ // ici on retour les erreur, verifie si le client e
 
 function connection($bdd){
 
+	$file = fopen("./keyOf.txt", "r");
+	$key = fread($file, filesize('keyOf.txt'));
+	fclose($file);
+
 	if (!empty($_POST['login']) && !empty($_POST['password'])){ // on verifie si l'id existe et si le mdp correction a l'id
-		$data = $bdd->query('SELECT Pseudo, MotDePasse FROM Clients');
-
-
+		$data = $bdd->prepare('SELECT Pseudo, MotDePasse, AES_DECRYPT(MotDePasse, :keyOf) As MDP FROM Clients');
+		$data->bindValue(':keyOf', $key, PDO::PARAM_STR);
+		$data->execute();
+	
 		while($client = $data->fetch()){
-			if ($client['Pseudo'] == $_POST['login'] && $client['MotDePasse'] == $_SESSION['pass2']) {
+			if ($client['Pseudo'] == $_POST['login'] && $client['MDP'] == $_SESSION['pass2']) {
 				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
 				$_SESSION['pass2'] = htmlspecialchars($_POST['password']);
         echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
