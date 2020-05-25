@@ -1,7 +1,6 @@
 <?php
   session_start();
   include('Function/function.php');
-
   verification($bdd);
   
 
@@ -28,8 +27,10 @@
             <center>
             <h1 class="welcome">Inscription</h1>
             <p>
-              <form class="formulaire" method="post">
-                <p class="field"><input type="text" name="pseudo" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
+              <form class="formulaire" method="post" onsubmit="return verifForm(this)">
+                <p class="field"><input type="text" name="pseudo" placeholder="Nom d'utilisateur" onblur="verifPseudo(this)"><i class="icon-user icon-large"></i></p>
+                <p class="field"><input type="text" name="email" placeholder="Email" onblur="verifMail(this)"><i class="icon-user icon-large"></i></p>
+                <p class="field"><input type="text" name="age" placeholder="Age" onblur="verifAge(this)" min="0" max="111"><i class="icon-user icon-large"></i></p>
             		<p class="field"><input type="text" name="lastName" placeholder="Nom"><i class="icon-user icon-large"></i></p>
                 <p class="field"><input type="text" name="firstName" placeholder="Prénom"><i class="icon-user icon-large"></i></p>
             		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p><br>
@@ -46,7 +47,6 @@
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
-
-
+      <script src="js/function.js"></script>
       </body>
   </html>

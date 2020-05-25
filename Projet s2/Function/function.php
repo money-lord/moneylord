@@ -6,17 +6,25 @@ $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8',
 include('functionCache.php');
 
 function createAccount($bdd){ // creation de compte
+	
+	$stat = stat('C:\wamp64\www\GitHub\moneylord\Projet s2');
+
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$dateToday = date('d-m-Y', $stat['atime']);
 
 	if ($_POST['password'] != NULL){
 		$_SESSION['password'] = md5($_POST['password']);
 	}
 	// on evite les surprise avec htmlspecialchars
 	$pseudo = htmlspecialchars($_POST['pseudo']);
+	$email = htmlspecialchars($_POST['email']);
 	$nom = htmlspecialchars($_POST['lastName']);
 	$prenom = htmlspecialchars($_POST['firstName']);
+	$age = htmlspecialchars($_POST['age']);
 	$mdp = $_SESSION['password'];
 	//on les rentre dans la bdd
-	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar) VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0)');
+	$data4 = $bdd->query('INSERT INTO Clients(Nom,Prenom,Pseudo,MotDePasse,Solde,Avatar,DateInscription,Email,Age) 
+							VALUES (\''.$nom.'\',\''.$prenom.'\',\''.$pseudo.'\',\''.$mdp.'\', 0,0,\''.$dateToday.'\',\''.$email.'\',\''.$age.'\')');
 	// on recupere son ID pour la creation de la ligne du client dans les Statistiques
 	$data1 = $bdd->query('SELECT ID FROM Clients WHERE Pseudo= \''.$_POST['pseudo'].'\'');
 	$save = $data1->fetch();
@@ -240,12 +248,12 @@ function statClient($bdd){
 }
 
 function addcoin($bdd){
-	//Recuperation du solde
+	//Recupération du solde
 	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$recupSolde = $recupSolde->fetch();
-	//preparation du nouveau sold.
+	//preparation du nouveau solde.
 	$nouveauSolde = ($recupSolde['Solde']+$_POST['addcoin']);
-	// on reinjecte le nouveau sold dans la bdd
+	// on réinjecte le nouveau solde dans la bdd
 	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
 	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
 	$modifSolde = $modifSolde->execute();
@@ -289,14 +297,14 @@ function chat($bdd){
 
 <?php
 
-	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat '); // suppression les messages quand il y en a plus de 100 dans la bdd
+	$data2 = $bdd->query('SELECT COUNT(ID) FROM Chat '); // suppression des messages quand il y en a plus de 100 dans la bdd
 	$donnees = $data2->fetch();
 
 	if ($donnees['COUNT(ID)'] > 100) {
 		$firstId = $bdd->query('SELECT * FROM Chat ORDER BY ID LIMIT 1');
 		$firstId = $firstId->fetch();
 		echo 'premiere ID '.$firstId['ID'];
-		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { // on en suprime 30 pour redescendre a 70 messages pour toujours garder un historique de quelques messages
+		for ($i=$firstId['ID']; $i < ($firstId['ID']+30); $i++) { // on en supprime 30 pour redescendre a 70 messages pour toujours garder un historique de quelques messages
 
 			$data3 = $bdd->prepare('DELETE FROM Chat WHERE ID= :i');
 			$data3->bindParam(':i', $i, PDO::PARAM_STR);
