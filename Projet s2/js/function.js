@@ -5,8 +5,8 @@ function surligne(champ, erreur){
       champ.style.backgroundColor = "";
 }
 function verifPseudo(champ){
-   
-   //var regex = new RegExp("\\w+[-|\\s]+\\w", "i");  
+
+   //var regex = new RegExp("\\w+[-|\\s]+\\w", "i");
    var regex1 = /^[a-zéèàùûêâôë][a-zéèàùûêâôë \'-]+[a-zéèàùûêâôë]$/i;
    var regex2 = /[A-Za-z0-9]/;
 
@@ -16,7 +16,7 @@ function verifPseudo(champ){
    } else {
       surligne(champ, false);
       return true;
-   } 
+   }
 
 
 
@@ -74,19 +74,38 @@ function verifForm(f){
    }
 }
 
-function time() {
+function roulette() {
 
           var timerElt = document.getElementById('compte');
-          var time = 20;
           var timer = setInterval(function(){
             var now = new Date();
             var counter = now.getSeconds();
-            if (counter < 11) {
-              timerElt.innerText = "ca tourne";
+            if (counter === 0 | counter === 30) {
+              time();
             }
+            /*
             if (counter >= 11){
              counter = Math.abs(counter-60);
+             timerElt.innerText = "ca tourne";
               timerElt.innerText = counter;
+            }*/
+          },1000);
+}
+
+function time() {
+
+          var counter = 20;
+
+          var timerElt = document.getElementById('compte');
+          var timer1 = setInterval(function(){
+
+            timerElt.innerText = counter;
+            counter--;
+            if (counter == 0) {
+              setTimeout(function(){
+                clearInterval(timer1);
+              },1000);
             }
+
           },1000);
 }

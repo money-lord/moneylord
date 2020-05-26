@@ -1,36 +1,87 @@
 <?php
 
-
-  session_start();
-  include('Function/function.php');
-  if(!empty($_POST['password'])){
-    $_SESSION['pass2'] = $_POST['password'];
-  }
-  $message = connection($bdd);
-
+// test Roulette
 ?>
-<!DOCTYPE html>
-  <html>
-      <head>
-          <meta charset="utf-8" />
-          <title>Connexion MoneyLord</title>
-      </head>
-      <body>
-            <center>
-            <h1 class="welcome">Bienvenue</h1>
-            <p>
-              <form class="formulaire" action="" method ="POST">
-                <p class="field"><input type="text" name="login" placeholder="Nom d'utilisateur"><i class="icon-user icon-large"></i></p>
-                <p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p>
-                <p class="submit"><button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button></p>
-              </form>
-              <a href="signin.php">Vous n'avez pas de compte ?</a>
-            </p>
-            <div class="errorred">
-            <p> <?php  if(!empty($_POST['password'])){ echo $message;}?> </p>
-            </div>
-            </center>
+
+<html>
+    <head>
+        <script src='./js/Winwheel.js'></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    </head>
+    <body>
+
+      <div id="canvasContainer">
+        <canvas id='canvas' width='880' height='300'></canvas>
+      </div>
+
+          <script>
+              let theWheel = new Winwheel({
+                  'numSegments' : 10,
+                  'textAlignment' : 'outer',
+                  'textOrientation' : 'vertical',
+                  'textFontSize'    : 11,
+                  'innerRadius'   : 20,
+                  'pointerAngle' : 0,
+                  'centerY' : 300,
+                  'textMargin' : 10,
+                  'lineWidth'   : 1,
+                  'rotationAngle' : 18,
+                  'segments'    :
+                  [
+                      {'fillStyle' : '#000000'},
+                      {'fillStyle' : '#C30101'},
+                      {'fillStyle' : '#000000'},
+                      {'fillStyle' : '#C30101'},
+                      {'fillStyle' : '#000000'},
+                      {'fillStyle' : '#C30101'},
+                      {'fillStyle' : '#000000'},
+                      {'fillStyle' : '#C30101'},
+                      {'fillStyle' : '#000000'},
+                      {'fillStyle' : '#ffea00', 'text' : 'Money Lord'},
+                  ],
+                  'animation' :
+                    {
+                        'type'     : 'spinToStop',
+                        'duration' : 5,
+                        'spins'    : 8,
+                        'callbackFinished' : 'alertPrize()',
+                        'callbackAfter' : 'drawTriangle()',
+                        'stopAngle' : 10 // degre ou l'on veut que ca s'arrete
+
+                    }
+              });
 
 
-      </body>
-  </html>
+              function alertPrize()
+                {
+                  let winningSegment = theWheel.getIndicatedSegment();
+                  alert("la couleur est " + winningSegment.fillStyle + "!");
+                }
+
+              drawTriangle();
+
+              function drawTriangle()
+                {
+                  let ctx = theWheel.ctx;
+                  ctx.strokeStyle = 'black';
+                  ctx.fillStyle   = 'black';
+                  ctx.lineWidth   = 2;
+                  ctx.beginPath();
+                  ctx.moveTo(170, 5);
+                  ctx.lineTo(230, 5);
+                  ctx.lineTo(200, 40);
+                  ctx.lineTo(171, 5);
+                  ctx.stroke();
+                  ctx.fill();
+                }
+
+
+
+
+          </script>
+
+        <button onClick="theWheel.startAnimation();">tourne la roulette</button>
+
+
+    </body>
+</html>

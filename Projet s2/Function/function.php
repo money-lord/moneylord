@@ -337,10 +337,7 @@ function chat($bdd){
 	}
 }
 
-function randomNb(){
 
-
-}
 
 ?>
 <!DOCTYPE html>

@@ -59,7 +59,7 @@ chat($bdd);
 
         <script src="js/function.js"></script>
         <script>
-          time();
+          roulette();
         </script>
 
 
