@@ -31,8 +31,8 @@
                 <p class="field"><input type="text" name="pseudo" placeholder="Nom d'utilisateur" onblur="verifPseudo(this)"><i class="icon-user icon-large"></i></p>
                 <p class="field"><input type="text" name="email" placeholder="Email" onblur="verifMail(this)"><i class="icon-user icon-large"></i></p>
                 <p class="field"><input type="text" name="age" placeholder="Age" onblur="verifAge(this)" min="0" max="111"><i class="icon-user icon-large"></i></p>
-            		<p class="field"><input type="text" name="lastName" placeholder="Nom"><i class="icon-user icon-large"></i></p>
-                <p class="field"><input type="text" name="firstName" placeholder="Prénom"><i class="icon-user icon-large"></i></p>
+            		<p class="field"><input type="text" name="lastName" placeholder="Nom" onblur="veriflastname(this)"><i class="icon-user icon-large"></i></p>
+                <p class="field"><input type="text" name="firstName" placeholder="Prénom" onblur="verifname(this)"><i class="icon-user icon-large"></i></p>
             		<p class="field"><input type="password" name="password" placeholder="Mot de passe"><i class="icon-lock icon-large"></i></p><br>
             		<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
             	</form>

@@ -72,8 +72,7 @@ function verification($bdd){ // ici on retourne les erreur, verifie si le client
 			createAccount($bdd);
 			echo '<meta http-equiv="Refresh" content="0; URL=index.php" />';
 		}
-	}
-	else {
+	} else {
 		return 'Un ou plusieurs des champs nest pas rempli';
 	}
 }
@@ -85,15 +84,18 @@ function connection($bdd){
 	fclose($file);
 
 	if (!empty($_POST['login']) && !empty($_POST['password'])){ // on verifie si l'id existe et si le mdp correction a l'id
-		$data = $bdd->prepare('SELECT Pseudo, MotDePasse, AES_DECRYPT(MotDePasse, :keyOf) As MDP FROM Clients');
+		$data = $bdd->prepare('SELECT ID, Pseudo, MotDePasse, AES_DECRYPT(MotDePasse, :keyOf) As MDP FROM Clients');
 		$data->bindValue(':keyOf', $key, PDO::PARAM_STR);
 		$data->execute();
 	
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MDP'] == $_SESSION['pass2']) {
-				$_SESSION['pseudo'] = htmlspecialchars($_POST['login']);
+
+				$_SESSION['ID'] = htmlspecialchars($_POST['login']);
+				$_SESSION['ID'] = $client['ID'];
 				$_SESSION['pass2'] = htmlspecialchars($_POST['password']);
-        echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
+
+        		echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
 				return ' ';
 			}
 		}
@@ -110,7 +112,7 @@ function displayUserAccount($bdd){
 	}
 	$req = $bdd->query('SELECT * FROM Clients');
 	while ($checkAccount = $req->fetch()) {
-		if ($_SESSION['pseudo'] == $checkAccount['pseudo'] && $_SESSION['password'] == $checkAccount['password']) { // Vérif correspondance entre compte client et client connecté
+		if ($_SESSION['ID'] == $checkAccount['pseudo'] && $_SESSION['password'] == $checkAccount['password']) { // Vérif correspondance entre compte client et client connecté
 
 			echo '<div><p>Pseudo : '.$checkAccount['Pseudo'].'</p>
 					<p>Nom : '.$checkAccount['Nom'].'</p>
@@ -132,7 +134,7 @@ function changeData($bdd){
 
 	$password = md5($_POST['password']); // chiffrement du mot de passe
 	 // on prepare la requete pour les modification
-	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE ID=\''.$_SESSION['ID'].'\'');
 
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
@@ -165,15 +167,15 @@ function changeData($bdd){
 	            // Parcours du tableau d'erreurs
 		            if(isset($_FILES['fichier']['error']) && UPLOAD_ERR_OK === $_FILES['fichier']['error']){
 		            // On renomme le fichier
-		            	$nomImage = $_SESSION['pseudo'].'.'. $extension;
+		            	$nomImage = $_SESSION['ID'].'.'. $extension;
 
 			            // Si c'est OK, on teste l'upload
 			            if(move_uploaded_file($_FILES['fichier']['tmp_name'], $target.$nomImage)){
 			              	$message = 'Upload réussi !';
-			              	$updateAvatar = $bdd->prepare('UPDATE Clients SET Avatar = :avatar WHERE Pseudo = :pseudo');
-		                   	// echo $_SESSION['pseudo'].".".$extensionsUpload;
+			              	$updateAvatar = $bdd->prepare('UPDATE Clients SET Avatar = :avatar WHERE ID = :ID');
+		                   	// echo $_SESSION['ID'].".".$extensionsUpload;
 		                    $updateAvatar->bindParam(':avatar', $nomImage, PDO::PARAM_STR);
-		                    $updateAvatar->bindParam(':pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+		                    $updateAvatar->bindParam(':ID', $_SESSION['ID'], PDO::PARAM_STR);
 		                    $updateAvatar->execute();
 			              	echo '<meta http-equiv="Refresh" content="0; URL=account.php" />';
 			            } else {
@@ -201,7 +203,7 @@ function changeData($bdd){
 
 function printAvatar($bdd){
 	//on affiche l'avatar si il en un sinon on affiche l'avatar par defaut
-	$req=$bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$req=$bdd->query('SELECT * FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
 	$verif = $req->fetch();
 	if($verif['Avatar'] == '0'){
 		return 'anonyme.jpg';
@@ -218,7 +220,7 @@ function statClient($bdd){
 							FROM Statistiques AS stats
 							INNER JOIN Clients AS c
 							ON stats.Clients_ID = c.ID
-							WHERE Pseudo= \''.$_SESSION["pseudo"].'\' '); // on recupere les données que lon souhaite dans les deux tables
+							WHERE ID= \''.$_SESSION['ID'].'\' '); // on recupere les données que lon souhaite dans les deux tables
 
   $afficher = $data->fetch();
 			$max = max($afficher['flip'],$afficher['roulette'],$afficher['couleur']); // on cherche le nom du plus grand des trois sans se soucier d'une egalité quelquonque
@@ -271,12 +273,12 @@ function statClient($bdd){
 
 function addcoin($bdd){
 	//Recupération du solde
-	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$recupSolde = $bdd->query('SELECT * FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
 	$recupSolde = $recupSolde->fetch();
 	//preparation du nouveau solde.
 	$nouveauSolde = ($recupSolde['Solde']+$_POST['addcoin']);
 	// on réinjecte le nouveau solde dans la bdd
-	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE Pseudo=\''.$_SESSION['pseudo'].'\'');
+	$modifSolde = $bdd->prepare('UPDATE Clients SET Solde =:solde  WHERE ID=\''.$_SESSION['ID'].'\'');
 	$modifSolde->bindParam(':solde', $nouveauSolde, PDO::PARAM_INT);
 	$modifSolde = $modifSolde->execute();
 	header('Location: home.php');
@@ -285,7 +287,7 @@ function addcoin($bdd){
 
 function displayBalance($bdd){
 	// affichage du solde.
-	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE Pseudo=\''.$_SESSION['pseudo'].'\' ');
+	$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
 	$display = $displayBalance->fetch();
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
@@ -303,8 +305,8 @@ function chat($bdd){
 		</form></center>';
 
 	if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
-		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:Pseudo,:Message)');
-		$data2->bindValue(':Pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);
+		$data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
+		$data2->bindValue(':ID', $_SESSION['ID'], PDO::PARAM_STR);
 		$data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
 		$data2->execute();
 	}
