@@ -73,3 +73,20 @@ function verifForm(f){
       return false;
    }
 }
+
+function time() {
+
+          var timerElt = document.getElementById('compte');
+          var time = 20;
+          var timer = setInterval(function(){
+            var now = new Date();
+            var counter = now.getSeconds();
+            if (counter < 11) {
+              timerElt.innerText = "ca tourne";
+            }
+            if (counter >= 11){
+             counter = Math.abs(counter-60);
+              timerElt.innerText = counter;
+            }
+          },1000);
+}

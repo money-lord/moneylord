@@ -518,3 +518,8 @@ nav ul a {
   border-radius : 75px;
   background-color: transparent;
 }
+
+#compte{
+  font-size: 3em;
+  background-color: red;
+}

@@ -10,7 +10,7 @@ function createAccount($bdd){ // creation de compte
 	$stat = stat('C:\wamp64\www\GitHub\moneylord\Projet s2');
 
 	$ip = $_SERVER['REMOTE_ADDR'];
-	$dateToday = date("Y-m-d"); 
+	$dateToday = date("Y-m-d");
 
 	if ($_POST['password'] != NULL){
 		$_SESSION['password'] = $_POST['password'];
@@ -87,7 +87,7 @@ function connection($bdd){
 		$data = $bdd->prepare('SELECT ID, Pseudo, MotDePasse, AES_DECRYPT(MotDePasse, :keyOf) As MDP FROM Clients');
 		$data->bindValue(':keyOf', $key, PDO::PARAM_STR);
 		$data->execute();
-	
+
 		while($client = $data->fetch()){
 			if ($client['Pseudo'] == $_POST['login'] && $client['MDP'] == $_SESSION['pass2']) {
 
@@ -335,6 +335,11 @@ function chat($bdd){
 			$data3->execute();
 		}
 	}
+}
+
+function randomNb(){
+
+
 }
 
 ?>
