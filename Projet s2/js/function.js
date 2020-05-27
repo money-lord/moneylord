@@ -103,7 +103,10 @@ function time() {
             counter--;
             if (counter == 0) {
               setTimeout(function(){
+                theWheel.startAnimation();
                 clearInterval(timer1);
+                resetWheel();return false;
+
               },1000);
             }
 

@@ -59,7 +59,8 @@ header{
 .content{
   margin-top: 6%;
   margin-left: 25%;
-  padding: 3em;
+  padding: 1em;
+  padding-top: 2em;
 }
 
 .contentstat{
@@ -518,8 +519,40 @@ nav ul a {
   border-radius : 75px;
   background-color: transparent;
 }
+.topRoulette{
+  display: flex;
+}
+.botRoulette{
+  padding-top: 5%;
+  display: flex;
+}
+
+.redteam{
+  width: 33%;
+  height: 20%;
+  background-color: red;
+  height: 15%;
+}
+.blackteam{
+  width: 33%;
+  height: 20%;
+  background-color: black;
+}
+.mlteam{
+  width: 33%;
+  height: 20%;
+  background-color: yellow;
+}
 
 #compte{
-  font-size: 1em;
-  background-color: red;
+  font-size: 4em;
+
+  width: 33%;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.canvasContainer{
+  width: 66%;
+  padding-right: 1em;
 }

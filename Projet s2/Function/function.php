@@ -337,6 +337,64 @@ function chat($bdd){
 	}
 }
 
+function angleRoulette($bdd){
+	$data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); // suppression des messages quand il y en a plus de 100 dans la bdd
+	$donnees = $data2->fetch();
+	$save = $donnees['nb'];
+
+	$data2 = $bdd->query('SELECT nbalea AS nb, id FROM aleatoire WHERE id >= 1'); // suppression des messages quand il y en a plus de 100 dans la bdd
+	while($donnees = $data2->fetch()){
+	  if ($save == $donnees['nb']) {
+	    $tirage =  $donnees['id'];
+	  }
+	}
+
+	if ($tirage == 1) {
+		echo rand(1,23);
+	}
+	if ($tirage == 2) {
+		echo rand(25, 47);
+	}
+	if ($tirage == 3) {
+		echo rand(49, 71);
+	}
+	if ($tirage == 4) {
+		echo rand(73, 95);
+	}
+	if ($tirage == 5) {
+		echo rand(97, 119);
+	}
+	if ($tirage == 6) {
+		echo rand(121, 143);
+	}
+	if ($tirage == 7) {
+		echo rand(145, 167);
+	}
+	if ($tirage == 8) {
+		echo rand(169, 192);
+	}
+	if ($tirage == 9) {
+		echo rand(194, 215);
+	}
+	if ($tirage == 10) {
+		echo rand(217, 239);
+	}
+	if ($tirage == 11) {
+		echo rand(241, 261);
+	}
+	if ($tirage == 12) {
+		echo rand(263, 287);
+	}
+	if ($tirage == 13) {
+		echo rand(289, 311);
+	}
+	if ($tirage == 14) {
+		echo rand(313, 335);
+	}
+	if ($tirage == 15) {
+		echo rand(337, 359);
+	}
+}
 
 
 ?>
