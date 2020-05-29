@@ -28,24 +28,53 @@ chat($bdd);
                 <canvas id='canvas' width='600' height='300'></canvas>
               </div>
             </div>
+
+            <div class="addBet">
+              <form action="GameTwo.php" method="POST">
+                  <div class="iframeAddBet">
+                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"; scrolling="yes"></iframe>
+                  </div>
+              </form>
+            </div>
+
             <div class="botRoulette">
-              <div class="redteam">test rouge</div>
-              <div class="blackteam">test noir</div>
-              <div class="mlteam">test ml</div>
+              
+              <div class="redTeamNames">
+                <div class="redTeam">
+                  <form action="GameTwo.php" method="POST">
+                    <button class="chatBet">Miser Sur Le Rouge</button>
+                  </form>
+                </div> 
+                <?php include('Function/roulettered.php'); ?>
+              </div>
+
+              <div class="blackTeamNames">
+                <div class="blackTeam">
+                  <form action="GameTwo.php" method="POST">
+                    <button class="chatBet">Miser Sur Le Noir</button>
+                  </form>
+                </div>
+                <?php include('Function/rouletteblack.php'); ?>
+              </div>
+
+              <div class="mlTeamNames">
+                <div class="mlTeam">
+                  <form action="GameTwo.php" method="POST">
+                    <button class="chatBet">Miser Sur MoneyLord</button>
+                  </form>
+                </div> 
+                <?php include('Function/rouletteml.php'); ?>
+              </div>
 
             </div>
 
-
         </div>
-
 
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>
           </center>
         </footer>
-
-
 
         <script src="js/function.js"></script>
         <script>
@@ -108,8 +137,6 @@ chat($bdd);
               ctx.fill();
             }
         </script>
-
-
 
       </body>
   </html>
