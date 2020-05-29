@@ -318,6 +318,21 @@ function coinflip($bdd){
 	}*/
 }
 
+function verifSolde($bdd) {
+
+	$recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
+	$Solde = $recupSolde->fetch();
+
+	if ($_POST['betRoulette'] < $Solde) {
+		return true;
+		
+	}else if ($_POST['betRoulette'] > $Solde) {
+		echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
+		echo "<a href="addcoins.php"></a>";
+		return false;
+	}
+}
+
 function chat($bdd){
 
 	echo '<div class="chat"><div class="messagesborder">';
