@@ -290,6 +290,30 @@ function displayBalance($bdd){
 	echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
 }
 
+function coinflip($bdd){
+
+	$coin = random_int(1,2);
+
+	if ($coin == 1) {
+		echo "Tails";
+	}else{
+		echo "Heads";
+	}
+	
+
+	/*$server_seed = "96f3ea4d221ca1b2048cc3b3b844e479f2bd9c80a870628072ee98fd1aa83cd0";
+	$public_seed = "460679512935";
+
+	for($round = 0;$round < 10;$round++) {
+    	$hash = hash('sha256', $server_seed . "-" . $public_seed . "-" . $round);
+    	if (hexdec(substr($hash, 0, 8)) % 2) {
+        	echo 'heads', PHP_EOL;
+    	} else {
+        	echo 'tails', PHP_EOL;
+    	}
+	}*/
+}
+
 function chat($bdd){
 
 	echo '<div class="chat"><div class="messagesborder">';
