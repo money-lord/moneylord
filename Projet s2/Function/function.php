@@ -220,7 +220,7 @@ function statClient($bdd){
 							FROM Statistiques AS stats
 							INNER JOIN Clients AS c
 							ON stats.Clients_ID = c.ID
-							WHERE ID= \''.$_SESSION['ID'].'\' '); // on recupere les données que lon souhaite dans les deux tables
+							WHERE c.ID= \''.$_SESSION['ID'].'\''); // on recupere les données que lon souhaite dans les deux tables
 
   $afficher = $data->fetch();
 			$max = max($afficher['flip'],$afficher['roulette'],$afficher['couleur']); // on cherche le nom du plus grand des trois sans se soucier d'une egalité quelquonque
