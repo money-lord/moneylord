@@ -1,36 +1,17 @@
 <?php
 
-if ($_POST['pseudo'] != null) {
-  echo htmlspecialchars($_POST['pseudo']);
-}
+$bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
 
-?>
 
-<!DOCTYPE html>
-  <html>
-      <head>
-          <meta charset="utf-8" />
-          <title>Inscription MoneyLord</title>
-      </head>
-      <body>
-        <section class="sectionindex">
+$data = $bdd->query('SELECT c.Solde solde,stats.TotalBet bet,
+            stats.TotalBetRoulette roulette, stats.TotalBetCoinFlip flip,
+            stats.TotalBetCouleur couleur, c.Nom nom, c.Prenom prenom, c.Pseudo pseudo
+            FROM Statistiques AS stats
+            INNER JOIN Clients AS c
+            ON stats.Clients_ID = c.ID
+            WHERE c.ID= 79 ');
 
+          $afficher = $data->fetch();
 
-          <div class="signup">
-            <center>
-            <h1 class="welcome">Inscription</h1>
-            <p>
-              <form class="formulaire" method="post" onsubmit="return verifForm(this)">
-                <input type="text" name="pseudo" placeholder="Nom d'utilisateur" onblur="verifPseudo(this)">
-            		<input type="submit" >
-            	</form>
-            </p>
-            </center>
-          </div>
-        </section>
-
-
-      <script src="js/function.js"></script>
-      </body>
-  </html>
+          			echo $afficher['flip'];

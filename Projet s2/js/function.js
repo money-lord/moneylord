@@ -6,7 +6,11 @@ function surligne(champ, erreur){
 }
 function verifPseudo(champ){
 
-   if(champ.value.length < 5 || champ.value.length > 25){
+   //var regex = new RegExp("\\w+[-|\\s]+\\w", "i");
+   var regex1 = /^[a-zéèàùûêâôë][a-zéèàùûêâôë \'-]+[a-zéèàùûêâôë]$/i;
+   var regex2 = /[A-Za-z0-9]/;
+
+   if(champ.value.length < 6 || champ.value.length > 14 || !regex1.test(champ.value) && !regex2.test(champ.value)){
       surligne(champ, true);
       return false;
    } else {
@@ -14,15 +18,7 @@ function verifPseudo(champ){
       return true;
    }
 
-  // Caractères autorisés
-   var regex = new RegExp("[a-z0-9A-Z._-]", "i");
-   var valid;
-   for (x = 0; x < chars.value.length; x++) {
-      valid = regex.test(chars.value.charAt(x));
-      if (valid == false) {
-          chars.value = chars.value.substr(0, x) + chars.value.substr(x + 1, chars.value.length - x + 1); x--;
-      }
-   }
+
 
 }
 function verifname(champ){
@@ -76,4 +72,44 @@ function verifForm(f){
       alert("Veuillez remplir correctement tous les champs");
       return false;
    }
+}
+
+function roulette() {
+
+          var timerElt = document.getElementById('compte');
+          var timer = setInterval(function(){
+            var now = new Date();
+            var counter = now.getSeconds();
+            if (counter === 0 | counter === 30) {
+              time();
+            }
+            /*
+            if (counter >= 11){
+             counter = Math.abs(counter-60);
+             timerElt.innerText = "ca tourne";
+              timerElt.innerText = counter;
+            }*/
+          },1000);
+}
+
+function time() {
+
+          var counter = 20;
+
+          var timerElt = document.getElementById('compte');
+          var timer1 = setInterval(function(){
+
+            timerElt.innerText = counter;
+            counter--;
+            if (counter == 0) {
+              setTimeout(function(){
+                theWheel.startAnimation();
+                clearInterval(timer1);
+
+                
+
+              },1000);
+            }
+
+          },1000);
 }
