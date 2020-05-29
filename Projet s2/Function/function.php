@@ -195,7 +195,7 @@ function changeData($bdd){
 		      // Sinon on affiche une erreur pour l'extension
 		      $message = 'L\'extension du fichier est incorrecte !';
 		    }
-		}+ else {
+		} else {
 			// Sinon on affiche une erreur pour le champ vide
 			$message = 'Veuillez remplir le formulaire svp !';
 		}
@@ -328,7 +328,7 @@ function verifSolde($bdd) {
 		
 	}else if ($_POST['betRoulette'] > $Solde) {
 		echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
-		echo "<a href="addcoins.php"></a>";
+		//echo "<a href="addcoins.php"></a>";
 		return false;
 	}
 }
@@ -435,40 +435,40 @@ function angleRoulette($bdd){
 	if ($tirage == 15) {
 		echo rand(337, 359);
 	}
-}
+}/*
 function WinRoulette($bdd){
     $CoinWin = 0;
 
-if(CouleurReturn($bdd) == 'black'){
-    $dataBlack = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteBlack WHERE ID=\''.$_SESSION['ID'].'\' ');
-    $data = $dataBlack->fetch();
-    if($data['ID'] != empty){
-        $CoinWin = $CoinWin + $data['Mise'] * 2;
-    }
-}
-if(CouleurReturn($bdd) == 'red'){
-    $dataRed = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteRed WHERE ID=\''.$_SESSION['ID'].'\' ');
-    $data = $dataRed->fetch();
-    if($data['ID'] != empty){
-        $CoinWin = $CoinWin + $data['Mise'] * 2;
-    }
-}
-if(CouleurReturn($bdd) == 'Ml'){
-    $dataMl = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteMl WHERE ID=\''.$_SESSION['ID'].'\' ');
-    $data = $dataMl->fetch();
-    if($data['ID'] != empty){
-        $CoinWin = $CoinWin + $data['Mise'] * 10;
-    }
-}
-$dataC = $bdd->prepare('SELECT Solde FROM CLients WHERE ID=\''.$_SESSION['ID'].'\' ');
-$dataCF = $dataC->fetch();
-$solde = $dataCF['Solde'];
-$finalSolde = $solde + $CoinWin;
-$data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
-$data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+	if(CouleurReturn($bdd) == 'black'){
+	    $dataBlack = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteBlack WHERE ID=\''.$_SESSION['ID'].'\' ');
+	    $data = $dataBlack->fetch();
+	    if($data['ID'] != empty){
+	        $CoinWin = $CoinWin + $data['Mise'] * 2;
+	    }
+	}
+	if(CouleurReturn($bdd) == 'red'){
+	    $dataRed = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteRed WHERE ID=\''.$_SESSION['ID'].'\' ');
+	    $data = $dataRed->fetch();
+	    if($data['ID'] != empty){
+	        $CoinWin = $CoinWin + $data['Mise'] * 2;
+	    }
+	}
+	if(CouleurReturn($bdd) == 'Ml'){
+	    $dataMl = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteMl WHERE ID=\''.$_SESSION['ID'].'\' ');
+	    $data = $dataMl->fetch();
+	    if($data['ID'] != empty){
+	        $CoinWin = $CoinWin + $data['Mise'] * 10;
+	    }
+	}
+	$dataC = $bdd->prepare('SELECT Solde FROM CLients WHERE ID=\''.$_SESSION['ID'].'\' ');
+	$dataCF = $dataC->fetch();
+	$solde = $dataCF['Solde'];
+	$finalSolde = $solde + $CoinWin;
+	$data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+	$data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
 }
 
-
+*/
 function CouleurReturn($bdd){
 
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); 

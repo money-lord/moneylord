@@ -1,5 +1,5 @@
 <?php 
-
+/*
 //appel de la bdd
 $bdd = new PDO('mysql:host=176.191.21.84:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
@@ -59,5 +59,5 @@ function CouleurReturn($bdd){
         }
     }
     return 'Ml';
-}
+}*/
 ?>

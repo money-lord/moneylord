@@ -349,10 +349,13 @@ nav ul a {
 .addBet{
   padding-top: 2%;
   padding-bottom: 2%;
-  width:50%;
+  width:100%;
+  height:2%;
 
 }
 .iframeAddBet{
+  width: 100%;
+  max-height:1%;
   display: flex;
 }
 .bet{
