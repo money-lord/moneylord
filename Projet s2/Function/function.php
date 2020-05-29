@@ -132,14 +132,16 @@ function displayChat($bdd){
 
 function changeData($bdd){
 
-	$password = md5($_POST['password']); // chiffrement du mot de passe
+	$file = fopen("./keyOf.txt", "r");
+	$key = fread($file, filesize('keyOf.txt'));
+	fclose($file);
 	 // on prepare la requete pour les modification
-	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=:password WHERE ID=\''.$_SESSION['ID'].'\'');
-
+	$data = $bdd->prepare('UPDATE Clients SET Pseudo=:pseudo, Nom=:nom, Prenom=:prenom, MotDePasse=AES_ENCRYPT(:mdp, :keyOf), WHERE ID=\''.$_SESSION['ID'].'\'');
+	$data->bindValue(':keyOf', $key, PDO::PARAM_STR);
 	$data->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
 	$data->bindValue(':nom', $_POST['lastName'], PDO::PARAM_STR);
 	$data->bindValue(':prenom', $_POST['firstName'], PDO::PARAM_STR);
-	$data->bindValue(':password', $password, PDO::PARAM_STR);
+	$data->bindValue(':mdp', $_POST['password'], PDO::PARAM_STR);
 
 	$ExecuteIsOk = $data->execute();
 	// on prepare l'upload de l'image et selectionnant son chemin, la taille maximal, et le format qu'il peut importer
