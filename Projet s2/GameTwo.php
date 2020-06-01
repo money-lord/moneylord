@@ -31,14 +31,14 @@ chat($bdd);
 
             <div class="addBet">
               <form action="GameTwo.php" method="POST">
-                  <div class="iframeAddBet">
+                  <div class="betZone">
                     <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"; scrolling="yes"></iframe>
                   </div>
               </form>
             </div>
 
             <div class="botRoulette">
-              
+
               <div class="redTeamNames">
                 <div class="redTeam">
                   <form action="GameTwo.php" method="POST">
