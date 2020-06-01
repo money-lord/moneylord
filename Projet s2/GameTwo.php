@@ -30,11 +30,10 @@ chat($bdd);
             </div>
 
             <div class="addBet">
-              <form action="GameTwo.php" method="POST">
-                  <div class="betZone">
-                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"; scrolling="yes"></iframe>
+
+                  <div class="iframeAddBet">
+                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
                   </div>
-              </form>
             </div>
 
             <div class="botRoulette">
@@ -44,7 +43,7 @@ chat($bdd);
                   <form action="GameTwo.php" method="POST">
                     <button class="chatBet">Miser Sur Le Rouge</button>
                   </form>
-                </div> 
+                </div>
                 <?php include('Function/roulettered.php'); ?>
               </div>
 
@@ -62,7 +61,7 @@ chat($bdd);
                   <form action="GameTwo.php" method="POST">
                     <button class="chatBet">Miser Sur MoneyLord</button>
                   </form>
-                </div> 
+                </div>
                 <?php include('Function/rouletteml.php'); ?>
               </div>
 
