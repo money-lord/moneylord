@@ -317,8 +317,7 @@ function coinflip($bdd)
 
 
 
-function chat($bdd)
-{
+function chat($bdd){
     echo '<div class="chat"><div class="messagesborder">';
 
     echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
