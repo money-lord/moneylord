@@ -399,7 +399,7 @@ function RRed($bdd){
 	<script>
 		setInterval('load_messagesRed()',500);
 		function load_messagesRed(){
-			$('.messagesRed').load('./roulettered.php');
+			$('.messagesRed').load('roulettered.php');
 		}
 	</script>
 
@@ -564,7 +564,7 @@ function betColor($bdd){
 
 	} else if (!empty($_POST['betBlack'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RoulletteBlack 
+		$data = $bdd ->prepare('INSERT INTO RoulletteBlack
 								VALUES (Null,:idClient,:mise)');
 		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
 		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
