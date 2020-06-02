@@ -35,7 +35,7 @@ chat($bdd);
                   </div>
             </div>
 
-            <div class="botRoulette">
+             <div class="botRoulette">
 
               <div class="redTeamNames">
                 <div class="redTeam">
