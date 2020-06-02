@@ -361,8 +361,7 @@ function chat($bdd){
     }
 }
 
-function Rblack($bdd)
-{
+function Rblack($bdd){
   echo'<div class="messagesBlack">';
   $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
@@ -375,9 +374,9 @@ function Rblack($bdd)
   echo'</div>'; ?>
 
 	<script>
-		setInterval('load_messages()',500);
-		function load_messages(){
-			$('.messagesBlack').load('Function/rouletteblack.php');
+		setInterval('load_messagesBlack()',500);
+		function load_messagesBlack(){
+			$('.messagesBlack').load('./rouletteblack.php');
 		}
 	</script>
 
@@ -385,13 +384,12 @@ function Rblack($bdd)
 
 }
 
-function RRed($bdd)
-{
-  echo'<div class="messagesBlack">';
+function RRed($bdd){
+  echo'<div class="messagesRed">';
   $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
   $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
-  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+  	INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
 
   while ($save = $data1 ->fetch()){
   		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
@@ -399,9 +397,9 @@ function RRed($bdd)
   echo'</div>'; ?>
 
 	<script>
-		setInterval('load_messages()',500);
-		function load_messages(){
-			$('.messagesRed').load('Function/roulettered.php');
+		setInterval('load_messagesRed()',500);
+		function load_messagesRed(){
+			$('.messagesRed').load('./roulettered.php');
 		}
 	</script>
 
@@ -409,13 +407,12 @@ function RRed($bdd)
 
 }
 
-function RMl($bdd)
-{
-  echo'<div class="messagesBlack">';
+function RMl($bdd){
+  echo'<div class="messagesMl">';
   $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
   $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
-  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+  	INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
 
   while ($save = $data1 ->fetch()){
   		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
@@ -423,9 +420,9 @@ function RMl($bdd)
   echo'</div>'; ?>
 
 	<script>
-		setInterval('load_messages()',500);
-		function load_messages(){
-			$('.messagesMl').load('Function/rouletteml.php');
+		setInterval('load_messagesMl()',500);
+		function load_messagesMl(){
+			$('.messagesMl').load('./rouletteml.php');
 		}
 	</script>
 
