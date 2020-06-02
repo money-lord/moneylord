@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('function.php');
+
 betColor($bdd);
 
 ?>

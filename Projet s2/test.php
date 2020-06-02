@@ -112,9 +112,9 @@ e = e || window.event;
 function lancer(ele) {
 
 
-var q=(Math.floor(Math.random() * 2) === 0);
+var q=(Math.floor(Math.random() * 2) === 0); // tirage
 
-if (q) document.getElementById("piece").innerHTML = '<img src=\'/pile1.png\' alt=\'Pile\' title=\'Pile\'>';
+if (q) document.getElementById("piece").innerHTML = '<img src=\'/pile1.png\' alt=\'Pile\' title=\'Pile\'>'; // affichage pile
 if (q) document.getElementById("piece").style.width = "175px";
 if (q) document.getElementById("piece").style.height = "175px";
 if (q) document.getElementById("piece").style.background = "white";
@@ -122,7 +122,7 @@ if (q) document.getElementById("piece").style.border = "0px";
 if (q) document.getElementById("piece").style.transition = "0.4s";
 
 
-if (q !=true) document.getElementById("piece").innerHTML = '<img src=\'/face1.png\' alt=\'Face\' title=\'Face\'>';
+if (q !=true) document.getElementById("piece").innerHTML = '<img src=\'/face1.png\' alt=\'Face\' title=\'Face\'>'; // affichage  face
 if (q !=true) document.getElementById("piece").style.width = "175px";
 if (q !=true) document.getElementById("piece").style.height = "175px";
 if (q !=true) document.getElementById("piece").style.background = "white";
@@ -134,7 +134,7 @@ if (q !=true) document.getElementById("piece").style.transition = "0.4s";
 }
 
 
-function rot() {
+function rot() { // animation
 if (document.getElementById("w").style.transform="rotateX(360deg)") document.getElementById("piece").style.transform="rotateX(360deg)";
 if (document.getElementById("piece").style.transform="rotateX(360deg)") document.getElementById("w").style.transform="none";
 }
