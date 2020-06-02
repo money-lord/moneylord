@@ -358,6 +358,9 @@ nav ul a {
   height:2%;
 
 */
+.testBet{
+    display: inline-block;
+}
 .flexButtonRoulette{
   display: flex;
 }
