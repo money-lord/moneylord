@@ -363,7 +363,6 @@ function chat($bdd){
 
 function Rblack($bdd){
   echo'<div class="messagesBlack">';
-  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
   $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
@@ -376,7 +375,7 @@ function Rblack($bdd){
 	<script>
 		setInterval('load_messagesBlack()',500);
 		function load_messagesBlack(){
-			$('.messagesBlack').load('./rouletteblack.php');
+			$('.messagesBlack').load('./Function/rouletteblack.php');
 		}
 	</script>
 
@@ -386,7 +385,6 @@ function Rblack($bdd){
 
 function RRed($bdd){
   echo'<div class="messagesRed">';
-  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
   $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
@@ -399,7 +397,7 @@ function RRed($bdd){
 	<script>
 		setInterval('load_messagesRed()',500);
 		function load_messagesRed(){
-			$('.messagesRed').load('roulettered.php');
+			$('.messagesRed').load('./Function/roulettered.php');
 		}
 	</script>
 
@@ -409,7 +407,6 @@ function RRed($bdd){
 
 function RMl($bdd){
   echo'<div class="messagesMl">';
-  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
 
   $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
@@ -422,7 +419,7 @@ function RMl($bdd){
 	<script>
 		setInterval('load_messagesMl()',500);
 		function load_messagesMl(){
-			$('.messagesMl').load('./rouletteml.php');
+			$('.messagesMl').load('./Function/rouletteml.php');
 		}
 	</script>
 

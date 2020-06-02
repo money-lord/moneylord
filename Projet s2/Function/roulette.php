@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('function.php');
+WinRoulette($bdd);
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +21,7 @@ include('function.php');
 <script src="../js/function.js"></script>
 <script>
 	rouletteanim();
+
 
 	let theWheel = new Winwheel({
 			'numSegments' : 15,
