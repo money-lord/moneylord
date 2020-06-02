@@ -345,7 +345,6 @@ nav ul a {
 }
 
 .addBet{
-  background-color: red;
   height: 4.5vw;
 }
 
@@ -358,13 +357,15 @@ nav ul a {
   height:2%;
 
 */
-.testBet{
-    display: inline-block;
+.bet{
+  margin-left: 30%; 
 }
 .flexButtonRoulette{
+  padding-top: 0.4%;
   display: flex;
-}
+  bottom: 0;
 
+}
 .canvasContainer{
   width: 66%;
   padding-right: 1em;

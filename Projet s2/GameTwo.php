@@ -31,37 +31,21 @@ chat($bdd);
 
             <div class="addBet">
 
-                  <div class="iframeAddBet">
-                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
-                  </div>
+              <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
+
             </div>
 
             <div class="botRoulette">
 
               <div class="redTeamNames">
-                <div class="redTeam">
-                  <form action="GameTwo.php" method="POST">
-                    <button class="chatBet">Miser Sur Le Rouge</button>
-                  </form>
-                </div>
                 <?php include('Function/roulettered.php'); ?>
               </div>
 
               <div class="blackTeamNames">
-                <div class="blackTeam">
-                  <form action="GameTwo.php" method="POST">
-                    <button class="chatBet">Miser Sur Le Noir</button>
-                  </form>
-                </div>
                 <?php include('Function/rouletteblack.php'); ?>
               </div>
 
               <div class="mlTeamNames">
-                <div class="mlTeam">
-                  <form action="GameTwo.php" method="POST">
-                    <button class="chatBet">Miser Sur MoneyLord</button>
-                  </form>
-                </div>
                 <?php include('Function/rouletteml.php'); ?>
               </div>
 

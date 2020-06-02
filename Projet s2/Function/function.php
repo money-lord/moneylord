@@ -315,19 +315,7 @@ function coinflip($bdd)
     }*/
 }
 
-function verifSolde($bdd)
-{
-    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
-    $Solde = $recupSolde->fetch();
 
-    if ($_POST['betRoulette'] < $Solde) {
-        return true;
-    } elseif ($_POST['betRoulette'] > $Solde) {
-        echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
-        //echo "<a href="addcoins.php"></a>";
-        return false;
-    }
-}
 
 function chat($bdd)
 {
@@ -374,8 +362,8 @@ function chat($bdd)
     }
 }
 
-function angleRoulette($bdd)
-{
+function angleRoulette($bdd){
+
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); // suppression des messages quand il y en a plus de 100 dans la bdd
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
@@ -466,8 +454,64 @@ function WinRoulette($bdd){
 }
 
 */
-function CouleurReturn($bdd)
-{
+
+function verifSolde($bdd){
+    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
+    $Solde = $recupSolde->fetch();
+
+    if ($_SESSION['betRoulette'] < $Solde) {
+        return true;
+    } elseif ($_SESSION['betRoulette'] > $Solde) {
+       // echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
+        //echo "<a href="addcoins.php"></a>";
+        return false;
+    }
+}
+
+function amountBet(){
+	if (!isset($_POST['betRoulette'])) {
+
+		echo "0";
+		$_SESSION['betRoulette'] = 0;
+	} else if (!empty($_POST['betRoulette'])) {
+		if ($_POST['betRoulette'] == 0) {
+			$_SESSION['betRoulette'] = 0;
+		} else {
+			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];			
+		}
+
+		echo $_SESSION['betRoulette'];
+	}
+}
+
+function betColor($bdd){
+
+	if (!empty($_POST['betRed'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RouletteRed 
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();
+
+	} else if (!empty($_POST['betBlack'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RouletteBlack 
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();
+	} else if (!empty($_POST['betMl'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RouletteMl 
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();		
+	}
+}
+
+function CouleurReturn($bdd){
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0');
     $donnees = $data2->fetch();
     $save = $donnees['nb'];

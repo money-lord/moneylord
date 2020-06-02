@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('function.php');
+betColor($bdd);
+
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +14,9 @@ include('function.php');
 
 			<body>
 				<div class="testBet">
-				<form action="GameTwo.php" method="POST">
+				<form action="" method="POST">
 					<div class="bet">
-						<input type="number" min="0" value="" placeholder="Entrer votre Mise ici">
+						<input type="text" min="0" value="<?php amountBet(); ?>" placeholder="Entrer votre Mise ici">
 						<button name="betRoulette" value="0" >Clear</button>
 						<button name="betRoulette" value="0.01">+0.01</button>
 						<button name="betRoulette" value="0.1">+0.1</button>
@@ -25,20 +27,21 @@ include('function.php');
 					</div>
 				</form>
 
+
 					<div class="flexButtonRoulette">
 						<div class="redTeam">
-							<form action="GameTwo.php" method="POST">
-								<button class="chatBet">Miser Sur Le Rouge</button>
+							<form action="" method="POST">
+								<input type="hidden" name="betRed" value="<?php echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur Le Rouge</button>
 							</form>
 						</div>
 						<div class="blackTeam">
-							<form action="GameTwo.php" method="POST">
-								<button class="chatBet">Miser Sur Le Noir</button>
+							<form action="" method="POST">
+								<input type="hidden" name="betBlack" value="<?php  echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur Le Noir</button>
 							</form>
 						</div>
 						<div class="mlTeam">
-							<form action="GameTwo.php" method="POST">
-								<button class="chatBet">Miser Sur MoneyLord</button>
+							<form action="" method="POST">
+								<input type="hidden" name="betMl" value="<?php echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur MoneyLord</button>
 							</form>
 						</div>
 					</div>
