@@ -420,28 +420,28 @@ function angleRoulette($bdd){
     if ($tirage == 15) {
         echo rand(337, 359);
     }
-}/*
+}
 function WinRoulette($bdd){
     $CoinWin = 0;
 
     if(CouleurReturn($bdd) == 'black'){
         $dataBlack = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteBlack WHERE ID=\''.$_SESSION['ID'].'\' ');
-        $data = $dataBlack->fetch();
-        if($data['ID'] != empty){
-            $CoinWin = $CoinWin + $data['Mise'] * 2;
+        $data1 = $dataBlack->fetch();
+        if($data1['ID'] != NULL){
+            $CoinWin = $CoinWin + $data1['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'red'){
         $dataRed = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteRed WHERE ID=\''.$_SESSION['ID'].'\' ');
         $data = $dataRed->fetch();
-        if($data['ID'] != empty){
+        if($data['ID'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'Ml'){
         $dataMl = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteMl WHERE ID=\''.$_SESSION['ID'].'\' ');
         $data = $dataMl->fetch();
-        if($data['ID'] != empty){
+        if($data['ID'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 10;
         }
     }
@@ -453,7 +453,7 @@ function WinRoulette($bdd){
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
 }
 
-*/
+
 
 function verifSolde($bdd){
     $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
@@ -477,7 +477,7 @@ function amountBet(){
 		if ($_POST['betRoulette'] == 0) {
 			$_SESSION['betRoulette'] = 0;
 		} else {
-			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];			
+			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
 		}
 
 		echo $_SESSION['betRoulette'];
@@ -488,7 +488,7 @@ function betColor($bdd){
 
 	if (!empty($_POST['betRed'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RouletteRed 
+		$data = $bdd ->prepare('INSERT INTO RouletteRed
 								VALUES (Null,:idClient,:mise)');
 		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
 		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
@@ -496,18 +496,18 @@ function betColor($bdd){
 
 	} else if (!empty($_POST['betBlack'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RouletteBlack 
+		$data = $bdd ->prepare('INSERT INTO RouletteBlack
 								VALUES (Null,:idClient,:mise)');
 		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
 		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
 		$data->execute();
 	} else if (!empty($_POST['betMl'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RouletteMl 
+		$data = $bdd ->prepare('INSERT INTO RouletteMl
 								VALUES (Null,:idClient,:mise)');
 		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
 		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-		$data->execute();		
+		$data->execute();
 	}
 }
 

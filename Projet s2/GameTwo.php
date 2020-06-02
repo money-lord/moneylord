@@ -2,6 +2,7 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
+WinRoulette($bdd);
 
 ?>
 
@@ -25,8 +26,8 @@ chat($bdd);
               <div id="compte">Chargement</div>
 
               <div class="canvasContainer">
-                <iframe src=./Function/roulette.php width=100% height=100% frameBorder="0"></iframe>
-                
+                <iframe src=./Function/roulette.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>
+
               </div>
             </div>
 
