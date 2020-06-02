@@ -97,7 +97,7 @@ function connection($bdd)
             }
         }
     }
-    return 'identifiant ou mot-de-passe incorrecte';
+    return 'identifiant ou mot-de-passe incorrect';
 }
 
 function displayUserAccount($bdd)
