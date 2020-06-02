@@ -346,14 +346,16 @@ nav ul a {
 
 .addBet{
   background-color: red;
-  height: 2.5vw;
+  height: 4.5vw;
 }
 
 .botRoulette{
   display: flex;
 }
 
-
+.flexButtonRoulette{
+  display: flex;
+}
 
 
 .canvasContainer{
