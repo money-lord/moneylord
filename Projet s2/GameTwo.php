@@ -40,15 +40,16 @@ WinRoulette($bdd);
             <div class="botRoulette">
 
               <div class="redTeamNames">
-                <iframe src=Function/roulettered.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>
+                <?php RRed($bdd); ?>
               </div>
 
               <div class="blackTeamNames">
-                <iframe src=Function/rouletteblack.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>
+                <?php Rblack($bdd); ?>
               </div>
 
               <div class="mlTeamNames">
-                <iframe src=Function/rouletteml.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>              
+                <?php RMl($bdd); ?>
+
               </div>
 
             </div>

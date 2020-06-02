@@ -361,6 +361,78 @@ function chat($bdd){
     }
 }
 
+function Rblack($bdd)
+{
+  echo'<div class="messagesBlack">';
+  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messages()',500);
+		function load_messages(){
+			$('.messagesBlack').load('Function/rouletteblack.php');
+		}
+	</script>
+
+<?php
+
+}
+
+function RRed($bdd)
+{
+  echo'<div class="messagesBlack">';
+  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messages()',500);
+		function load_messages(){
+			$('.messagesRed').load('Function/roulettered.php');
+		}
+	</script>
+
+<?php
+
+}
+
+function RMl($bdd)
+{
+  echo'<div class="messagesBlack">';
+  $bdd = new PDO('mysql:host=legrimoiregalant.fr:3307/;dbname=money_lord; charset=utf8', 'user', 'Moneylord1*');
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messages()',500);
+		function load_messages(){
+			$('.messagesMl').load('Function/rouletteml.php');
+		}
+	</script>
+
+<?php
+
+}
+
 function angleRoulette($bdd){
 
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); // suppression des messages quand il y en a plus de 100 dans la bdd
