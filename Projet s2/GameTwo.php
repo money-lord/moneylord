@@ -31,12 +31,12 @@ chat($bdd);
             </div>
 
             <div class="addBet">
-                  <div class="iframeAddBet">
-                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
-                  </div>
+
+              <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
+
             </div>
 
-             <div class="botRoulette">
+            <div class="botRoulette">
 
               <div class="redTeamNames">
                 <?php include('Function/roulettered.php'); ?>
