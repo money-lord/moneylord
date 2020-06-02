@@ -343,20 +343,18 @@ nav ul a {
 .topRoulette{
   display: flex;
 }
+
+.addBet{
+  background-color: red;
+  height: 4.5vw;
+}
+
 .botRoulette{
   display: flex;
 }
-.addBet{
-  padding-top: 2%;
-  padding-bottom: 2%;
-  width:100%;
-  height:4%;
-  background-color: red;
 
-}
-.iframeAddBet{
-  width: 100%;
-  height:2%;
+.flexButtonRoulette{
+  display: flex;
 }
 
 
