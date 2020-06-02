@@ -496,7 +496,7 @@ function betColor($bdd){
 
 	} else if (!empty($_POST['betBlack'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RouletteBlack 
+		$data = $bdd ->prepare('INSERT INTO RoulletteBlack 
 								VALUES (Null,:idClient,:mise)');
 		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
 		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
