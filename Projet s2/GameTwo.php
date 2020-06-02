@@ -40,15 +40,15 @@ WinRoulette($bdd);
             <div class="botRoulette">
 
               <div class="redTeamNames">
-                <?php include('Function/roulettered.php'); ?>
+                <?php RRed($bdd); ?>
               </div>
 
               <div class="blackTeamNames">
-                <?php include('Function/rouletteblack.php'); ?>
+                <?php Rblack($bdd); ?>
               </div>
 
               <div class="mlTeamNames">
-                <?php include('Function/rouletteml.php'); ?>
+                <?php RMl($bdd); ?>
               </div>
 
             </div>
