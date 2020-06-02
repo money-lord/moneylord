@@ -82,13 +82,9 @@ function roulette() {
             var counter = now.getSeconds();
             if (counter === 0 | counter === 30) {
               time();
+
             }
-            /*
-            if (counter >= 11){
-             counter = Math.abs(counter-60);
-             timerElt.innerText = "ca tourne";
-              timerElt.innerText = counter;
-            }*/
+
           },1000);
 }
 
@@ -103,13 +99,24 @@ function time() {
             counter--;
             if (counter == 0) {
               setTimeout(function(){
-                theWheel.startAnimation();
+                //theWheel.startAnimation();
                 clearInterval(timer1);
-
-                
-
               },1000);
             }
-
           },1000);
+}
+
+function rouletteanim() {
+
+  var timerElt = document.getElementById('compte');
+  var timer = setInterval(function(){
+    var now = new Date();
+    var counter = now.getSeconds();
+    if (counter === 21 | counter === 51) {
+      theWheel.startAnimation();
+    }
+    if (counter === 0 | counter === 30) {
+      window.location.reload();
+    }
+  },1000);
 }

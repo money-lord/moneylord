@@ -7,7 +7,7 @@ chat($bdd);
 
 <!DOCTYPE html>
   <html>
-      <head> 
+      <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
@@ -25,7 +25,8 @@ chat($bdd);
               <div id="compte">Chargement</div>
 
               <div class="canvasContainer">
-                <canvas id='canvas' width='600' height='300'></canvas>
+                <iframe src=./Function/roulette.php width=100% height=100% frameBorder="0"></iframe>
+                
               </div>
             </div>
 
