@@ -2,7 +2,6 @@
 session_start();
 include('Function/function.php');
 chat($bdd);
-WinRoulette($bdd);
 
 ?>
 

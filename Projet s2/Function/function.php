@@ -490,32 +490,33 @@ function WinRoulette($bdd){
     $CoinWin = 0;
 
     if(CouleurReturn($bdd) == 'black'){
-        $dataBlack = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteBlack WHERE ID=\''.$_SESSION['ID'].'\' ');
+        $dataBlack = $bdd->query('SELECT * FROM RoulletteBlack WHERE IDClient = \''.$_SESSION['ID'].'\' ');
         $data1 = $dataBlack->fetch();
-        if($data1['ID'] != NULL){
+        if($data1['IDClient'] != NULL){
             $CoinWin = $CoinWin + $data1['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'red'){
-        $dataRed = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteRed WHERE ID=\''.$_SESSION['ID'].'\' ');
+        $dataRed = $bdd->query('SELECT * FROM RouletteRed WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataRed->fetch();
-        if($data['ID'] != NULL){
+        if($data['IDClient'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'Ml'){
-        $dataMl = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteMl WHERE ID=\''.$_SESSION['ID'].'\' ');
+        $dataMl = $bdd->query('SELECT * FROM RouletteMl WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataMl->fetch();
-        if($data['ID'] != NULL){
+        if($data['IDClient'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 10;
         }
     }
-    $dataC = $bdd->prepare('SELECT Solde FROM CLients WHERE ID=\''.$_SESSION['ID'].'\' ');
+    $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
     $dataCF = $dataC->fetch();
     $solde = $dataCF['Solde'];
     $finalSolde = $solde + $CoinWin;
     $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+    $data->execute();
 }
 
 
