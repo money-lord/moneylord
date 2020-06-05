@@ -16,15 +16,27 @@ function createAccount($bdd)
     if ($_POST['password'] != null) {
         $_SESSION['password'] = $_POST['password'];
     }
-    // on evite les surprise avec htmlspecialchars
-    $pseudo = htmlspecialchars($_POST['pseudo']);
+	// on evite les surprise avec htmlspecialchars
+    if (/[^\w\d]/.test($_POST['pseudo'])) {
+    	$pseudo = htmlspecialchars($_POST['pseudo']);
+    }
+    if (/[^\w\d]/.test($_POST['email'])) {
     $email = htmlspecialchars($_POST['email']);
+	}
+	if (/[^\w\d]/.test($_POST['lastName'])) {
     $nom = htmlspecialchars($_POST['lastName']);
+	}
+	if (/[^\w\d]/.test($_POST['firstName'])) {
     $prenom = htmlspecialchars($_POST['firstName']);
+	}
+	if (/[^\w\d]/.test($_POST['age'])) {
     $age = htmlspecialchars($_POST['age']);
+	}
+	if (/[^\w\d]/.test($_POST['password'])) {
     $mdp = $_SESSION['password'];
-    //on les rentre dans la bdd
+	}
 
+    //on les rentre dans la bdd
 
     $file = fopen("./keyOf.txt", "r");
     $key = fread($file, filesize('keyOf.txt'));
