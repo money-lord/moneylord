@@ -7,7 +7,7 @@ chat($bdd);
 
 <!DOCTYPE html>
   <html>
-      <head> 
+      <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <link rel="icon" type="image/png" href="Images/minilogo.png" />
@@ -25,28 +25,30 @@ chat($bdd);
               <div id="compte">Chargement</div>
 
               <div class="canvasContainer">
-                <canvas id='canvas' width='600' height='300'></canvas>
+                <iframe src=./Function/roulette.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>
+
               </div>
             </div>
 
             <div class="addBet">
-                  <div class="iframeAddBet">
-                    <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
-                  </div>
+
+              <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
+
             </div>
 
-             <div class="botRoulette">
+            <div class="botRoulette">
 
               <div class="redTeamNames">
-                <?php include('Function/roulettered.php'); ?>
+                <?php RRed($bdd); ?>
               </div>
 
               <div class="blackTeamNames">
-                <?php include('Function/rouletteblack.php'); ?>
+                <?php Rblack($bdd); ?>
               </div>
 
               <div class="mlTeamNames">
-                <?php include('Function/rouletteml.php'); ?>
+                <?php RMl($bdd); ?>
+
               </div>
 
             </div>

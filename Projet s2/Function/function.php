@@ -97,7 +97,7 @@ function connection($bdd)
             }
         }
     }
-    return 'identifiant ou mot-de-passe incorrecte';
+    return 'identifiant ou mot-de-passe incorrect';
 }
 
 function displayUserAccount($bdd)
@@ -315,22 +315,9 @@ function coinflip($bdd)
     }*/
 }
 
-function verifSolde($bdd)
-{
-    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
-    $Solde = $recupSolde->fetch();
 
-    if ($_POST['betRoulette'] < $Solde) {
-        return true;
-    } elseif ($_POST['betRoulette'] > $Solde) {
-        echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
-        //echo "<a href="addcoins.php"></a>";
-        return false;
-    }
-}
 
-function chat($bdd)
-{
+function chat($bdd){
     echo '<div class="chat"><div class="messagesborder">';
 
     echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
@@ -374,8 +361,74 @@ function chat($bdd)
     }
 }
 
-function angleRoulette($bdd)
-{
+function Rblack($bdd){
+  echo'<div class="messagesBlack">';
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messagesBlack()',500);
+		function load_messagesBlack(){
+			$('.messagesBlack').load('./Function/rouletteblack.php');
+		}
+	</script>
+
+<?php
+
+}
+
+function RRed($bdd){
+  echo'<div class="messagesRed">';
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messagesRed()',500);
+		function load_messagesRed(){
+			$('.messagesRed').load('./Function/roulettered.php');
+		}
+	</script>
+
+<?php
+
+}
+
+function RMl($bdd){
+  echo'<div class="messagesMl">';
+
+  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+  	INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
+
+  while ($save = $data1 ->fetch()){
+  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+  	}
+  echo'</div>'; ?>
+
+	<script>
+		setInterval('load_messagesMl()',500);
+		function load_messagesMl(){
+			$('.messagesMl').load('./Function/rouletteml.php');
+		}
+	</script>
+
+<?php
+
+}
+
+function angleRoulette($bdd){
+
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); // suppression des messages quand il y en a plus de 100 dans la bdd
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
@@ -432,42 +485,99 @@ function angleRoulette($bdd)
     if ($tirage == 15) {
         echo rand(337, 359);
     }
-}/*
+}
 function WinRoulette($bdd){
     $CoinWin = 0;
 
     if(CouleurReturn($bdd) == 'black'){
-        $dataBlack = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteBlack WHERE ID=\''.$_SESSION['ID'].'\' ');
-        $data = $dataBlack->fetch();
-        if($data['ID'] != empty){
-            $CoinWin = $CoinWin + $data['Mise'] * 2;
+        $dataBlack = $bdd->query('SELECT * FROM RoulletteBlack WHERE IDClient = \''.$_SESSION['ID'].'\' ');
+        $data1 = $dataBlack->fetch();
+        if($data1['IDClient'] != NULL){
+            $CoinWin = $CoinWin + $data1['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'red'){
-        $dataRed = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteRed WHERE ID=\''.$_SESSION['ID'].'\' ');
+        $dataRed = $bdd->query('SELECT * FROM RouletteRed WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataRed->fetch();
-        if($data['ID'] != empty){
+        if($data['IDClient'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 2;
         }
     }
     if(CouleurReturn($bdd) == 'Ml'){
-        $dataMl = $bdd->prepare('SELECT ID, IDClient, Mise FROM RouletteMl WHERE ID=\''.$_SESSION['ID'].'\' ');
+        $dataMl = $bdd->query('SELECT * FROM RouletteMl WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataMl->fetch();
-        if($data['ID'] != empty){
+        if($data['IDClient'] != NULL){
             $CoinWin = $CoinWin + $data['Mise'] * 10;
         }
     }
-    $dataC = $bdd->prepare('SELECT Solde FROM CLients WHERE ID=\''.$_SESSION['ID'].'\' ');
+    $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
     $dataCF = $dataC->fetch();
     $solde = $dataCF['Solde'];
     $finalSolde = $solde + $CoinWin;
     $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+    $data->execute();
 }
 
-*/
-function CouleurReturn($bdd)
-{
+
+
+function verifSolde($bdd){
+    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
+    $Solde = $recupSolde->fetch();
+
+    if ($_SESSION['betRoulette'] < $Solde) {
+        return true;
+    } elseif ($_SESSION['betRoulette'] > $Solde) {
+       // echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
+        //echo "<a href="addcoins.php"></a>";
+        return false;
+    }
+}
+
+function amountBet(){
+	if (!isset($_POST['betRoulette'])) {
+
+		echo "0";
+		$_SESSION['betRoulette'] = 0;
+	} else if (!empty($_POST['betRoulette'])) {
+		if ($_POST['betRoulette'] == 0) {
+			$_SESSION['betRoulette'] = 0;
+		} else {
+			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
+		}
+
+		echo $_SESSION['betRoulette'];
+	}
+}
+
+function betColor($bdd){
+
+	if (!empty($_POST['betRed'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RouletteRed
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();
+
+	} else if (!empty($_POST['betBlack'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RoulletteBlack
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();
+	} else if (!empty($_POST['betMl'])) {
+
+		$data = $bdd ->prepare('INSERT INTO RouletteMl
+								VALUES (Null,:idClient,:mise)');
+		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+		$data->execute();
+	}
+}
+
+function CouleurReturn($bdd){
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0');
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
