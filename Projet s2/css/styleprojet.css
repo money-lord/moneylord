@@ -47,6 +47,11 @@ header{
   text-align: right;
 }
 
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
 .account a{
   margin: 1vw;
   margin-top: 2px;
