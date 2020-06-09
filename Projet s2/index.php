@@ -1,7 +1,7 @@
 <?php
 
   session_start();
-
+  include('Function/function.php');
   if(!empty($_POST['password'])){
     $_SESSION['pass2'] = $_POST['password'];
   }
