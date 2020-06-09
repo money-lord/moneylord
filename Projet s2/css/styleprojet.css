@@ -47,9 +47,40 @@ header{
   text-align: right;
 }
 
-.flex-container {
+.homeGame{
   display: flex;
   justify-content: center;
+  text-align: justify;
+  padding: 2em;
+}
+
+.homeGameCoinflip{
+  padding: 1em;
+  border: 1px solid #808080;
+  margin: 0.5em;
+  width: 30%;
+}
+
+
+.homeGameRoulette{
+  padding: 1em;
+  border: 1px solid #808080;
+  margin: 0.5em;
+  width: 30%;
+}
+
+.homeGameColor{
+  padding: 1em;
+  border: 1px solid #808080;
+  margin: 0.5em;
+  width: 30%;
+}
+.ImgHomeColor{
+  max-width: 15vw;
+}.ImgHomeRoulette{
+  max-width: 15vw;
+}.ImgHomeCoin{
+  max-width: 15vw;
 }
 
 .account a{
@@ -363,7 +394,7 @@ nav ul a {
 
 */
 .bet{
-  margin-left: 30%; 
+  margin-left: 30%;
 }
 .flexButtonRoulette{
   padding-top: 0.4%;
