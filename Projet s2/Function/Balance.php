@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('function.php');
 
 ?>
 
@@ -17,11 +18,5 @@ session_start();
 
 				$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
 				$display = $displayBalance->fetch();
-				echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>'; 
-				 ?>
-<script>
-	setInterval('load_balance()',500);
-	function load_balance(){
-		$('.balanceload').load('Balance.php');
-	}
-</script>
+				echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
+				 
