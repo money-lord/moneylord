@@ -298,10 +298,19 @@ function addcoin($bdd)
 
 function displayBalance($bdd)
 {
-    // affichage du solde.
+    echo '<div class="balanceload">';
     $displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
     $display = $displayBalance->fetch();
     echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
+    echo '</div>';
+    ?>
+    <script>
+  		setInterval('load_balance()',500);
+  		function load_balance(){
+  			$('.balanceload').load('Function/Balance.php');
+  		}
+  	</script>
+    <?php
 }
 
 function coinflip($bdd)
@@ -343,7 +352,7 @@ function chat($bdd){
 
     if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
         $data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
-        $data2->bindValue(':ID', $_SESSION['ID'], PDO::PARAM_STR);
+        $data2->bindValue(':ID', @$_SESSION['ID'], PDO::PARAM_STR);
         $data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
         $data2->execute();
     }
