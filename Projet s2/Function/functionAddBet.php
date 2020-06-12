@@ -28,7 +28,7 @@ betColor($bdd);
 					</div>
 				</form>
 
-
+				<div class="errorMessage"></div>
 					<div class="flexButtonRoulette">
 						<div class="redTeam">
 							<form action="" method="POST">
