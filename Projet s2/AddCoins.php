@@ -25,8 +25,8 @@ if (!empty($_POST['addcoin'])) {
             <form action="" method="post">
 
               <br><br>
-              <input type="number" name="addcoin" min="5" max="1000"> euros <br><br>
-              <input type="submit" value="Ajouter">
+              <input class="addCoinNumber" type="number" name="addcoin" min="5" max="1000000" placeholder="Euros"> 
+              <input class="addCoinSubmit" type="submit" value="Ajouter">
             </form>
           </center>
         </div>

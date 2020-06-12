@@ -498,6 +498,23 @@ button {
   border-color: #EDD602;
 }
 
+.addCoinNumber {
+  border: 1px solid #000000;
+  font-size: 1.5em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  border-radius: 10px;
+  padding-left: 5px;
+  width: 7em;
+  height: 2.5em;
+}
+.addCoinSubmit {
+  border: 1px solid #000000;
+  font-size: 1.5em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  border-radius: 30px;
+  width: 5em;
+  height: 2.5em;
+}
 
 .loader-container {
   position: absolute;

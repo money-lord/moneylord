@@ -16,9 +16,8 @@
       <input class="toggle" id="toggle" type="checkbox" checked>
    <ul>
       <li><a href="AddCoins.php"><?php displayBalance($bdd); ?></a></li>
-      <li><a href="account.php">MON COMPTE</a></li>
-      <li><a href="Index.php">DECONNEXION</a></li>
-
+      <li><a href="account.php">Mon Compte</a></li>
+      <li><a href="Index.php">Déconnexion</a></li>
    </ul>
 </nav>
 
