@@ -383,7 +383,7 @@ nav ul a {
 
 .addBet{
   margin-top: 1em;
-  height: 4.5vw;
+  height: 6.5vw;
 }
 
 .botRoulette{
@@ -634,8 +634,11 @@ button {
   padding-left: 5px;
   width: 7em;
   height: 2.5em;
-  margin-top: 1em;
-  bottom: 0;
+  margin-left: 3.5vw;
+}
+
+.tophomeGame{
+  height: 84%;
 }
 .buttonChat {
   border: 1px solid #808080;
@@ -645,6 +648,7 @@ button {
   padding-left: 5px;
   width: 100%;
   height: 50px;
+
 }
 .inputAccModif {
 
@@ -676,4 +680,3 @@ button {
   height: 2.8vh;
 
 }
-
