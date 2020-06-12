@@ -298,10 +298,19 @@ function addcoin($bdd)
 
 function displayBalance($bdd)
 {
-    // affichage du solde.
+    echo '<div class="balanceload">';
     $displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
     $display = $displayBalance->fetch();
     echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
+    echo '</div>';
+    ?>
+    <script>
+  		setInterval('load_balance()',500);
+  		function load_balance(){
+  			$('.balanceload').load('Function/Balance.php');
+  		}
+  	</script>
+    <?php
 }
 
 function coinflip($bdd)
