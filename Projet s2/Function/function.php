@@ -271,7 +271,6 @@ function statClient($bdd)
 						data: {
 								labels: ['Coinflip', 'Couleurs', 'Roulette'],
 								datasets: [{
-									label: 'My First dataset',
 									backgroundColor: ['#B5B6B6','#ffea00','#4a4949'],
 									data: [<?php echo $afficher['flip']; ?>, <?php echo $afficher['couleur']; ?>, <?php echo $afficher['roulette']; ?>]
 								}]
@@ -567,7 +566,7 @@ function amountBet($bdd){
 
         } else {
 			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
-            
+
             $newBalance = $solde-$_SESSION['betRoulette'];
 
             $data=$bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
