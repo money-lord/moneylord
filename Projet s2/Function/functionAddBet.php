@@ -2,7 +2,7 @@
 session_start();
 include('function.php');
 
-betColor($bdd);
+$errorMessage = betColor($bdd);
 
 ?>
 
@@ -17,7 +17,7 @@ betColor($bdd);
 				<div class="testBet">
 				<form action="" method="POST">
 					<div class="bet">
-						<?php echo amountBet($bdd); ?>
+						<?php amountBet($bdd); ?>
 						<button name="betRoulette" value="Clear" >Clear</button>
 						<button name="betRoulette" value="0.01">+0.01</button>
 						<button name="betRoulette" value="0.1">+0.1</button>
@@ -30,7 +30,7 @@ betColor($bdd);
 					</div>
 				</form>
 
-				<div class="errorMessage"><?php errorMessage(); ?></div>
+				<div class="errorMessage"><?php if (!empty($errorMessage)){echo $errorMessage;} ?></div>
 					<div class="flexButtonRoulette">
 						<div class="redTeam">
 							<form action="" method="POST">

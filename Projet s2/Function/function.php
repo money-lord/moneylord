@@ -530,6 +530,16 @@ function WinRoulette($bdd){
     $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
     $data->execute();
+
+    if ($CoinWin != 0) {
+      $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+      $dataCF = $dataC->fetch();
+      $TotalBetRoulette = $dataCF['TotalBetRoulette'];
+      $finalbelt = $TotalBetRoulette + 1;
+      $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE ID=\''.$_SESSION['ID'].'\'');
+      $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
+      $data->execute();
+    }
 }
 
 
@@ -569,7 +579,7 @@ function amountBet($bdd){
 
         } else if ($_POST['betRoulette'] > $solde){
 
-            
+
 
         } else {
 			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
@@ -587,29 +597,61 @@ function amountBet($bdd){
 
 function betColor($bdd){
 
-	if (!empty($_POST['betRed'])) {
+  // FAIRE UN INNER POUR LES DEUX APPELLE SI DESSOUS
 
-		$data = $bdd ->prepare('INSERT INTO RouletteRed
-								VALUES (Null,:idClient,:mise)');
-		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-		$data->execute();
+  $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+  $dataCF = $data1->fetch();
+  $solde = $dataCF['Solde'];
 
-	} else if (!empty($_POST['betBlack'])) {
+  $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+  $dataCF = $data1->fetch();
+  $TotalBet = $dataCF['TotalBet'];
 
-		$data = $bdd ->prepare('INSERT INTO RoulletteBlack
-								VALUES (Null,:idClient,:mise)');
-		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-		$data->execute();
-	} else if (!empty($_POST['betMl'])) {
+  if ($_SESSION['betRoulette'] > $solde) {
+    return 'Fond insufisant';
+  }
+  else{
+  	if (!empty($_POST['betRed'])) {
 
-		$data = $bdd ->prepare('INSERT INTO RouletteMl
-								VALUES (Null,:idClient,:mise)');
-		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-		$data->execute();
-	}
+  		$data = $bdd ->prepare('INSERT INTO RouletteRed
+  								VALUES (Null,:idClient,:mise)');
+  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+  		$data->execute();
+
+      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE ID=\''.$_SESSION['ID'].'\'');
+      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
+  		$data->execute();
+
+  	} else if (!empty($_POST['betBlack'])) {
+
+  		$data = $bdd ->prepare('INSERT INTO RoulletteBlack
+  								VALUES (Null,:idClient,:mise)');
+  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+  		$data->execute();
+
+      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE ID=\''.$_SESSION['ID'].'\'');
+      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
+  		$data->execute();
+
+  	} else if (!empty($_POST['betMl'])) {
+
+  		$data = $bdd ->prepare('INSERT INTO RouletteMl
+  								VALUES (Null,:idClient,:mise)');
+  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+  		$data->execute();
+
+      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE ID=\''.$_SESSION['ID'].'\'');
+      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
+  		$data->execute();
+
+  	}
+  }
 }
 
 function CouleurReturn($bdd){
