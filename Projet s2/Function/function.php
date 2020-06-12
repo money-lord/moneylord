@@ -554,7 +554,7 @@ function amountBet(){
 		echo "0";
 		$_SESSION['betRoulette'] = 0;
 	} else if (!empty($_POST['betRoulette'])) {
-		if ($_POST['betRoulette'] == 0) {
+		if ($_POST['betRoulette'] == "Clear") {
 			$_SESSION['betRoulette'] = 0;
 		} else {
 			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];

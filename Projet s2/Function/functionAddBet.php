@@ -18,7 +18,7 @@ betColor($bdd);
 				<form action="" method="POST">
 					<div class="bet">
 						<input type="text" min="0" value="<?php amountBet(); ?>" placeholder="Entrer votre Mise ici">
-						<button name="betRoulette" value="0" >Clear</button>
+						<button name="betRoulette" value="Clear" >Clear</button>
 						<button name="betRoulette" value="0.01">+0.01</button>
 						<button name="betRoulette" value="0.1">+0.1</button>
 						<button name="betRoulette" value="1">+1</button>
