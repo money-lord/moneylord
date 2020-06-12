@@ -23,11 +23,11 @@ chat($bdd);
          <div class="homeGameCoinflip">
            <center>
              <h1>Coinflip</h1>
-           Viens te confronter avec un autre joueur</br> et tente de gagner le double de ta somme</br> misée au super jeu du coinflip !</br> 1 chance sur 2 de gagner, a toi de jouer !</br>
-           </br><img class="ImgHomeCoin" src = "Images/coinflip.gif" >
+           <p>Viens te confronter avec un autre joueur </p><p> Et tente de gagner le double de la somme </p><p> misée au super jeu du coinflip !</p><p> Tu as 1 chance sur 2 de gagner, à toi de jouer !</p>
+           <img class="ImgHomeCoin" src = "Images/coinflip.gif" >
 
            <form method="post" action="GameOne.php">
-           </br><button class="buttonHome" type="submit">Jouer !</button></center>
+           <button class="buttonHome" type="submit">Jouer !</button></center>
            </form>
 
          </div>
@@ -36,11 +36,10 @@ chat($bdd);
          <div class="homeGameRoulette">
            <center>
              <h1>Roulette</h1>
-           Tu peux ici jouer au jeu le plus prisé des casinos, la roulette !</br> Tu peux multiplier ta mise jusqu'a 10</br> si tu tombe sur la case Money Lord, Bonne Chance !</br>
-           </br><img class="ImgHomeRoulette" src = "Images/roulette.gif" ></br></br></br>
-
+           <p>Tu peux ici jouer au jeu le plus prisé des casinos, la roulette !</p><p> Tu peux multiplier ta mise jusqu'a 10</p><p> Si tu tombe sur la case Money Lord, Bonne Chance !</p>
+           <img class="ImgHomeRoulette" src = "Images/roulette.gif" >
            <form method="post" action="GameTwo.php">
-           </br><button class="buttonHome" type="submit">Jouer !</button></center>
+           <button class="buttonHome" type="submit">Jouer !</button></center>
            </form>
 
         </div>
@@ -48,11 +47,11 @@ chat($bdd);
          <div class="homeGameColor">
            <center>
              <h1>Couleur</h1>
-           Choisis ici ta couleur favorite et tente de multiplier ta mise par 5 !</br> Le jeu le plus chanceux de notre site, viens remplir tes poches ici !</br>
-           </br><img class="ImgHomeColor" src = "Images/couleur.gif" >
+           <p>Choisis ici ta couleur favorite et tente de multiplier ta mise par 5 !</p><p> Le jeu le plus chanceux de notre site, viens remplir tes poches ici !</p>
+           <img class="ImgHomeColor" src = "Images/couleur.gif" >
 
            <form method="post" action="GameTree.php">
-           </br><button class="buttonHome" type="submit">Jouer !</button></center>
+           <button class="buttonHome" type="submit">Jouer !</button></center>
           </form>
 
         </div>

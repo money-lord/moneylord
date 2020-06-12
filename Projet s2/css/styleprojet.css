@@ -633,6 +633,8 @@ button {
   padding-left: 5px;
   width: 7em;
   height: 2.5em;
+  margin-top: 1em;
+  bottom: 0;
 }
 .buttonChat {
   border: 1px solid #808080;
