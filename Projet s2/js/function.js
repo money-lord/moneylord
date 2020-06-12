@@ -84,7 +84,6 @@ function roulette() {
 
               time();
               document.getElementById('loader').style.display = "none";
-
             }
 
           },1000);
@@ -99,6 +98,7 @@ function time() {
 
             timerElt.innerText = counter;
             counter--;
+
             if (counter == 0) {
               setTimeout(function(){
                 //theWheel.startAnimation();
