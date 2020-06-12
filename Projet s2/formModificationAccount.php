@@ -7,7 +7,7 @@ if (!empty($_POST['change']) && $_POST['change'] != null) {
 
 }
 
-$displayBalance = $bdd->query('SELECT * FROM Clients WHERE pseudo = \''.$_SESSION["pseudo"].'\' ');
+$displayBalance = $bdd->query('SELECT * FROM Clients WHERE ID= \''.$_SESSION["ID"].'\' ');
 $info = $displayBalance->fetch();
 
  ?>
@@ -27,19 +27,31 @@ $info = $displayBalance->fetch();
             </center>
           </div>
 
-          <div>
+          <div class="accModif">
             <center>
             <h1 >Modification de compte</h1>
             <p>
             <form action="" method="post" enctype="multipart/form-data" >
-                <p >Pseudo : <input type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
-            		<p >Nom : <input type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
-                <p >Prénom : <input type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
-            		<p >Mot de Passe : <input type="password" name="password"value = ""></p>
-                <p >Avatar : <input type="file" name="fichier" id="fichier"/>
-                <input type="hidden" name="change" value="change"><br><br>
-                <input type="submit" name="" value="Modifier">
+                <p>Pseudo : <input class="inputAccModif" type="text" name="pseudo" value = "<?= $info['Pseudo']; ?>" ></p>
+            		<p>Nom : <input class="inputAccModif" type="text" name="lastName" value = "<?= $info['Nom']; ?>"></p>
+                <p>Prénom : <input class="inputAccModif" type="text" name="firstName" value = "<?= $info['Prenom']; ?>"></p>
+            		<p>Mot de Passe : <input class="inputAccModif" type="password" name="password"value = ""></p>
+                <p> <div class="upload">
+                    Sélectionnez l'Avatar à télécharger :
+                    <input type="file" name="film" id="file" class="browse" multiple>
+                
+                    </div>
+                    <script type="text/javascript">
+                      $('#file-select-button').click(function(){
+                        $('.upload input').click();
+                      });
+                    </script>
+                  </p>
+                    <!-- <input class="inputAccModifAvatar" type="file" name="fichier" id="fichier"/> !-->
+                <input class="inputAccModif" type="hidden" name="change" value="change"><br><br>
+                <input class="inputAccModif" type="submit" name="" value="Modifier">
             	</form>
+              <p>
               <a href="account.php">Vous ne désirez plus le modifier ?</a>
             </p>
             <p> <?php  if(!empty($_POST['change'])){ echo $message;}?> </p>
