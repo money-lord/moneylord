@@ -546,6 +546,9 @@ function verifSolde($bdd){
         return false;
     }
 }
+function errorMessage(){
+
+}
 
 function amountBet($bdd){
 	if (!isset($_POST['betRoulette'])) {
@@ -563,6 +566,10 @@ function amountBet($bdd){
 		} else if ($_POST['betRoulette'] == "total"){
 
             $_SESSION['betRoulette'] = $solde;
+
+        } else if ($_POST['betRoulette'] > $solde){
+
+            
 
         } else {
 			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
