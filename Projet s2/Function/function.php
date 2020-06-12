@@ -352,7 +352,7 @@ function chat($bdd){
 
     if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
         $data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
-        $data2->bindValue(':ID', $_SESSION['ID'], PDO::PARAM_STR);
+        $data2->bindValue(':ID', @$_SESSION['ID'], PDO::PARAM_STR);
         $data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
         $data2->execute();
     }
