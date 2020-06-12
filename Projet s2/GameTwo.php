@@ -29,7 +29,7 @@ chat($bdd);
 
               </div>
             </div>
-
+            
             <div class="addBet">
 
               <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>

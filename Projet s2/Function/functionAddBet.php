@@ -32,17 +32,17 @@ betColor($bdd);
 					<div class="flexButtonRoulette">
 						<div class="redTeam">
 							<form action="" method="POST">
-								<input type="hidden" name="betRed" value="<?php echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur Le Rouge</button>
+								<input type="hidden" name="betRed" value="<?php echo $_SESSION['betRoulette'];?>"><button class="Red chatBet ">Miser Sur Le Rouge</button>
 							</form>
 						</div>
 						<div class="blackTeam">
 							<form action="" method="POST">
-								<input type="hidden" name="betBlack" value="<?php  echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur Le Noir</button>
+								<input type="hidden" name="betBlack" value="<?php  echo $_SESSION['betRoulette'];?>"><button class="Black chatBet ">Miser Sur Le Noir</button>
 							</form>
 						</div>
 						<div class="mlTeam">
 							<form action="" method="POST">
-								<input type="hidden" name="betMl" value="<?php echo $_SESSION['betRoulette'];?>"><button class="chatBet">Miser Sur MoneyLord</button>
+								<input type="hidden" name="betMl" value="<?php echo $_SESSION['betRoulette'];?>"><button class="Yellow chatBet ">Miser Sur MoneyLord</button>
 							</form>
 						</div>
 					</div>
