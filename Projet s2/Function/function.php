@@ -16,26 +16,26 @@ function createAccount($bdd)
     if ($_POST['password'] != null) {
         $_SESSION['password'] = $_POST['password'];
     }
-	// on evite les surprise avec htmlspecialchars
+    // on evite les surprise avec htmlspecialchars
 
     if ($_POST['pseudo']) {
-    	$pseudo = htmlspecialchars($_POST['pseudo']);
+        $pseudo = htmlspecialchars($_POST['pseudo']);
     }
     if ($_POST['email']) {
         $email = htmlspecialchars($_POST['email']);
-	}
-	if ($_POST['lastName']) {
+    }
+    if ($_POST['lastName']) {
         $nom = htmlspecialchars($_POST['lastName']);
-	}
-	if ($_POST['firstName']) {
+    }
+    if ($_POST['firstName']) {
         $prenom = htmlspecialchars($_POST['firstName']);
-	}
-	if ($_POST['age']) {
+    }
+    if ($_POST['age']) {
         $age = htmlspecialchars($_POST['age']);
-	}
-	if ($_POST['password']) {
+    }
+    if ($_POST['password']) {
         $mdp = $_SESSION['password'];
-	}
+    }
 
     //on les rentre dans la bdd
 
@@ -296,22 +296,7 @@ function addcoin($bdd)
     header('Location: home.php');
 }
 
-function displayBalance($bdd)
-{
-    echo '<div class="balanceload">';
-    $displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
-    $display = $displayBalance->fetch();
-    echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
-    echo '</div>';
-    ?>
-    <script>
-  		setInterval('load_balance()',500);
-  		function load_balance(){
-  			$('.balanceload').load('Function/Balance.php');
-  		}
-  	</script>
-    <?php
-}
+
 
 function coinflip($bdd)
 {
@@ -339,7 +324,8 @@ function coinflip($bdd)
 
 
 
-function chat($bdd){
+function chat($bdd)
+{
     echo '<div class="chat"><div class="messagesborder">';
 
     echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
@@ -383,16 +369,17 @@ function chat($bdd){
     }
 }
 
-function Rblack($bdd){
-  echo'<div class="messagesBlack">';
+function Rblack($bdd)
+{
+    echo'<div class="messagesBlack">';
 
-  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
 
-  while ($save = $data1 ->fetch()){
-  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-  	}
-  echo'</div>'; ?>
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
 
 	<script>
 		setInterval('load_messagesBlack()',500);
@@ -402,19 +389,19 @@ function Rblack($bdd){
 	</script>
 
 <?php
-
 }
 
-function RRed($bdd){
-  echo'<div class="messagesRed">';
+function RRed($bdd)
+{
+    echo'<div class="messagesRed">';
 
-  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
 
-  while ($save = $data1 ->fetch()){
-  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-  	}
-  echo'</div>'; ?>
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
 
 	<script>
 		setInterval('load_messagesRed()',500);
@@ -424,19 +411,19 @@ function RRed($bdd){
 	</script>
 
 <?php
-
 }
 
-function RMl($bdd){
-  echo'<div class="messagesMl">';
+function RMl($bdd)
+{
+    echo'<div class="messagesMl">';
 
-  $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
   	INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
 
-  while ($save = $data1 ->fetch()){
-  		echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-  	}
-  echo'</div>'; ?>
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
 
 	<script>
 		setInterval('load_messagesMl()',500);
@@ -446,11 +433,10 @@ function RMl($bdd){
 	</script>
 
 <?php
-
 }
 
-function angleRoulette($bdd){
-
+function angleRoulette($bdd)
+{
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0'); // suppression des messages quand il y en a plus de 100 dans la bdd
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
@@ -508,27 +494,28 @@ function angleRoulette($bdd){
         echo rand(337, 359);
     }
 }
-function WinRoulette($bdd){
+function WinRoulette($bdd)
+{
     $CoinWin = 0;
 
-    if(CouleurReturn($bdd) == 'black'){
+    if (CouleurReturn($bdd) == 'black') {
         $dataBlack = $bdd->query('SELECT * FROM RoulletteBlack WHERE IDClient = \''.$_SESSION['ID'].'\' ');
         $data1 = $dataBlack->fetch();
-        if($data1['IDClient'] != NULL){
+        if ($data1['IDClient'] != null) {
             $CoinWin = $CoinWin + $data1['Mise'] * 2;
         }
     }
-    if(CouleurReturn($bdd) == 'red'){
+    if (CouleurReturn($bdd) == 'red') {
         $dataRed = $bdd->query('SELECT * FROM RouletteRed WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataRed->fetch();
-        if($data['IDClient'] != NULL){
+        if ($data['IDClient'] != null) {
             $CoinWin = $CoinWin + $data['Mise'] * 2;
         }
     }
-    if(CouleurReturn($bdd) == 'Ml'){
+    if (CouleurReturn($bdd) == 'Ml') {
         $dataMl = $bdd->query('SELECT * FROM RouletteMl WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataMl->fetch();
-        if($data['IDClient'] != NULL){
+        if ($data['IDClient'] != null) {
             $CoinWin = $CoinWin + $data['Mise'] * 10;
         }
     }
@@ -541,140 +528,131 @@ function WinRoulette($bdd){
     $data->execute();
 }
 
+function amountBet($bdd)
+{
 
-
-function verifSolde($bdd){
-    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\'');
-    $Solde = $recupSolde->fetch();
-
-    if ($_SESSION['betRoulette'] < $Solde) {
-        return true;
-    } elseif ($_SESSION['betRoulette'] > $Solde) {
-       // echo "Vous ne disposez pas du solde suffisant, veuillez ajouter des fonds !";
-        //echo "<a href="addcoins.php"></a>";
-        return false;
-    }
-}
-
-function amountBet($bdd){
-	if (!isset($_POST['betRoulette'])) {
-
-		echo "0";
-		$_SESSION['betRoulette'] = 0;
-	} else if (!empty($_POST['betRoulette'])) {
-
+    if (!isset($_POST['betRoulette'])) {
+        echo '0';
+        $_SESSION['betRoulette'] = 0;
+    } elseif (!empty($_POST['betRoulette'])) {
         $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
         $dataCF = $data1->fetch();
         $solde = $dataCF['Solde'];
 
-		if ($_POST['betRoulette'] == "Clear") {
-			$_SESSION['betRoulette'] = 0;
-		} else if ($_POST['betRoulette'] == "total"){
-
+        if ($_POST['betRoulette'] == "Clear") {
+            $_SESSION['betRoulette'] = 0;
+        } elseif ($_POST['betRoulette'] == "total") {
             $_SESSION['betRoulette'] = $solde;
-
-        } else if ($_POST['betRoulette'] > $solde){
-
-
-
         } else {
-			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
+            $_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
+        }
+
+        echo $_SESSION['betRoulette'];
+    }
+}
+
+function betColor($bdd)
+{
+
+  // FAIRE UN INNER POUR LES DEUX APPELLE SI DESSOUS
+
+    $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $data1->fetch();
+    $solde = $dataCF['Solde'];
+
+    $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $data1->fetch();
+    $TotalBet = $dataCF['TotalBet'];
+
+    if ($_SESSION['betRoulette'] > $solde) {
+        return 'Fond insufisant';
+    } else {
+
+
+
+
+        if (!empty($_POST['betRed'])) {
+            $data = $bdd ->prepare('INSERT INTO RouletteRed
+  								VALUES (Null,:idClient,:mise)');
+            $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->execute();
+
+            $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+            $data->bindValue(':TotalBet', $totalbeltfinal, PDO::PARAM_INT);
+            $data->execute();
+
+            $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+            $dataCF = $dataC->fetch();
+            $TotalBetRoulette = $dataCF['TotalBetRoulette'];
+            $finalbelt = $TotalBetRoulette + 1;
+            $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
+            $data->execute();
 
             $newBalance = $solde-$_SESSION['betRoulette'];
 
             $data=$bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
             $data->bindValue(':Solde', $newBalance, PDO::PARAM_STR);
             $data->execute();
-		}
 
-		echo $_SESSION['betRoulette'];
-	}
+        } elseif (!empty($_POST['betBlack'])) {
+            $data = $bdd ->prepare('INSERT INTO RoulletteBlack
+  								VALUES (Null,:idClient,:mise)');
+            $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->execute();
+
+            $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+            $data->bindValue(':TotalBet', $totalbeltfinal, PDO::PARAM_INT);
+            $data->execute();
+
+            $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+            $dataCF = $dataC->fetch();
+            $TotalBetRoulette = $dataCF['TotalBetRoulette'];
+            $finalbelt = $TotalBetRoulette + 1;
+            $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
+            $data->execute();
+
+            $newBalance = $solde-$_SESSION['betRoulette'];
+
+            $data=$bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':Solde', $newBalance, PDO::PARAM_STR);
+            $data->execute();
+        } elseif (!empty($_POST['betMl'])) {
+            $data = $bdd ->prepare('INSERT INTO RouletteMl
+  								VALUES (Null,:idClient,:mise)');
+            $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->execute();
+
+            $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
+            $data->bindValue(':TotalBet', $totalbeltfinal, PDO::PARAM_INT);
+            $data->execute();
+
+            $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+            $dataCF = $dataC->fetch();
+            $TotalBetRoulette = $dataCF['TotalBetRoulette'];
+            $finalbelt = $TotalBetRoulette + 1;
+            $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
+            $data->execute();
+
+            $newBalance = $solde-$_SESSION['betRoulette'];
+
+            $data=$bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':Solde', $newBalance, PDO::PARAM_STR);
+            $data->execute();
+        }
+    }
 }
 
-function betColor($bdd){
-
-  // FAIRE UN INNER POUR LES DEUX APPELLE SI DESSOUS
-
-  $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
-  $dataCF = $data1->fetch();
-  $solde = $dataCF['Solde'];
-
-  $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
-  $dataCF = $data1->fetch();
-  $TotalBet = $dataCF['TotalBet'];
-
-  if ($_SESSION['betRoulette'] > $solde) {
-    return 'Fond insufisant';
-  }
-  else{
-  	if (!empty($_POST['betRed'])) {
-
-  		$data = $bdd ->prepare('INSERT INTO RouletteRed
-  								VALUES (Null,:idClient,:mise)');
-  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-  		$data->execute();
-
-      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
-  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
-  		$data->execute();
-
-      $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
-      $dataCF = $dataC->fetch();
-      $TotalBetRoulette = $dataCF['TotalBetRoulette'];
-      $finalbelt = $TotalBetRoulette + 1;
-      $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
-      $data->execute();
-
-  	} else if (!empty($_POST['betBlack'])) {
-
-  		$data = $bdd ->prepare('INSERT INTO RoulletteBlack
-  								VALUES (Null,:idClient,:mise)');
-  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-  		$data->execute();
-
-      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
-  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
-  		$data->execute();
-
-      $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
-      $dataCF = $dataC->fetch();
-      $TotalBetRoulette = $dataCF['TotalBetRoulette'];
-      $finalbelt = $TotalBetRoulette + 1;
-      $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
-      $data->execute();
-
-  	} else if (!empty($_POST['betMl'])) {
-
-  		$data = $bdd ->prepare('INSERT INTO RouletteMl
-  								VALUES (Null,:idClient,:mise)');
-  		$data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-  		$data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
-  		$data->execute();
-
-      $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
-  		$data->bindValue(':TotalBet',$totalbeltfinal, PDO::PARAM_INT);
-  		$data->execute();
-
-      $dataC = $bdd->query('SELECT TotalBetRoulette FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
-      $dataCF = $dataC->fetch();
-      $TotalBetRoulette = $dataCF['TotalBetRoulette'];
-      $finalbelt = $TotalBetRoulette + 1;
-      $data = $bdd->prepare('UPDATE Statistiques SET TotalBetRoulette=:TotalBetRoulette  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
-      $data->bindValue(':TotalBetRoulette', $finalbelt, PDO::PARAM_STR);
-      $data->execute();
-
-  	}
-  }
-}
-
-function CouleurReturn($bdd){
+function CouleurReturn($bdd)
+{
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0');
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
@@ -696,6 +674,22 @@ function CouleurReturn($bdd){
         }
     }
     return 'Ml';
+}
+
+function displayBalance($bdd)
+{
+    echo '<div class="balanceload">';
+    $displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
+    $display = $displayBalance->fetch();
+    echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
+    echo '</div>'; ?>
+    <script>
+  		setInterval('load_balance()',500);
+  		function load_balance(){
+  			$('.balanceload').load('Function/Balance.php');
+  		}
+  	</script>
+    <?php
 }
 
 ?>
