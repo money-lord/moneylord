@@ -36,10 +36,11 @@ chat($bdd);
          <div class="homeGameRoulette">
            <center>
              <h1>Roulette</h1>
-           <p>Tu peux ici jouer au jeu le plus prisé des casinos, la roulette !</p><p> Tu peux multiplier ta mise jusqu'a 10</p><p> Si tu tombe sur la case Money Lord, Bonne Chance !</p>
-           <img class="ImgHomeRoulette" src = "Images/roulette.gif" >
-           <form method="post" action="GameTwo.php">
-           <button class="buttonHome" type="submit">Jouer !</button></center>
+              <p>Tu peux ici jouer au jeu le plus prisé des casinos, la roulette !</p><p> Tu peux multiplier ta mise jusqu'a 10</p><p> Si tu tombe sur la case Money Lord, Bonne Chance !</p>
+              <img class="ImgHomeRoulette" src="Images/roulette.gif">
+              <form method="post" action="GameTwo.php">
+              <button class="buttonHome" type="submit">Jouer !</button>
+            </center>
            </form>
 
         </div>
