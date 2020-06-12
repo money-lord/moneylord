@@ -81,7 +81,9 @@ function roulette() {
             var now = new Date();
             var counter = now.getSeconds();
             if (counter === 0 | counter === 30) {
+
               time();
+              document.getElementById('loader').style.display = "none";
 
             }
 

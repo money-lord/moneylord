@@ -20,6 +20,13 @@ chat($bdd);
         <?php include('header.php'); ?>
 
         <div class="content">
+          <div ID="loader">
+            <div class="loader-container">
+              <div class="progress float shadow">
+                <div class="progress__item"></div>
+              </div>
+            </div>
+          </div>
 
             <div class="topRoulette">
               <div id="compte">Chargement</div>
@@ -64,6 +71,7 @@ chat($bdd);
         <script src="js/function.js"></script>
         <script>
           roulette();
+          
 
           let theWheel = new Winwheel({
               'numSegments' : 15,
