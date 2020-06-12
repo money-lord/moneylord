@@ -131,6 +131,7 @@ a{
 }
 
 footer {
+
     position: fixed;
     bottom: 0;
     padding-left: 1%;
@@ -651,7 +652,7 @@ button {
   font-size: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
   border-radius: 10px;
-  width: 5em;
+  width: 10vw;
   height: 2.5em;
 
 }
@@ -660,21 +661,19 @@ button {
   margin-right: 33.33%;
   border: 1px solid #000000;
 }
+.fade {
+  background:linear-gradient(#EDD602,white);
+}
+.footerFade {
+
+}
 .inputAccModifAvatar {
 
   border: 1px solid #000000;
   font-size: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-  border-radius: 10px;
-  width: 10em;
-  height: 2.5em;
+  width: 17vw;
+  height: 2.8vh;
 
 }
-.upload .browse input[type='file']{
-    position: absolute;
-    margin-top: 3px;
-    margin-left: 3px;
-    height: 1px;
-    width: 1px;
-    z-index: -5;
-}
+
