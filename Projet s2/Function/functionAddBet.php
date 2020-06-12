@@ -17,14 +17,16 @@ betColor($bdd);
 				<div class="testBet">
 				<form action="" method="POST">
 					<div class="bet">
-						<?php echo amountBet(); ?>
+						<?php echo amountBet($bdd); ?>
 						<button name="betRoulette" value="Clear" >Clear</button>
 						<button name="betRoulette" value="0.01">+0.01</button>
 						<button name="betRoulette" value="0.1">+0.1</button>
 						<button name="betRoulette" value="1">+1</button>
 						<button name="betRoulette" value="10">+10</button>
 						<button name="betRoulette" value="100">+100</button>
-						<button name="betRoulette" value="">ALL-IN</button>
+						<button name="betRoulette" value="1000">+1000</button>
+						<button name="betRoulette" value="10000">+10000</button>
+						<button name="betRoulette" value="total">ALL-IN</button>
 					</div>
 				</form>
 

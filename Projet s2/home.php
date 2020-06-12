@@ -27,7 +27,7 @@ chat($bdd);
            </br><img class="ImgHomeCoin" src = "Images/coinflip.gif" >
 
            <form method="post" action="GameOne.php">
-           </br><button type="submit">Jouer !</button></center>
+           </br><button class="buttonHome" type="submit">Jouer !</button></center>
            </form>
 
          </div>
@@ -40,7 +40,7 @@ chat($bdd);
            </br><img class="ImgHomeRoulette" src = "Images/roulette.gif" ></br></br></br>
 
            <form method="post" action="GameTwo.php">
-           </br><button type="submit">Jouer !</button></center>
+           </br><button class="buttonHome" type="submit">Jouer !</button></center>
            </form>
 
         </div>
@@ -52,7 +52,7 @@ chat($bdd);
            </br><img class="ImgHomeColor" src = "Images/couleur.gif" >
 
            <form method="post" action="GameTree.php">
-           </br><button type="submit">Jouer !</button></center>
+           </br><button class="buttonHome" type="submit">Jouer !</button></center>
           </form>
 
         </div>

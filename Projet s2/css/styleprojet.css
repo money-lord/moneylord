@@ -337,7 +337,7 @@ nav ul {
 
 }
 nav ul li {
-  border-radius: 2px;
+  border-radius: 10px;
   position: relative;
   display: inline-block;
   margin-left: 35px;
@@ -486,16 +486,22 @@ button {
   border: 1px solid #000000;
   font-size: 1em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 .Red {
   border-color: red;
+  border-width: 2px;
+
 }
 .Black {
   border-color: black;
+  border-width: 2px;
+
 }
 .Yellow {
   border-color: #EDD602;
+  border-width: 2px;
+
 }
 
 .addCoinNumber {
@@ -511,7 +517,7 @@ button {
   border: 1px solid #000000;
   font-size: 1.5em;
   font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
-  border-radius: 30px;
+  border-radius: 10px;
   width: 5em;
   height: 2.5em;
 }
@@ -617,4 +623,23 @@ button {
   100% {
     -webkit-transform: rotate(360deg);
   }
+}
+
+.buttonHome {
+  border: 1px solid #000000;
+  font-size: 1.5em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  border-radius: 10px;
+  padding-left: 5px;
+  width: 7em;
+  height: 2.5em;
+}
+.buttonChat {
+  border: 1px solid #808080;
+  font-size: 1.5em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  border-radius: 10px;
+  padding-left: 5px;
+  width: 100%;
+  height: 50px;
 }

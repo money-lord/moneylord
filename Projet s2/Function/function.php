@@ -339,7 +339,7 @@ function chat($bdd){
     echo'</div>';
     echo '<br><center><form action="" method ="POST">
 		<input class="txtZone" type="text" name="Message" placeholder="Message" max="250" ><br><br>
-		<button type="submit" value="Envoyer" class="button">Envoyer</button>
+		<button class="buttonChat" type="submit" value="Envoyer" class="button">Envoyer</button>
 		</form></center>';
 
     if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
@@ -548,16 +548,31 @@ function verifSolde($bdd){
     }
 }
 
-function amountBet(){
+function amountBet($bdd){
 	if (!isset($_POST['betRoulette'])) {
 
 		echo "0";
 		$_SESSION['betRoulette'] = 0;
 	} else if (!empty($_POST['betRoulette'])) {
+
+        $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+        $dataCF = $data1->fetch();
+        $solde = $dataCF['Solde'];
+
 		if ($_POST['betRoulette'] == "Clear") {
 			$_SESSION['betRoulette'] = 0;
-		} else {
+		} else if ($_POST['betRoulette'] == "total"){
+
+            $_SESSION['betRoulette'] = $solde;
+
+        } else {
 			$_SESSION['betRoulette'] = $_SESSION['betRoulette'] + $_POST['betRoulette'];
+            
+            $newBalance = $solde-$_SESSION['betRoulette'];
+
+            $data=$bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+            $data->bindValue(':Solde', $newBalance, PDO::PARAM_STR);
+            $data->execute();
 		}
 
 		echo $_SESSION['betRoulette'];
