@@ -55,13 +55,26 @@ include('function.php');
 				{
 						'type'     : 'spinToStop',
 						'duration' : 5,
-						'spins'    : 8,
+						'spins'    : 5,
 						'callbackFinished' : 'alertPrize()',
 						'callbackAfter' : 'drawTriangle()',
+            'callbackSound' : playSound,
 						'stopAngle' : <?php angleRoulette($bdd); ?> // degre ou l'on veut que ca s'arrete
 
 				}
 	});
+
+  let audio = new Audio('../audio/tick.mp3');
+
+  function playSound(){
+
+        audio.pause();
+        audio.currentTime = 0;
+
+
+        audio.play();
+    }
+
 	drawTriangle();
 	function drawTriangle()
 		{
