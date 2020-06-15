@@ -324,17 +324,13 @@ function coinflip($bdd)
 
 
 
-function chat($bdd)
-{
+function chat($bdd){
     echo '<div class="chat"><div class="messagesborder">';
 
     echo '<iframe src=Function/fuctionMessage.php width=100% height=100%; scrolling="yes"></iframe>';
 
     echo'</div>';
-    echo '<br><center><form action="" method ="POST">
-		<input class="txtZone" type="text" name="Message" placeholder="Message" max="250" ><br><br>
-		<button class="buttonChat" type="submit" value="Envoyer" class="button">Envoyer</button>
-		</form></center>';
+    echo '<div class="messageChat"><iframe src=Function/functionMessageEnvoyer.php width=100% height=100% frameBorder="0"; scrolling="yes"></iframe></div>';
 
     if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
         $data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
@@ -369,71 +365,6 @@ function chat($bdd)
     }
 }
 
-function Rblack($bdd)
-{
-    echo'<div class="messagesBlack">';
-
-    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
-  	INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
-
-    while ($save = $data1 ->fetch()) {
-        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-    }
-    echo'</div>'; ?>
-
-	<script>
-		setInterval('load_messagesBlack()',500);
-		function load_messagesBlack(){
-			$('.messagesBlack').load('./Function/rouletteblack.php');
-		}
-	</script>
-
-<?php
-}
-
-function RRed($bdd)
-{
-    echo'<div class="messagesRed">';
-
-    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
-  	INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
-
-    while ($save = $data1 ->fetch()) {
-        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-    }
-    echo'</div>'; ?>
-
-	<script>
-		setInterval('load_messagesRed()',500);
-		function load_messagesRed(){
-			$('.messagesRed').load('./Function/roulettered.php');
-		}
-	</script>
-
-<?php
-}
-
-function RMl($bdd)
-{
-    echo'<div class="messagesMl">';
-
-    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
-  	INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
-
-    while ($save = $data1 ->fetch()) {
-        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
-    }
-    echo'</div>'; ?>
-
-	<script>
-		setInterval('load_messagesMl()',500);
-		function load_messagesMl(){
-			$('.messagesMl').load('./Function/rouletteml.php');
-		}
-	</script>
-
-<?php
-}
 
 function angleRoulette($bdd)
 {
@@ -504,15 +435,13 @@ function WinRoulette($bdd)
         if ($data1['IDClient'] != null) {
             $CoinWin = $CoinWin + $data1['Mise'] * 2;
         }
-    }
-    if (CouleurReturn($bdd) == 'red') {
+    } elseif (CouleurReturn($bdd) == 'red') {
         $dataRed = $bdd->query('SELECT * FROM RouletteRed WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataRed->fetch();
         if ($data['IDClient'] != null) {
             $CoinWin = $CoinWin + $data['Mise'] * 2;
         }
-    }
-    if (CouleurReturn($bdd) == 'Ml') {
+    } elseif (CouleurReturn($bdd) == 'Ml') {
         $dataMl = $bdd->query('SELECT * FROM RouletteMl WHERE IDClient=\''.$_SESSION['ID'].'\' ');
         $data = $dataMl->fetch();
         if ($data['IDClient'] != null) {
@@ -567,9 +496,6 @@ function betColor($bdd)
     if ($_SESSION['betRoulette'] > $solde) {
         return 'Fond insufisant';
     } else {
-
-
-
 
         if (!empty($_POST['betRed'])) {
             $data = $bdd ->prepare('INSERT INTO RouletteRed
@@ -676,6 +602,71 @@ function CouleurReturn($bdd)
     return 'Ml';
 }
 
+function Rblack($bdd)
+{
+    echo'<div class="messagesBlack">';
+
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    INNER JOIN  RoulletteBlack AS rb ON rb.IDClient = c.ID ');
+
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
+
+    <script>
+        setInterval('load_messagesBlack()',500);
+        function load_messagesBlack(){
+            $('.messagesBlack').load('./Function/rouletteblack.php');
+        }
+    </script>
+
+<?php
+}
+
+function RRed($bdd)
+{
+    echo'<div class="messagesRed">';
+
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    INNER JOIN  RouletteRed AS rb ON rb.IDClient = c.ID ');
+
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
+
+    <script>
+        setInterval('load_messagesRed()',500);
+        function load_messagesRed(){
+            $('.messagesRed').load('./Function/roulettered.php');
+        }
+    </script>
+
+<?php
+}
+
+function RMl($bdd)
+{
+    echo'<div class="messagesMl">';
+
+    $data1 = $bdd->query('SELECT c.Pseudo pseudo, rb.Mise mise FROM Clients AS c
+    INNER JOIN  RouletteMl AS rb ON rb.IDClient = c.ID ');
+
+    while ($save = $data1 ->fetch()) {
+        echo '<p>'.$save['pseudo'].' : '.$save['mise'].'</p>';
+    }
+    echo'</div>'; ?>
+
+    <script>
+        setInterval('load_messagesMl()',500);
+        function load_messagesMl(){
+            $('.messagesMl').load('./Function/rouletteml.php');
+        }
+    </script>
+
+<?php
+}
 function displayBalance($bdd)
 {
     echo '<div class="balanceload">';
