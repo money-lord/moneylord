@@ -513,9 +513,11 @@ function betColor($bdd)
         if (!empty($_POST['betRed'])) {
             $data = $bdd ->prepare('INSERT INTO RouletteRed
   								VALUES (Null,:idClient,:mise)');
+            $mise = $_SESSION['betRoulette'];
             $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $mise, PDO::PARAM_STR);
             $data->execute();
+
 
             $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
             $totalbeltfinal = $TotalBet+$_SESSION['betRoulette'];
@@ -540,7 +542,7 @@ function betColor($bdd)
             $data = $bdd ->prepare('INSERT INTO RoulletteBlack
   								VALUES (Null,:idClient,:mise)');
             $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_STR);
             $data->execute();
 
             $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
@@ -565,7 +567,7 @@ function betColor($bdd)
             $data = $bdd ->prepare('INSERT INTO RouletteMl
   								VALUES (Null,:idClient,:mise)');
             $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
-            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_INT);
+            $data->bindValue(':mise', $_SESSION['betRoulette'], PDO::PARAM_STR);
             $data->execute();
 
             $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
