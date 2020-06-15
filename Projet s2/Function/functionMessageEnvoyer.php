@@ -2,6 +2,12 @@
 session_start();
 include('function.php');
 
+if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
+    $data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
+    $data2->bindValue(':ID', @$_SESSION['pseudo'], PDO::PARAM_STR);
+    $data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
+    $data2->execute();
+}
 ?>
 
 <!DOCTYPE html>

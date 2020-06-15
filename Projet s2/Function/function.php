@@ -104,6 +104,7 @@ function connection($bdd)
             if ($client['Pseudo'] == $_POST['login'] && $client['MDP'] == $_SESSION['pass2']) {
                 $_SESSION['ID'] = htmlspecialchars($_POST['login']);
                 $_SESSION['ID'] = $client['ID'];
+                $_SESSION['pseudo'] = $client['Pseudo'];
                 $_SESSION['pass2'] = htmlspecialchars($_POST['password']);
 
                 echo '<meta http-equiv="Refresh" content="0; URL=home.php" />';
@@ -332,12 +333,7 @@ function chat($bdd){
     echo'</div>';
     echo '<div class="messageChat"><iframe src=Function/functionMessageEnvoyer.php width=100% height=100% frameBorder="0"; scrolling="yes"></iframe></div>';
 
-    if (!empty($_POST['Message'])) { //ajout de nouveaux messages dans la bdd
-        $data2 = $bdd->prepare('INSERT INTO Chat VALUES (NULL,:ID,:Message)');
-        $data2->bindValue(':ID', @$_SESSION['ID'], PDO::PARAM_STR);
-        $data2->bindValue(':Message', $_POST['Message'], PDO::PARAM_STR);
-        $data2->execute();
-    }
+
 
     echo '</div>'; ?>
 	<script>
