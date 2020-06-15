@@ -315,7 +315,7 @@ nav:hover:active h2{
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 50%;
   z-index: 1;
   opacity: 0;
   cursor: pointer;
