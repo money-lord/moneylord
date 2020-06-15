@@ -1,14 +1,12 @@
 <?php
 session_start();
 include('function.php');
-WinRoulette($bdd);
 ?>
 
 <!DOCTYPE html>
   <html>
       <head>
           <meta charset="utf-8" />
-          <link rel="stylesheet" href="css/styleprojet.css" type="text/css" media="screen" />
           <script src="../js/jquery.min.js"></script>
           <script src='../js/Winwheel.js'></script>
           <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>

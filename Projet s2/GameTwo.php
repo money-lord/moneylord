@@ -20,6 +20,7 @@ chat($bdd);
         <?php include('header.php'); ?>
 
         <div class="content">
+
           <div ID="loader">
             <div class="loader-container">
               <div class="progress float shadow">
@@ -30,13 +31,13 @@ chat($bdd);
 
             <div class="topRoulette">
               <div id="compte">Chargement</div>
+              <iframe src=./Function/winRoulette.php width=2 height=2 frameBorder="0" scrolling="no"></iframe>
 
               <div class="canvasContainer">
                 <iframe src=./Function/roulette.php width=100% height=100% frameBorder="0" scrolling="no"></iframe>
-
               </div>
             </div>
-            
+
             <div class="addBet">
 
               <iframe src=Function/functionAddBet.php width=100% height=100% frameBorder="0"></iframe>
@@ -71,7 +72,7 @@ chat($bdd);
         <script src="js/function.js"></script>
         <script>
           roulette();
-          
+
 
           let theWheel = new Winwheel({
               'numSegments' : 15,

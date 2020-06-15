@@ -117,8 +117,19 @@ function rouletteanim() {
     if (counter === 21 | counter === 51) {
       theWheel.startAnimation();
     }
-    if (counter === 0 | counter === 30) {
+    if (counter === 1 | counter === 31) {
       window.location.reload();
     }
+  },1000);
+}
+
+function relord() {
+  var timer2 = setInterval(function(){
+    var sec = new Date();
+    var counter = sec.getSeconds();
+    if (counter === 1 | counter === 31) {
+      window.location.reload();
+    }
+    window.location.reload();
   },1000);
 }
