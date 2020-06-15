@@ -31,7 +31,7 @@ $errorMessage = betColor($bdd);
 				</form>
 
 				<div class="errorMessage"><?php if (!empty($errorMessage)){echo $errorMessage;} ?></div>
-        
+
 					<div class="flexButtonRoulette">
 						<div class="redTeam">
 							<form action="" method="POST">
@@ -49,7 +49,5 @@ $errorMessage = betColor($bdd);
 							</form>
 						</div>
 					</div>
-
-          <?php echo $_POST['betRed']; ?>
 				</body>
 			</body>
