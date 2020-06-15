@@ -172,7 +172,7 @@ footer p{
     word-wrap : break-word;
     position: fixed;
     bottom: 0;
-    left: 2%;
+    left: 1%;
     width: 100%;
     text-overflow: ellipsis;
 }
@@ -337,7 +337,7 @@ nav ul {
   margin-bottom: 22px;
   text-align: center;
   transition: all .4s ease-out;
-  height: 200px;
+  height: 100%;
 
 
 }
@@ -371,7 +371,6 @@ nav ul a {
   font-weight: 200;
   text-decoration: none;
   transition: color .3s;
-  height: 15vw;
 }
 
 .image-ronde{
@@ -645,7 +644,6 @@ button {
 
 .tophomeGame{
   height: 84%;
-
 }
 .buttonChat {
   border: 1px solid #808080;
