@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('function.php');
+include('function.php'); // test
 
 ?>
 
@@ -19,4 +19,3 @@ include('function.php');
 				$displayBalance = $bdd->query('SELECT Solde FROM Clients WHERE ID=\''.$_SESSION['ID'].'\' ');
 				$display = $displayBalance->fetch();
 				echo '<a href="AddCoins.php">Solde : '.$display["Solde"].'</a>';
-				 
