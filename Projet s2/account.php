@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('Function/function.php');
-chat($bdd); // test
+chat($bdd); // testhh
 ?>
 
 
