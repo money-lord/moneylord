@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('Function/function.php');
+include('Function/function.php'); //ff
 chat($bdd);
 
 ?>
