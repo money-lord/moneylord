@@ -493,8 +493,7 @@ function amountBet($bdd)
     }
 }
 
-function betColor($bdd)
-{
+function betColor($bdd){
 
   // FAIRE UN INNER POUR LES DEUX APPELLE SI DESSOUS
 
@@ -699,12 +698,29 @@ function displayBalance($bdd)
 }
 
 function resetColor(){
-  $_SESSION['resultColor1'] = 0;
-  $_SESSION['resultColor2'] = 0;
-  $_SESSION['resultColor3'] = 0;
-  $_SESSION['resultColor4'] = 0;
-  $_SESSION['resultColor5'] = 0;
-  $_SESSION['resultColor6'] = 0;
+
+    $_SESSION['resultColor1'] = 0;
+    $_SESSION['resultColor2'] = 0;
+    $_SESSION['resultColor3'] = 0;
+    $_SESSION['resultColor4'] = 0;
+    $_SESSION['resultColor5'] = 0;
+    $_SESSION['resultColor6'] = 0;
+
+    $data1=$bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $data1->fetch();
+    $solde = $dataCF['Solde'];
+
+    $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $data1->fetch();
+    $TotalBet = $dataCF['TotalBet'];
+
+    if ($_SESSION['ColorMise'] > $solde) {
+
+        return 'Fond insufisant';
+    } else {
+
+        echo '<meta http-equiv="Refresh" content="0; URL=colorChose.php" />';
+    }
 }
 
 function setColor($bdd){

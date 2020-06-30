@@ -9,7 +9,7 @@ include('Function/function.php');
 // jaune #EDD602
 // violet #bc04a6
 
-
+$_SESSION['ColorMise'] = $_POST['mise'];
 $_SESSION['playerColor'] = NULL;
 $_SESSION['ColorMise'] = NULL ;
 resetColor();
@@ -21,14 +21,14 @@ resetColor();
       <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" href="./css/styleprojet.css" type="text/css" media="screen" />
-          <title>Color</title>
+          <title>MoneyLord Color Game</title>
       </head>
       <body>
         <br>
           <center>
-            <h1>Choisi ta Mise !!</h1>
+            <h1>Choisi ta Mise !</h1>
 
-            <form action="colorChose.php" method="post">
+            <form action="" method="post">
               <input type="number" name="mise">
               <input type="submit" value="Miser">
             </form>

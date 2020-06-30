@@ -20,7 +20,7 @@ $_SESSION['resultColor6'];
       <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" href="./css/styleprojet.css" type="text/css" media="screen" />
-          <title>Color</title>
+          <title>MoneyLord Color Game</title>
       </head>
       <body>
         <br>

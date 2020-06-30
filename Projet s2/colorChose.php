@@ -9,8 +9,6 @@ include('Function/function.php');
 // jaune #EDD602
 // violet #bc04a6 nn
 
-$_SESSION['ColorMise'] = $_POST['mise'];
-
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +16,12 @@ $_SESSION['ColorMise'] = $_POST['mise'];
       <head>
           <meta charset="utf-8" />
           <link rel="stylesheet" href="./css/styleprojet.css" type="text/css" media="screen" />
-          <title>Color</title>
+          <title>MoneyLord Color Game</title>
       </head>
       <body>
         <br>
           <center>
-            <h1>Choisi ta Couleur !!</h1>
+            <h1>Choisi ta couleur !</h1>
 
             <form action="colorGame.php" method="post">
               <input type="hidden" name="color" value="4">
