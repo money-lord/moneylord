@@ -17,9 +17,6 @@ function verifPseudo(champ){
       surligne(champ, false);
       return true;
    }
-
-
-
 }
 function verifname(champ){
   if(champ.value.length < 2 || champ.value.length > 35){

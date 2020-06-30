@@ -718,7 +718,7 @@ function setColor($bdd){
   $multiple = 0;
 
   for ($i=1; $i < 7; $i++) {
-    if ($_SESSION['playerColor'] == ${resultColor.$i}) {
+    if ($_SESSION['playerColor'] == ${'resultColor'.$i}) {
       $multiple++;
       if ($multiple > 1) {
         $_SESSION['ColorMise'] = 2 * $_SESSION['ColorMise'];
