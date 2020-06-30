@@ -698,6 +698,77 @@ function displayBalance($bdd)
     <?php
 }
 
+function resetColor(){
+  $_SESSION['resultColor1'] = 0;
+  $_SESSION['resultColor2'] = 0;
+  $_SESSION['resultColor3'] = 0;
+  $_SESSION['resultColor4'] = 0;
+  $_SESSION['resultColor5'] = 0;
+  $_SESSION['resultColor6'] = 0;
+}
+
+function setColor($bdd){
+  $resultColor1 = rand(1,6);
+  $resultColor2 = rand(1,6);
+  $resultColor3 = rand(1,6);
+  $resultColor4 = rand(1,6);
+  $resultColor5 = rand(1,6);
+  $resultColor6 = rand(1,6);
+
+  $multiple = 0;
+
+  for ($i=1; $i < 7; $i++) {
+    if ($_SESSION['playerColor'] == ${resultColor.$i}) {
+      $multiple++;
+      if ($multiple > 1) {
+        $_SESSION['ColorMise'] = 2 * $_SESSION['ColorMise'];
+      }
+    }
+
+    if ($multiple == 0 ) {
+      $_SESSION['ColorMise'] == 0;
+    }
+  }
+
+  $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+  $dataCF = $dataC->fetch();
+  $solde = $dataCF['Solde'];
+  $finalSolde = $solde + $_SESSION['ColorMise'];
+  $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+  $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+  $data->execute();
+
+  $_SESSION['resultColor1'] = $resultColor1;
+  $_SESSION['resultColor2'] = $resultColor2;
+  $_SESSION['resultColor3'] = $resultColor3;
+  $_SESSION['resultColor4'] = $resultColor4;
+  $_SESSION['resultColor5'] = $resultColor5;
+  $_SESSION['resultColor6'] = $resultColor6;
+}
+
+function calcDegColorGame($num){
+  if ($num == 1) {
+    return rand(1,59);
+  }
+  if ($num == 2) {
+    return rand(61,119);
+  }
+  if ($num == 3) {
+    return rand(221,179);
+  }
+  if ($num == 4) {
+    return rand(181,239);
+  }
+  if ($num == 5) {
+    return rand(241,299);
+  }
+  if ($num == 6) {
+    return rand(301,359);
+  }
+}
+
+
+
 ?>
 <!DOCTYPE html>
   <html>

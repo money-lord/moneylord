@@ -19,6 +19,7 @@ chat($bdd);
         <?php include('header.php'); ?>
 
         <div class="content">
+          <iframe src=colorChoseMise.php width=100% height=650px frameBorder="0"></iframe>
         </div>
 
         <footer>
