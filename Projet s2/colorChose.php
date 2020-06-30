@@ -7,7 +7,7 @@ include('Function/function.php');
 // vert #13c924
 // gris #81827d
 // jaune #EDD602
-// violet #bc04a6
+// violet #bc04a6 nn
 
 $_SESSION['ColorMise'] = $_POST['mise'];
 
