@@ -5,6 +5,14 @@ include('Function/function.php');
 $_SESSION['playerColor'] = $_POST['color'];
 setColor($bdd);
 
+
+echo $_SESSION['resultColor1'].
+$_SESSION['resultColor2'].
+$_SESSION['resultColor3'].
+$_SESSION['resultColor4'].
+$_SESSION['resultColor5'].
+$_SESSION['resultColor6'];
+
 ?>
 
 <!DOCTYPE html>

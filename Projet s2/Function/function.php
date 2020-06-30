@@ -748,22 +748,22 @@ function setColor($bdd){
 
 function calcDegColorGame($num){
   if ($num == 1) {
-    return rand(1,59);
+    return rand(0,56);
   }
   if ($num == 2) {
-    return rand(61,119);
+    return rand(58,114);
   }
   if ($num == 3) {
-    return rand(221,179);
+    return rand(119,175);
   }
   if ($num == 4) {
-    return rand(181,239);
+    return rand(181,235);
   }
   if ($num == 5) {
-    return rand(241,299);
+    return rand(241,295);
   }
   if ($num == 6) {
-    return rand(301,359);
+    return rand(301,355);
   }
 }
 
