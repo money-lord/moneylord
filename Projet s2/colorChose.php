@@ -9,7 +9,6 @@ include('Function/function.php');
 // jaune #EDD602
 // violet #bc04a6 nn
 
-$_SESSION['ColorMise'] = $_POST['mise'];
 
 ?>
 

@@ -9,11 +9,16 @@ include('Function/function.php');
 // jaune #EDD602
 // violet #bc04a6
 
-$_SESSION['ColorMise'] = $_POST['mise'];
+
 $_SESSION['playerColor'] = NULL;
 $_SESSION['ColorMise'] = NULL ;
-resetColor();
 
+ 
+
+if(!empty($_POST['mise'])){
+  $_SESSION['ColorMise'] = $_POST['mise'];
+  resetColor($bdd);
+}
 ?>
 
 <!DOCTYPE html>
