@@ -744,7 +744,7 @@ function setColor($bdd){
 
     }
     if ($multiple == 0 ) {
-      $_SESSION['ColorMise'] == 0;
+      $_SESSION['ColorMise'] = 0;
     }
     $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
     $dataCF = $dataC->fetch();
