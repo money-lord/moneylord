@@ -736,7 +736,7 @@ function setColor($bdd){
 
     for ($i=1; $i < 7; $i++) {
         if ($_SESSION['playerColor'] == ${'resultColor'.$i}) {
-          $multiple++;
+            $multiple++;
             if ($multiple > 1) {
                 $_SESSION['ColorMise'] = 2 * $_SESSION['ColorMise'];
             }
@@ -744,7 +744,7 @@ function setColor($bdd){
 
     }
     if ($multiple == 0 ) {
-      $_SESSION['ColorMise'] == 0;
+      $_SESSION['ColorMise'] = 0;
     }
     $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
     $dataCF = $dataC->fetch();
