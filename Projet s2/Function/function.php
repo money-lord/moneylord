@@ -809,6 +809,94 @@ function calcDegColorGame($num){
   }
 }
 
+function coinFlipBet($bdd){
+
+    $recupSolde = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+    $recupSolde1 = $recupSolde->fetch();
+    $solde = $recupSolde1['Solde'];
+
+    if ($_SESSION['CoinFlipMise'] > $solde) {
+
+        return 'Fond insufisant';
+    }  else{
+
+        $finalSolde = $solde - $_SESSION['CoinFlipMise'];
+        $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+        $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+        $data->execute();
+
+        echo '<meta http-equiv="Refresh" content="0; URL=coinflipSide.php" />';
+    }
+}
+function coinFlipSideChoice($bdd){
+
+
+    if (!empty($_SESSION['sideChoice'])) {
+
+        return 'Veuillez choisir un côté';
+    }  else{
+
+        $finalSolde = $solde - $_SESSION['CoinFlipMise'];
+        $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+        $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+        $data->execute();
+
+        echo '<meta http-equiv="Refresh" content="0; URL=coinflipSide.php" />';
+    }
+}
+
+function coinFlipResult($bdd){
+
+    $multiple = 0;
+    $_SESSION['StatistiquesBetClient'] = $_SESSION['ColorMise'];
+    for ($i=1; $i < 7; $i++) {
+        if ($_SESSION['playerColor'] == ${'resultColor'.$i}) {
+            $multiple++;
+            if ($multiple > 1) {
+                $_SESSION['ColorMise'] = 2 * $_SESSION['ColorMise'];
+            }
+        }
+
+    }
+    if ($multiple == 0 ) {
+      $_SESSION['ColorMise'] = 0;
+    }
+
+    $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $dataC->fetch();
+    $solde = $dataCF['Solde'];
+
+    $finalSolde = $solde + $_SESSION['ColorMise'];
+
+    $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+    $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+    $data->execute();
+
+    // Incrémentation du solde de la mise total du joueur sur MoneyLord
+
+    $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $data1->fetch();
+    $TotalBet = $dataCF['TotalBet'];
+
+    $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+
+    $totalbetfinal = $TotalBet + $_SESSION['StatistiquesBetClient'];
+
+    $data->bindValue(':TotalBet', $totalbetfinal, PDO::PARAM_INT);
+    $data->execute();
+
+    // incrémentation nombre de fois que le joueur à joué au jeu des couleurs
+
+    $dataC = $bdd->query('SELECT TotalBetCouleur FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
+    $dataCF = $dataC->fetch();
+    $TotalBetCouleur = $dataCF['TotalBetCouleur'];
+    $finalbelt = $TotalBetCouleur + 1;
+    $data = $bdd->prepare('UPDATE Statistiques SET TotalBetCouleur=:TotalBetCouleur  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
+    $data->bindValue(':TotalBetCouleur', $finalbelt, PDO::PARAM_STR);
+    $data->execute();
+
+}
+
 
 
 ?>
