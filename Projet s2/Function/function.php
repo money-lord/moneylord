@@ -836,12 +836,7 @@ function coinFlipSideChoice($bdd){
         return 'Veuillez choisir un côté';
     }  else{
 
-        $finalSolde = $solde - $_SESSION['CoinFlipMise'];
-        $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
-        $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
-        $data->execute();
-
-        echo '<meta http-equiv="Refresh" content="0; URL=coinflipSide.php" />';
+        echo '<meta http-equiv="Refresh" content="0; URL=coinflipGame.php" />';
     }
 }
 
