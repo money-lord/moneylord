@@ -30,21 +30,17 @@ if(!empty($_POST['sideChoice'])){
       <body>
         <br>
           <center>
-
             <h1>Choisi ton côté !</h1>
-
-            <form action="coinflipGame.php" method="post">
-              <input type="hidden" name="sideChoice" value="0">
-              <input id="gameColorTag" class="gameColorTagRed" type="submit" value="">
-            </form>
-            <form action="coinflipGame.php" method="post">
-              <input type="hidden" name="sideChoice" value="1">
-              <input id="gameColorTag" class="gameColorTagblue" type="submit" value="">
-            </form>
-
+            <div class="coinFlipSide">
+              <form action="coinflipGame.php" method="post">
+                <input type="hidden" name="sideChoice" value="0">
+                <input id="gameCoinFlipTag" class="gameColorTagGrey" type="submit" value="">
+              </form>
+              <form action="coinflipGame.php" method="post">
+                <input type="hidden" name="sideChoice" value="1">
+                <input id="gameCoinFlipTag" class="gameColorTagYellow" type="submit" value="">
+              </form>
+            </div>
           </center>
-
-
-
       </body>
   </html>

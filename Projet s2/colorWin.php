@@ -15,11 +15,8 @@ include('Function/function.php');
           <center>
             <h1>Tu as gagné : <?php echo $_SESSION['ColorMise']; ?> $</h1>
 
-            <p>Clic sur couleur en haut a gauche pour rejouer !</p>
-
+            <p><a href="GameTree.php">Clique ici pour rejouer !</a></p>
+            
           </center>
-
-
-
       </body>
   </html>

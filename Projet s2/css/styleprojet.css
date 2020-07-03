@@ -14,6 +14,26 @@ header{
   background-position: bottom;
   background-size: 100%;
 }
+#coinFlipSide{
+  display: ;
+}
+#gameCoinFlipTag{
+  border: 1px solid #808080;
+  width: 20vw;
+  font-size: 1.5em;
+  font-family: 'GeosansLight', "Arial Black", Arial, Verdana, sans-serif;
+  border-radius: 20em;
+  padding-left: 5px;
+  height: 20vw;
+}
+
+.gameColorTagGrey{
+  background-color: #81827d;
+}
+.gameColorTagYellow{
+  background-color: #EDD602;
+}
+
 #gameColorTag{
   border: 1px solid #808080;
   width: 20vw;
