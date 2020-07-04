@@ -818,6 +818,7 @@ function coinFlipBet($bdd){
     if ($_SESSION['CoinFlipMise'] > $solde) {
 
         return 'Fond insufisant';
+
     }  else{
 
         $finalSolde = $solde - $_SESSION['CoinFlipMise'];
@@ -834,6 +835,7 @@ function coinFlipSideChoice($bdd){
     if (!empty($_SESSION['sideChoice'])) {
 
         return 'Veuillez choisir un côté';
+        
     }  else{
 
         echo '<meta http-equiv="Refresh" content="0; URL=coinflipGame.php" />';
