@@ -130,3 +130,19 @@ function relord() {
     window.location.reload();
   },1000);
 }
+
+function coinFlipAction(coin) {
+  if (coin === 0) {
+    var spin = ['animation900'];
+  }
+  else {
+    var spin = ['animation1080'];
+  }
+  
+$('#coin').removeClass();
+
+setTimeout(function(){
+$('#coin').addClass(spin);
+}, 100);
+
+}
