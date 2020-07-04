@@ -131,29 +131,18 @@ function relord() {
   },1000);
 }
 
-
-
-
-
-
-
-jQuery(document).ready(function($){
-
-var spinArray = [/*'animation900',*/'animation1080'/*,'animation1260','animation1440','animation1620','animation1800','animation1980','animation2160'*/];
-
-function getSpin() {
-var spin = spinArray[Math.floor(Math.random()*spinArray.length)];
-return spin;
-}
-
-$('#coin').on('click', function(){
-
+function coinFlipAction(coin) {
+  if (coin === 0) {
+    var spin = ['animation900'];
+  }
+  else {
+    var spin = ['animation1080'];
+  }
+  
 $('#coin').removeClass();
 
 setTimeout(function(){
-$('#coin').addClass(getSpin());
+$('#coin').addClass(spin);
 }, 100);
 
-});
-
-});
+}

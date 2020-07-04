@@ -2,10 +2,14 @@
 session_start();
 include('Function/function.php');
 
+
+
 // $_SESSION['sideChoice']
 // $_SESSION['CoinFlipMise']
 
-coinFlipResult($bdd);
+$coin = coinFlipResult($bdd);
+
+$_SESSION['coinMiseResul'] = $coin;
 
 ?>
 
@@ -26,8 +30,13 @@ coinFlipResult($bdd);
             </div>
             </div>
 
+
+            <meta http-equiv="Refresh" content="5; URL=coinWin.php" />
           </center>
           <script src='./js/jquery.min.js'></script>
           <script  src="./js/function.js"></script>
+          <script>
+            coinFlipAction(<?php echo  $coin; ?>);
+          </script>
       </body>
   </html>

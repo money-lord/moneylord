@@ -13,9 +13,16 @@ include('Function/function.php');
       <body>
         <br>
           <center>
-            <h1>Tu as gagné : <?php echo $_SESSION['ColorMise']; ?> $</h1>
+            <?php
+              if ($_SESSION['ColorMise'] == $_SESSION['sideChoice']) {
+                echo '<h1>Tu as gagné deux fois ta mise ! </h1>';
+              }else {
+                echo '<h1>Tu as perdu ! </h1>';
+              }
+            ?>
 
-            <p><a href="colorChoseMise.php">Clique ici pour rejouer !</a></p>
+
+            <p><a href="coinflipBet.php">Clique ici pour rejouer !</a></p>
 
           </center>
       </body>
