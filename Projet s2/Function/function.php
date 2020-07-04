@@ -865,7 +865,7 @@ function coinFlipResult($bdd){
 
     $data = $bdd ->prepare('UPDATE Statistiques SET TotalBet=:TotalBet  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
 
-    $totalbetfinal = $TotalBet + $$_SESSION['CoinFlipMise'];
+    $totalbetfinal = $TotalBet + $_SESSION['CoinFlipMise'];
 
     $data->bindValue(':TotalBet', $totalbetfinal, PDO::PARAM_INT);
     $data->execute();

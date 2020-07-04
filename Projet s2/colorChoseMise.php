@@ -34,13 +34,42 @@ if(!empty($_POST['mise'])){
             <h1>Choisi ta Mise !</h1>
 
             <form action="" method="post">
-              <input type="number" name="mise">
+              <input type="number" min="0" name="mise">
               <input type="submit" value="Miser">
             </form>
-
           </center>
+        <div class="homeGame">
+
+         <div class="homeGameCoinflip">
+           <div class="tophomeGame">
+           <center>
+             <h1>Step 1</h1>
+           <p>Choisi ta mise !</p><br><br><br>
+           <img class="ImgHomeCoin" src = "Images/img1presentationcoinflip.jpg" >
+           </div>
+
+         </div>
 
 
+         <div class="homeGameRoulette">
+           <div class="tophomeGame">
+           <center>
+             <h1>Step 2</h1>
+           <p>Choisi la couleur sur laquelle tu souhaites miser !</p><br><br>
+           <img class="ImgHomeRoulette" src = "Images/img1presentationcolor.jpg" >
+           </div>
 
+        </div>
+
+         <div class="homeGameColor">
+           <div class="tophomeGame">
+           <center>
+             <h1>Step 3</h1>
+           <p>Gagne jusqu'à 16 fois ta mise !</p><p>C'est simple non ? À toi de jouer ! </p>
+            <img class="ImgHomeCoin" src = "Images/couleur.gif" >
+           </div>
+
+        </div>
+      </div>
       </body>
   </html>

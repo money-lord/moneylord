@@ -18,8 +18,9 @@ chat($bdd);
         <?php include('header.php'); ?>
 
         <div class="content">
-           <iframe src=coinflipBet.php width=100% height=650px frameBorder="0"></iframe>
+           <iframe src=coinflipBet.php width=100% height=650px frameBorder="0" scrolling="no"></iframe>
         </div>
+        
         <footer>
           <center>
             <p>© 2020-2020, moneylord.com, Inc. ou ses filiales</p>

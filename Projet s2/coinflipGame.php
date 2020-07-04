@@ -9,7 +9,7 @@ include('Function/function.php');
 
 $coin = coinFlipResult($bdd);
 
-$_SESSION['coinMiseResul'] = $coin;
+$_SESSION['coinMiseResult'] = $coin;
 
 ?>
 
