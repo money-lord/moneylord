@@ -732,6 +732,8 @@ function setColor($bdd){
     $resultColor5 = rand(1,6);
     $resultColor6 = rand(1,6);
 
+    $dateToday = date("Y-m-d");
+    
     $multiple = 0;
     $_SESSION['StatistiquesBetClient'] = $_SESSION['ColorMise'];
     for ($i=1; $i < 7; $i++) {
@@ -778,6 +780,18 @@ function setColor($bdd){
     $finalbelt = $TotalBetCouleur + 1;
     $data = $bdd->prepare('UPDATE Statistiques SET TotalBetCouleur=:TotalBetCouleur  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':TotalBetCouleur', $finalbelt, PDO::PARAM_STR);
+    $data->execute();
+
+    $data = $bdd ->prepare('INSERT INTO HistoriqueClientColor
+                    VALUES (Null,:tirage1,:tirage2,:tirage3,:tirage4,:tirage5,:tirage6,:dt,:idClient)');
+    $data->bindValue(':dt', $dateToday, PDO::PARAM_STR);    
+    $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+    $data->bindValue(':tirage1', $resultColor1, PDO::PARAM_INT);
+    $data->bindValue(':tirage2', $resultColor2, PDO::PARAM_INT);
+    $data->bindValue(':tirage3', $resultColor3, PDO::PARAM_INT);
+    $data->bindValue(':tirage4', $resultColor4, PDO::PARAM_INT);
+    $data->bindValue(':tirage5', $resultColor5, PDO::PARAM_INT);
+    $data->bindValue(':tirage6', $resultColor6, PDO::PARAM_INT);
     $data->execute();
 
     $_SESSION['resultColor1'] = $resultColor1;
@@ -845,6 +859,7 @@ function coinFlipSideChoice($bdd){
 function coinFlipResult($bdd){
 
     $coin = rand(0,1);
+    $dateToday = date("Y-m-d");
 
     if ($coin == $_SESSION['sideChoice']) {
       $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
@@ -879,6 +894,14 @@ function coinFlipResult($bdd){
     $data = $bdd->prepare('UPDATE Statistiques SET TotalBetCoinFlip=:TotalBetCoinFlip  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':TotalBetCoinFlip', $finalbelt, PDO::PARAM_STR);
     $data->execute();
+
+    $data = $bdd ->prepare('INSERT INTO HistoriqueClientCoinFlip
+                    VALUES (Null,:coin,:dt,:idClient)');
+    $data->bindValue(':dt', $dateToday, PDO::PARAM_STR);    
+    $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+    $data->bindValue(':coin', $coin, PDO::PARAM_INT);
+    $data->execute();
+
 
     return $coin;
 }
