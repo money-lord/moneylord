@@ -138,7 +138,7 @@ function coinFlipAction(coin) {
   else {
     var spin = ['animation1080'];
   }
-  
+
 $('#coin').removeClass();
 
 setTimeout(function(){
