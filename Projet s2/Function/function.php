@@ -441,6 +441,7 @@ function tirage($bdd)
 function WinRoulette($bdd)
 {
     $CoinWin = 0;
+    $dateToday = date("Y-m-d");
 
     if (CouleurReturn($bdd) == 'black') {
         $dataBlack = $bdd->query('SELECT * FROM RoulletteBlack WHERE IDClient = \''.$_SESSION['ID'].'\' ');
@@ -467,6 +468,15 @@ function WinRoulette($bdd)
     $finalSolde = $solde + $CoinWin;
     $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+    $data->execute();
+
+    $rouletteResultat = CouleurReturn($bdd);
+
+    $data = $bdd ->prepare('INSERT INTO HistoriqueClientRoulette
+                    VALUES (Null,:rouletteResultat,:dt,:idClient)');
+    $data->bindValue(':dt', $dateToday, PDO::PARAM_STR);    
+    $data->bindValue(':idClient', $_SESSION['ID'], PDO::PARAM_INT);
+    $data->bindValue(':rouletteResultat', $rouletteResultat, PDO::PARAM_STR);
     $data->execute();
 }
 
@@ -591,8 +601,7 @@ function betColor($bdd){
     }
 }
 
-function CouleurReturn($bdd)
-{
+function CouleurReturn($bdd){
     $data2 = $bdd->query('SELECT nbalea AS nb FROM aleatoire WHERE id = 0');
     $donnees = $data2->fetch();
     $save = $donnees['nb'];
@@ -614,6 +623,8 @@ function CouleurReturn($bdd)
         }
     }
     return 'Ml';
+
+
 }
 
 function Rblack($bdd)
@@ -733,7 +744,7 @@ function setColor($bdd){
     $resultColor6 = rand(1,6);
 
     $dateToday = date("Y-m-d");
-    
+
     $multiple = 0;
     $_SESSION['StatistiquesBetClient'] = $_SESSION['ColorMise'];
     for ($i=1; $i < 7; $i++) {
@@ -894,6 +905,7 @@ function coinFlipResult($bdd){
     $data = $bdd->prepare('UPDATE Statistiques SET TotalBetCoinFlip=:TotalBetCoinFlip  WHERE Clients_ID=\''.$_SESSION['ID'].'\'');
     $data->bindValue(':TotalBetCoinFlip', $finalbelt, PDO::PARAM_STR);
     $data->execute();
+
 
     $data = $bdd ->prepare('INSERT INTO HistoriqueClientCoinFlip
                     VALUES (Null,:coin,:dt,:idClient)');
