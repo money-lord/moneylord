@@ -471,7 +471,7 @@ function WinRoulette($bdd)
     $data->execute();
 
 
-    
+
     $dateToday = date("Y-m-d");
     $rouletteResultat = CouleurReturn($bdd);
     $data = $bdd ->prepare('INSERT INTO HistoriqueClientRoulette
@@ -844,7 +844,7 @@ function coinFlipBet($bdd){
 
     if ($_SESSION['CoinFlipMise'] > $solde) {
 
-        return 'Fond insufisant';
+        echo 'Fond insufisant';
 
     }  else{
 
@@ -859,32 +859,30 @@ function coinFlipBet($bdd){
 function coinFlipSideChoice($bdd){
 
 
-    if (!empty($_SESSION['sideChoice'])) {
-
-        return 'Veuillez choisir un côté';
-        
-    }  else{
-
-        echo '<meta http-equiv="Refresh" content="0; URL=coinflipGame.php" />';
-    }
+    echo '<meta http-equiv="Refresh" content="0; URL=coinflipGame.php" />';
 }
 
 function coinFlipResult($bdd){
 
     $coin = rand(0,1);
+
     $dateToday = date("Y-m-d");
 
+    $_SESSION['coinMiseResult'] = $coin;
+
     if ($coin == $_SESSION['sideChoice']) {
-      $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
-      $dataCF = $dataC->fetch();
-      $solde = $dataCF['Solde'];
 
-      $finalSolde = $solde + ($_SESSION['CoinFlipMise']*2);
+        $dataC = $bdd->query('SELECT Solde FROM Clients WHERE ID =\''.$_SESSION['ID'].'\' ');
+        $dataCF = $dataC->fetch();
+        $solde = $dataCF['Solde'];
 
-      $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
-      $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
-      $data->execute();
+        $finalSolde = $solde + ($_SESSION['CoinFlipMise']*2);
+
+        $data = $bdd->prepare('UPDATE Clients SET Solde=:Solde  WHERE ID=\''.$_SESSION['ID'].'\'');
+        $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
+        $data->execute();
     }
+
     // Incrémentation du solde de la mise total du joueur sur MoneyLord
 
     $data1=$bdd->query('SELECT TotalBet FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
@@ -898,7 +896,7 @@ function coinFlipResult($bdd){
     $data->bindValue(':TotalBet', $totalbetfinal, PDO::PARAM_INT);
     $data->execute();
 
-    // incrémentation nombre de fois que le joueur à joué au jeu des couleurs
+    // incrémentation nombre de fois que le joueur à joué au jeu de coinflip
 
     $dataC = $bdd->query('SELECT TotalBetCoinFlip FROM Statistiques WHERE Clients_ID =\''.$_SESSION['ID'].'\' ');
     $dataCF = $dataC->fetch();

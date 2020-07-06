@@ -16,10 +16,17 @@ include('Function/function.php');
           <center>
             <?php
               if ($_SESSION['coinMiseResult'] == $_SESSION['sideChoice']) {
+
                 echo '<h1>Tu as gagné deux fois ta mise ! </h1>';
-              }else {
+
+              } else {
+
                 echo '<h1>Tu as perdu ! </h1>';
+
               }
+
+              $_SESSION['sideChoice'] = null;
+              $_SESSION['CoinFlipMise'] = null; 
             ?>
 
 

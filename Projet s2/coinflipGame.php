@@ -4,12 +4,12 @@ include('Function/function.php');
 
 
 
-// $_SESSION['sideChoice']
-// $_SESSION['CoinFlipMise']
+// $_SESSION['sideChoice'];
+// $_SESSION['CoinFlipMise'];
 
 $coin = coinFlipResult($bdd);
 
-$_SESSION['coinMiseResult'] = $coin;
+
 
 ?>
 

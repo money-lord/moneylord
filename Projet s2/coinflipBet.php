@@ -9,7 +9,6 @@ include('Function/function.php');
 // jaune #EDD602
 // violet #bc04a6
 
-$_SESSION['CoinFlipMise'] = NULL ;
 
 if(!empty($_POST['mise'])){
   $_SESSION['CoinFlipMise'] = $_POST['mise'];
