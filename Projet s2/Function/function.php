@@ -441,7 +441,7 @@ function tirage($bdd)
 function WinRoulette($bdd)
 {
     $CoinWin = 0;
-    $dateToday = date("Y-m-d");
+
 
     if (CouleurReturn($bdd) == 'black') {
         $dataBlack = $bdd->query('SELECT * FROM RoulletteBlack WHERE IDClient = \''.$_SESSION['ID'].'\' ');
@@ -470,8 +470,10 @@ function WinRoulette($bdd)
     $data->bindValue(':Solde', $finalSolde, PDO::PARAM_STR);
     $data->execute();
 
-    $rouletteResultat = CouleurReturn($bdd);
 
+    
+    $dateToday = date("Y-m-d");
+    $rouletteResultat = CouleurReturn($bdd);
     $data = $bdd ->prepare('INSERT INTO HistoriqueClientRoulette
                     VALUES (Null,:rouletteResultat,:dt,:idClient)');
     $data->bindValue(':dt', $dateToday, PDO::PARAM_STR);    
